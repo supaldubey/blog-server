@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: "postgres:11"
+    container_name: "my_postgres"
+    environment:
+      POSTGRES_PASSWORD: cubestackblog
+      POSTGRES_USER: cubestackblog
+      POSTGRES_DB: cubestackblog
+    ports:
+      - "5432:5432"
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+volumes:
+  my_dbdata:
