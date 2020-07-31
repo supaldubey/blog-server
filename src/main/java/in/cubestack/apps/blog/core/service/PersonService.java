@@ -20,10 +20,10 @@ public class PersonService {
     }
 
     public void save(Person person) {
-        personRepository.save(person);
+        personRepository.persist(person);
     }
 
     public List<Person> findAll() {
-        return personRepository.findAll();
+        return personRepository.findAll().list();
     }
 }

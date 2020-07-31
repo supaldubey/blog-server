@@ -1,20 +1,12 @@
 package in.cubestack.apps.blog.core.repository;
 
 
-import in.cubestack.apps.blog.base.repository.BaseRepository;
 import in.cubestack.apps.blog.core.domain.Person;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.persistence.EntityManager;
 
 @Singleton
-public class PersonRepository extends BaseRepository<Person> {
+public class PersonRepository implements PanacheRepository<Person> {
 
-    @Inject
-    EntityManager entityManager;
-
-    public PersonRepository(EntityManager entityManager) {
-        super(entityManager, Person.class);
-    }
 }
