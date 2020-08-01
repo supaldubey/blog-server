@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("posts")
 @Produces(MediaType.APPLICATION_JSON)
@@ -17,8 +18,26 @@ public class PostResource {
     private PostService postService;
 
     @GET
-    public List<Post> findAll() {
-        return postService.findAll();
+    public List<Post> findAll(
+            @QueryParam("categories") List<String> categories,
+            @QueryParam("tags") List<String> tags
+    ) {
+        if(categories != null && categories.size() > 0) {
+            return postService.findAllPublishedPostsByCategories(
+                    categories
+                            .stream()
+                            .map(Long::valueOf)
+                            .collect(Collectors.toList())
+            );
+        } else if(tags != null && tags.size() > 0) {
+            return postService.findAllPublishedPostsByTags(
+                    tags
+                            .stream()
+                            .map(Long::valueOf)
+                            .collect(Collectors.toList())
+            );
+        }
+        return postService.findAllPublished();
     }
 
     @GET

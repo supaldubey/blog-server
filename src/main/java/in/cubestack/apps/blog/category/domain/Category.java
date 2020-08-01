@@ -1,6 +1,8 @@
-package in.cubestack.apps.blog.post.domain;
+package in.cubestack.apps.blog.category.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
+import in.cubestack.apps.blog.post.domain.Post;
+import in.cubestack.apps.blog.post.domain.PostCategory;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,7 +29,11 @@ public class Category extends BaseModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<PostCategory> postCategories = new ArrayList<>();
 
-    Category() {
+    public Category() {
+    }
+
+    public Category(Long id) {
+        this.id = id;
     }
 
     public Category(String title, String metaTitle, String slug, String content) {

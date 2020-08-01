@@ -14,7 +14,15 @@ public class PostRepository implements PanacheRepositoryBase<Post, Long> {
         return find("slug", slug).firstResult();
     }
 
-    public List<Post> findByPostStatus(PostStatus postStatus) {
+    public List<Post> findAllPublishedPostsByCategories(List<Long> categories) {
+        return find("select distinct p from Post p left join p.postCategories pc where pc.category.id in ?1 and p.postStatus = ?2", categories, PostStatus.PUBLISHED).list();
+    }
+
+    public List<Post> findAllPublishedPostsByTags(List<Long> tags) {
+        return find("select distinct p from Post p left join p.postTags pt where pt.tag.id in ?1 and p.postStatus = ?2", tags, PostStatus.PUBLISHED).list();
+    }
+
+    public List<Post> findAllByPostStatus(PostStatus postStatus) {
         return find("postStatus", postStatus).list();
     }
 }

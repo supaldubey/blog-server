@@ -1,6 +1,7 @@
 package in.cubestack.apps.blog.post.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
+import in.cubestack.apps.blog.tag.domain.Tag;
 
 import javax.persistence.*;
 
@@ -17,7 +18,11 @@ public class PostTag extends BaseModel {
     @JoinColumn(name = "tagId")
     private Tag tag;
 
-    PostTag() {
+    public PostTag() {
+    }
+
+    public PostTag(Tag tag) {
+        this.tag = tag;
     }
 
     public PostTag(Post post, Tag tag) {

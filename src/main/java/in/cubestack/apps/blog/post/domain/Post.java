@@ -4,6 +4,7 @@ import in.cubestack.apps.blog.base.domain.BaseModel;
 import in.cubestack.apps.blog.comment.domain.Comment;
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.core.domain.PostStatus;
+import in.cubestack.apps.blog.tag.domain.Tag;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -42,8 +43,11 @@ public class Post extends BaseModel {
     @Column
     private String content;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostComment> postComments = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostCategory> postCategories = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostTag> postTags = new ArrayList<>();
