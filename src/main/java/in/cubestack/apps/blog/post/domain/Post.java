@@ -6,6 +6,8 @@ import in.cubestack.apps.blog.core.domain.PostStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -37,6 +39,9 @@ public class Post extends BaseModel {
 
     @Column
     private String content;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+    private List<PostComment> postComments = new ArrayList<>();
 
     Post() {}
 
