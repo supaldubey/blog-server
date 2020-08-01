@@ -4,6 +4,9 @@ package in.cubestack.apps.blog.core.domain;
 import in.cubestack.apps.blog.base.domain.BaseModel;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "person")
@@ -19,9 +22,18 @@ public class Person extends BaseModel {
     @Column
     private String email;
 
+    @Column
     private String username;
 
+    @Column
     private String password;
+
+    @Column
+    private String profileImage;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private PersonStatus status = PersonStatus.ACTIVE;
 
     @Column
     private String phone;
@@ -29,6 +41,8 @@ public class Person extends BaseModel {
     @Column
     private String countryCode;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<PersonRole> personRoles = new ArrayList<>();
 
     Person() {
     }
@@ -81,7 +95,34 @@ public class Person extends BaseModel {
         return password;
     }
 
+    public void deactivate() {
+        this.status = PersonStatus.DISABLED;
+    }
 
+    public void activate() {
+        this.status = PersonStatus.ACTIVE;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public PersonStatus getStatus() {
+        return status;
+    }
+
+    public void addRole(Role role) {
+        PersonRole personRole = new PersonRole(this, role);
+        this.personRoles.add(personRole);
+    }
+
+    public List<Role> getRoles() {
+        return personRoles.stream().map(PersonRole::getRole).collect(Collectors.toList());
+    }
 
     public void updatePassword(String password) {
         this.password = password;

@@ -1,14 +1,18 @@
 create TABLE person(
-    id bigserial PRIMARY KEY,
-    firstName varchar(200) NOT NULL,
-    lastName varchar(200),
-    email varchar(200),
-    username varchar(200),
-    password varchar(200),
-    phone varchar(20),
-    countryCode varchar(10),
-    createdAt timestamp NOT NULL,
-    updatedAt timestamp NOT NULL
+    id              BIGSERIAL PRIMARY KEY,
+
+    firstName       VARCHAR(200) NOT NULL,
+    lastName        VARCHAR(200),
+    email           VARCHAR(200),
+    username        VARCHAR(200),
+    password        VARCHAR(200),
+    status          VARCHAR(50),
+    profileImage    VARCHAR(500),
+    phone           VARCHAR(20),
+    countryCode     VARCHAR(10),
+
+    createdAt TIMESTAMP NOT NULL,
+    updatedAt TIMESTAMP NOT NULL
 );
 
 CREATE UNIQUE INDEX phone_unique_idx ON person (phone) WHERE (phone is NOT null);

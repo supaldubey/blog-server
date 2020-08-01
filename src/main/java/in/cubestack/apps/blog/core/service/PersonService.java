@@ -3,12 +3,12 @@ package in.cubestack.apps.blog.core.service;
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.core.repository.PersonRepository;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Singleton
+@ApplicationScoped
 @Transactional
 public class PersonService {
 
