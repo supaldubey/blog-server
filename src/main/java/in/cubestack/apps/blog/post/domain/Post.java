@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "post")
@@ -43,7 +44,11 @@ public class Post extends BaseModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
     private List<PostComment> postComments = new ArrayList<>();
 
-    Post() {}
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostTag> postTags = new ArrayList<>();
+
+    Post() {
+    }
 
     public Post(Person author, String title, String metaTitle, String summary, String slug, String content) {
         this.author = author;
@@ -90,6 +95,14 @@ public class Post extends BaseModel {
 
     public String getContent() {
         return content;
+    }
+
+    public List<Tag> getTags() {
+        return postTags.stream().map(PostTag::getTag).collect(Collectors.toList());
+    }
+
+    public void addTag(Tag tag) {
+        this.postTags.add(new PostTag(this, tag));
     }
 
     public void setTitle(String title) {
