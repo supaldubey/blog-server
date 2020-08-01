@@ -11,11 +11,11 @@ import javax.persistence.*;
 public class PostComment extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "postId", nullable = false)
+    @JoinColumn(name = "postId")
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "commentId", nullable = false)
+    @JoinColumn(name = "commentId")
     private Comment comment;
 
     public PostComment() {
