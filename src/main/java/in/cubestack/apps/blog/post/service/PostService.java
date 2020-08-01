@@ -1,13 +1,16 @@
 package in.cubestack.apps.blog.post.service;
 
+import in.cubestack.apps.blog.category.domain.Category;
 import in.cubestack.apps.blog.core.domain.PostStatus;
 import in.cubestack.apps.blog.post.domain.Post;
+import in.cubestack.apps.blog.post.repo.PostCategoryRepository;
 import in.cubestack.apps.blog.post.repo.PostRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 @Transactional
@@ -57,4 +60,5 @@ public class PostService {
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
+
 }

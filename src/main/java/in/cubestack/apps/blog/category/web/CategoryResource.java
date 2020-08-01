@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Map;
 
 @Path("categories")
 @Produces(MediaType.APPLICATION_JSON)
@@ -42,5 +43,13 @@ public class CategoryResource {
     public void delete(@PathParam("id") Long id) {
         categoryService.delete(id);
     }
+
+
+    @GET
+    @Path("post-counts")
+    public Map<Category, Long> findCategoryPostCounts() {
+        return categoryService.findCategoryPostCounts();
+    }
+
 
 }

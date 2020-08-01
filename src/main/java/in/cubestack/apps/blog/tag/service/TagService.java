@@ -1,5 +1,6 @@
 package in.cubestack.apps.blog.tag.service;
 
+import in.cubestack.apps.blog.post.repo.PostTagRepository;
 import in.cubestack.apps.blog.tag.domain.Tag;
 import in.cubestack.apps.blog.tag.repo.TagRepository;
 
@@ -14,6 +15,9 @@ public class TagService {
 
     @Inject
     private TagRepository tagRepository;
+
+    @Inject
+    private PostTagRepository postTagRepository;
 
     public List<Tag> findAll() {
         return tagRepository.findAll().list();
@@ -42,6 +46,6 @@ public class TagService {
     }
 
     public Map<Tag, Long> findTagPostCounts() {
-        return tagRepository.findTagPostCounts();
+        return postTagRepository.findTagPostCounts();
     }
 }
