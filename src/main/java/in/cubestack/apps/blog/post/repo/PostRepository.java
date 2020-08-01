@@ -1,17 +1,20 @@
 package in.cubestack.apps.blog.post.repo;
 
-import in.cubestack.apps.blog.base.repository.BaseRepository;
+import in.cubestack.apps.blog.core.domain.PostStatus;
 import in.cubestack.apps.blog.post.domain.Post;
+import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import javax.enterprise.context.ApplicationScoped;
+import java.util.List;
 
-public class PostRepository extends BaseRepository<Post> {
+@ApplicationScoped
+public class PostRepository implements PanacheRepositoryBase<Post, Long> {
 
-    @Inject
-    EntityManager entityManager;
+    public Post findBySlug(String slug) {
+        return find("slug", slug).firstResult();
+    }
 
-    public PostRepository(EntityManager entityManager) {
-        super(entityManager, Post.class);
+    public List<Post> findByPostStatus(PostStatus postStatus) {
+        return find("postStatus", postStatus).list();
     }
 }

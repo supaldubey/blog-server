@@ -41,6 +41,9 @@ public class Post extends BaseModel {
     @Column
     private String content;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+    private List<PostComment> postComments = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostTag> postTags = new ArrayList<>();
 
