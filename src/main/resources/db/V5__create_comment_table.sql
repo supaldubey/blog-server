@@ -11,3 +11,17 @@ create TABLE comment(
     updatedAt TIMESTAMP NOT NULL
 );
 
+create TABLE postComment(
+    id            BIGSERIAL PRIMARY KEY,
+
+    postId        BIGINT NOT NULL references post,
+    commentId     BIGINT NOT NULL references comment,
+
+    createdAt TIMESTAMP NOT NULL,
+    updatedAt TIMESTAMP NOT NULL
+);
+
+create index on postComment(postId);
+
+
+

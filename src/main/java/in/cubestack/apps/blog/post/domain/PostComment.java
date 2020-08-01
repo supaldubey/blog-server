@@ -6,7 +6,7 @@ import in.cubestack.apps.blog.comment.domain.Comment;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "comment")
+@Table(name = "postComment")
 @SequenceGenerator(name = "default_gen", sequenceName = "postComment_id_seq", allocationSize = 1)
 public class PostComment extends BaseModel {
 
