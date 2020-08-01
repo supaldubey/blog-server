@@ -33,6 +33,10 @@ public abstract class BaseModel {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @PrePersist
     public void prepareForSave() {
         this.createdAt = LocalDateTime.now();

@@ -20,6 +20,7 @@
         <surefire-plugin.version>2.22.1</surefire-plugin.version>
         <slugify.version>2.4</slugify.version>
         <common-mark.version>0.15.2</common-mark.version>
+        <jwt.version>0.9.1</jwt.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -75,10 +76,13 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-kubernetes</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-metrics</artifactId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.version}</version>
         </dependency>
+
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
