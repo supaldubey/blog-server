@@ -7,9 +7,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
-@ApplicationScoped
 @Transactional
+@ApplicationScoped
 public class PersonService {
 
     @Inject
@@ -25,5 +26,11 @@ public class PersonService {
 
     public List<Person> findAll() {
         return personRepository.findAll().list();
+    }
+
+    public Optional<Person> findByUsername(String username) {
+        Optional<Person> person = personRepository.find("username", username).firstResultOptional();
+        person.ifPresent(p -> p.getRoles().size());
+        return person;
     }
 }
