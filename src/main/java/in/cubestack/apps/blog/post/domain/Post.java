@@ -1,6 +1,7 @@
 package in.cubestack.apps.blog.post.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
+import in.cubestack.apps.blog.comment.domain.Comment;
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.core.domain.PostStatus;
 
@@ -103,6 +104,14 @@ public class Post extends BaseModel {
 
     public void addTag(Tag tag) {
         this.postTags.add(new PostTag(this, tag));
+    }
+
+    public List<Comment> getComments() {
+        return postComments.stream().map(PostComment::getComment).collect(Collectors.toList());
+    }
+
+    public void addComment(Comment comment) {
+        this.postComments.add(new PostComment(this, comment));
     }
 
     public void setTitle(String title) {
