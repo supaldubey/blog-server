@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/highlightjs.min.css">
+    <link rel="stylesheet" href="/css/blog2.css">
+</head>
+<body>
+
+<header class="navbar fixed-top navbar-dark bts-navbar">
+    <div class="container-fluid bts-container-fluid">
+        <div class="row bts-container-row">
+            <div class="col-sm-2 bts-container-col">
+                &nbsp;
+            </div>
+            <div class="col-sm-8 bts-container-col">
+                <span class="navbar-brand mb-0">Blog</span>
+            </div>
+            <div class="col-sm-2 bts-container-col">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</header>
+<div class="bts-body">
+    <div class="container-fluid bts-container-fluid">
+        <div class="row bts-container-row">
+            <div class="col-sm-2 bts-container-col">
+                {#if invalid}
+                    Invalid username / password
+                {/if}
+                {invalid}
+            </div>
+            <div class="col-sm-7 bts-container-col bts-content-area">
+                <div class="bts-post">
+                    <div class="bts-post-body">
+                        <div class="bts-post-item">
+                            <h1 class="bts-post-title">
+                                Please authenticate
+                            </h1>
+                        </div>
+                        <div class="bts-post-item">
+
+                        </div>
+                        <div class="bts-post-item">
+                            <div class="bts-post-content">
+                                <form method="post" >
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Username</label>
+                                        <input name="username" type="text" class="form-control input-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+                                        <small id="usernameHelp" class="form-text text-muted">We'll never share your details with anyone else.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input name="password" type="password" class="form-control input-lg" id="password" placeholder="Password">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                Right
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script src="/js/highlightjs-line-numbers.min.js"></script>
+<script type="text/javascript">
+    hljs.configure();
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+            hljs.initLineNumbersOnLoad(block);
+        });
+    });
+</script>
+</body>
+</html>

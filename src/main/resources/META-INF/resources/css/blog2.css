@@ -113,11 +113,7 @@ html, body {
     resize: none;
 }
 
-.form-control {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.85rem;
-    line-height: 1.25;
-}
+
 
 .form-control:focus {
     box-shadow: none;
