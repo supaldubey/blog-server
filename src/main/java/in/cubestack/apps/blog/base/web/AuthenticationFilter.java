@@ -38,7 +38,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
-        String token = parseToken(requestContext);
+        String token = httpHelper.getTokenFromRequest(requestContext);
 
         if (token != null) {
             prepareSecurityContext(requestContext, token);
@@ -85,17 +85,5 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                 return BASIC_AUTH;
             }
         });
-    }
-
-    private String parseToken(ContainerRequestContext requestContext) {
-        // Find from Cookie
-        String token = httpHelper.getTokenFromCookie(requestContext);
-
-        if (token == null) {
-            // Try to get from header
-            token = httpHelper.getTokenFromHeader(requestContext);
-        }
-
-        return token;
     }
 }

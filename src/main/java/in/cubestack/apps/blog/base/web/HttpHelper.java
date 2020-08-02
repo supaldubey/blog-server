@@ -40,4 +40,15 @@ public class HttpHelper {
 
         return token;
     }
+
+    public String getTokenFromRequest(ContainerRequestContext requestContext) {
+        // Find from Cookie
+        String token = getTokenFromCookie(requestContext);
+
+        // Try to get from header
+        if (token == null) {
+            token = getTokenFromHeader(requestContext);
+        }
+        return token;
+    }
 }
