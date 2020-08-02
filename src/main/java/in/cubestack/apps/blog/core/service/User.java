@@ -1,9 +1,12 @@
 package in.cubestack.apps.blog.core.service;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.security.auth.Subject;
 import java.security.Principal;
 import java.util.List;
 
+@RegisterForReflection
 public class User implements Principal {
     private final Long personId;
     private final String userName;
