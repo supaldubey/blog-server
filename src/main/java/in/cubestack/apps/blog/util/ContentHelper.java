@@ -1,14 +1,10 @@
 package in.cubestack.apps.blog.util;
 
-import com.github.slugify.Slugify;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import java.text.DateFormat;
-import java.util.function.Function;
 
 @ApplicationScoped
 public class ContentHelper {

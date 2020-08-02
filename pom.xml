@@ -98,12 +98,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.slugify</groupId>
-            <artifactId>slugify</artifactId>
-            <version>${slugify.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark</artifactId>
             <version>${common-mark.version}</version>
@@ -111,6 +105,11 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-qute</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>64.2</version>
         </dependency>
     </dependencies>
     <build>
