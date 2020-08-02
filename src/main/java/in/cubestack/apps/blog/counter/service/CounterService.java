@@ -12,15 +12,15 @@ import java.util.Optional;
 public class CounterService {
 
     @Inject
-    private CounterRepository counterRepository;
+    CounterRepository counterRepository;
 
     public void counter(Long contentId, CounterType counterType) {
-        // TODO not good
+        // TODO not good, This is bad
         Optional<Counter> counter = counterRepository.findCounter(contentId, counterType);
         if(counter.isPresent()) {
             counterRepository.updateCounter(contentId, counterType);
         } else {
-            counterRepository.persist(new Counter(contentId, counterType, 1l));
+            counterRepository.persist(new Counter(contentId, counterType, 1L));
         }
     }
 }

@@ -4,7 +4,6 @@ import in.cubestack.apps.blog.base.domain.BaseModel;
 import in.cubestack.apps.blog.comment.domain.Comment;
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.core.domain.PostStatus;
-import in.cubestack.apps.blog.tag.domain.Tag;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

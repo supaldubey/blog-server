@@ -6,12 +6,13 @@ import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class PostRepository implements PanacheRepositoryBase<Post, Long> {
 
-    public Post findBySlug(String slug) {
-        return find("slug", slug).firstResult();
+    public Optional<Post> findBySlug(String slug) {
+        return find("slug", slug).firstResultOptional();
     }
 
     public List<Post> findAllPublishedPostsByCategories(List<Long> categories) {

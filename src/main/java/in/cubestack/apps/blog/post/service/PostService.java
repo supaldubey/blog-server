@@ -1,29 +1,27 @@
 package in.cubestack.apps.blog.post.service;
 
-import in.cubestack.apps.blog.category.domain.Category;
 import in.cubestack.apps.blog.core.domain.PostStatus;
 import in.cubestack.apps.blog.post.domain.Post;
-import in.cubestack.apps.blog.post.repo.PostCategoryRepository;
 import in.cubestack.apps.blog.post.repo.PostRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @ApplicationScoped
 @Transactional
 public class PostService {
 
     @Inject
-    private PostRepository postRepository;
+    PostRepository postRepository;
 
     public Post findById(Long id) {
         return postRepository.findById(id);
     }
 
-    public Post findBySlug(String slug) {
+    public Optional<Post> findBySlug(String slug) {
         return postRepository.findBySlug(slug);
     }
 
@@ -48,12 +46,12 @@ public class PostService {
     }
 
     public Post save(Post post) {
-        postRepository.persistAndFlush(post);
+        postRepository.persist(post);
         return post;
     }
 
     public Post update(Post post) {
-        postRepository.persistAndFlush(post);
+        postRepository.persist(post);
         return post;
     }
 

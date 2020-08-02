@@ -1,7 +1,7 @@
-package in.cubestack.apps.blog.tag.web;
+package in.cubestack.apps.blog.post.web;
 
-import in.cubestack.apps.blog.tag.domain.Tag;
-import in.cubestack.apps.blog.tag.service.TagService;
+import in.cubestack.apps.blog.post.domain.Tag;
+import in.cubestack.apps.blog.post.service.TagService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class TagResource {
 
     @Inject
-    private TagService tagService;
+    TagService tagService;
 
     @GET
     public List<Tag> findAll() {

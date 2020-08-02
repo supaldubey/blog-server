@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class PostResource {
 
     @Inject
-    private PostService postService;
+    PostService postService;
 
     @GET
     public List<Post> findAll(

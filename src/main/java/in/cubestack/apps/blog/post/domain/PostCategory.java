@@ -1,7 +1,6 @@
 package in.cubestack.apps.blog.post.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
-import in.cubestack.apps.blog.category.domain.Category;
 
 import javax.persistence.*;
 
@@ -18,7 +17,7 @@ public class PostCategory extends BaseModel {
     @JoinColumn(name = "categoryId")
     private Category category;
 
-    public PostCategory() {}
+    PostCategory() {}
 
     public PostCategory(Category category) {
         this.category = category;

@@ -1,7 +1,7 @@
-package in.cubestack.apps.blog.category.web;
+package in.cubestack.apps.blog.post.web;
 
-import in.cubestack.apps.blog.category.domain.Category;
-import in.cubestack.apps.blog.category.service.CategoryService;
+import in.cubestack.apps.blog.post.domain.Category;
+import in.cubestack.apps.blog.post.service.CategoryService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class CategoryResource {
 
     @Inject
-    private CategoryService categoryService;
+    CategoryService categoryService;
 
     @GET
     public List<Category> findAll() {

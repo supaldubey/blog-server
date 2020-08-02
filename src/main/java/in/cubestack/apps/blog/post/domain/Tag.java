@@ -1,4 +1,4 @@
-package in.cubestack.apps.blog.tag.domain;
+package in.cubestack.apps.blog.post.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
 
@@ -18,7 +18,7 @@ public class Tag extends BaseModel {
     @Column
     private String content;
 
-    public  Tag() {}
+    Tag() {}
 
     public  Tag(Long id) {
         this.id = id;

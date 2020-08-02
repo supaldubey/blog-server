@@ -17,7 +17,7 @@ import java.util.List;
 public class CommentResource {
 
     @Inject
-    private CommentService commentService;
+    CommentService commentService;
 
     @GET
     public List<Comment> findAll() {

@@ -11,7 +11,7 @@ import java.util.List;
 public class CommentService {
 
     @Inject
-    private CommentRepository commentRepository;
+    CommentRepository commentRepository;
 
     public List<Comment> findAll() {
         return commentRepository.findAll().list();

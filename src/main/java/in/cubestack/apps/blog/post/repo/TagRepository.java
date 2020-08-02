@@ -1,6 +1,6 @@
-package in.cubestack.apps.blog.tag.repo;
+package in.cubestack.apps.blog.post.repo;
 
-import in.cubestack.apps.blog.tag.domain.Tag;
+import in.cubestack.apps.blog.post.domain.Tag;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
 import javax.enterprise.context.ApplicationScoped;

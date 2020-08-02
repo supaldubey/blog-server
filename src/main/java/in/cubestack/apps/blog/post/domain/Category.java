@@ -1,4 +1,4 @@
-package in.cubestack.apps.blog.category.domain;
+package in.cubestack.apps.blog.post.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
 import in.cubestack.apps.blog.post.domain.Post;

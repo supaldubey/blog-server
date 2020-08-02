@@ -1,11 +1,11 @@
-package in.cubestack.apps.blog.tag.service;
+package in.cubestack.apps.blog.post.service;
 
-import in.cubestack.apps.blog.post.repo.PostTagRepository;
-import in.cubestack.apps.blog.tag.domain.Tag;
-import in.cubestack.apps.blog.tag.repo.TagRepository;
+import in.cubestack.apps.blog.post.domain.Tag;
+import in.cubestack.apps.blog.post.repo.TagRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -14,10 +14,7 @@ import java.util.function.Supplier;
 public class TagService {
 
     @Inject
-    private TagRepository tagRepository;
-
-    @Inject
-    private PostTagRepository postTagRepository;
+    TagRepository tagRepository;
 
     public List<Tag> findAll() {
         return tagRepository.findAll().list();
@@ -46,6 +43,6 @@ public class TagService {
     }
 
     public Map<Tag, Long> findTagPostCounts() {
-        return postTagRepository.findTagPostCounts();
+        return new HashMap<>();
     }
 }

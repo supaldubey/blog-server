@@ -1,4 +1,4 @@
-package in.cubestack.apps.blog.web;
+package in.cubestack.apps.blog.base.web;
 
 import in.cubestack.apps.blog.core.service.AuthenticationService;
 import in.cubestack.apps.blog.core.service.User;

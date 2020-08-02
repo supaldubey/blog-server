@@ -1,11 +1,11 @@
-package in.cubestack.apps.blog.category.service;
+package in.cubestack.apps.blog.post.service;
 
-import in.cubestack.apps.blog.category.domain.Category;
-import in.cubestack.apps.blog.category.repo.CategoryRepository;
-import in.cubestack.apps.blog.post.repo.PostCategoryRepository;
+import in.cubestack.apps.blog.post.domain.Category;
+import in.cubestack.apps.blog.post.repo.CategoryRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -14,10 +14,7 @@ import java.util.function.Supplier;
 public class CategoryService {
 
     @Inject
-    private CategoryRepository categoryRepository;
-
-    @Inject
-    private PostCategoryRepository postCategoryRepository;
+    CategoryRepository categoryRepository;
 
     public List<Category> findAll() {
         return categoryRepository.findAll().list();
@@ -41,11 +38,7 @@ public class CategoryService {
         return category;
     }
 
-    private Supplier<UnsupportedOperationException> unsupportedOpsSupplier() {
-        return () -> new UnsupportedOperationException("Not yet implemented");
-    }
-
     public Map<Category, Long> findCategoryPostCounts() {
-        return postCategoryRepository.findTagPostCounts();
+        return new HashMap<>();
     }
 }

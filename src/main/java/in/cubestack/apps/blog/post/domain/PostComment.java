@@ -18,7 +18,7 @@ public class PostComment extends BaseModel {
     @JoinColumn(name = "commentId")
     private Comment comment;
 
-    public PostComment() {
+    PostComment() {
     }
 
     public PostComment(Post post, Comment comment) {

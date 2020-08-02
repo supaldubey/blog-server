@@ -1,6 +1,7 @@
 package in.cubestack.apps.blog.comment.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
+import in.cubestack.apps.blog.core.domain.Person;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,4 +26,37 @@ public class Comment extends BaseModel {
 
     @Column(name = "publishedAt")
     private LocalDateTime publishedAt;
+
+    Comment() {}
+
+    public Comment(String title, CommentStatus status, String content, LocalDateTime publishedAt) {
+        this.title = title;
+        this.status = status;
+        this.content = content;
+        this.publishedAt = publishedAt;
+    }
+
+    public void commentBy(Person person) {
+        this.commenterId = String.valueOf(person.getId());
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCommenterId() {
+        return commenterId;
+    }
+
+    public CommentStatus getStatus() {
+        return status;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public LocalDateTime getPublishedAt() {
+        return publishedAt;
+    }
 }
