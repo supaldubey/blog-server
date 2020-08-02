@@ -3,7 +3,8 @@ package in.cubestack.apps.blog.admin.resource;
 import in.cubestack.apps.blog.admin.service.AdminService;
 import in.cubestack.apps.blog.base.web.HttpHelper;
 import in.cubestack.apps.blog.core.service.User;
-import io.quarkus.qute.Template;
+import in.cubestack.apps.blog.post.domain.Post;
+import in.cubestack.apps.blog.post.service.PostService;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.api.CheckedTemplate;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class AdminResource {
     @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance login();
+
         public static native TemplateInstance dashboard();
     }
 
@@ -34,6 +36,9 @@ public class AdminResource {
 
     @Inject
     HttpHelper httpHelper;
+
+    @Inject
+    PostService postService;
 
 
     @GET
@@ -48,6 +53,18 @@ public class AdminResource {
     @Path("/login")
     public TemplateInstance login(@QueryParam("invalid") String invalid) {
         return Templates.login().data("invalid", invalid == null ? "" : invalid);
+    }
+
+    @POST
+    @Path("/posts")
+    public Response createPost(@Context SecurityContext securityContext,
+                               @FormParam("title") String title,
+                               @FormParam("metatitle") String metatitle,
+                               @FormParam("summary") String summary,
+                               @FormParam("content") String content) {
+        User user = (User) securityContext.getUserPrincipal();
+        Post post = postService.createPost(user, title, metatitle, summary, content);
+        return Response.ok("Created blog with id " + post.getId() + "View from http://localhost:8080/blog/posts/view2?postId=" + post.getId()).build();
     }
 
     @POST
