@@ -1,14 +1,11 @@
 package in.cubestack.apps.blog.post.web;
 
 import in.cubestack.apps.blog.core.domain.Person;
-import in.cubestack.apps.blog.core.domain.PersonStatus;
 import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.event.domain.EventType;
 import in.cubestack.apps.blog.event.service.EventService;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.service.PostService;
-import io.quarkus.qute.TemplateInstance;
-import io.quarkus.qute.api.CheckedTemplate;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -115,26 +112,6 @@ public class PostResource {
     @Path("{id}")
     public void delete(@PathParam("id") Long id) {
         postService.delete(id);
-    }
-
-    @CheckedTemplate
-    public static class Templates {
-        public static native TemplateInstance post(Post post);
-    }
-
-    @GET
-    @Path("html")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance post() {
-        Post post = new Post(
-                new Person("Arun", "Kumar", "bitsevn"),
-                "REST APIs with Quarkus RestEasy",
-                "Getting started guide",
-                null,
-                "rest-apis-with-quarkus-resteasy",
-                "# REST APIs with Quarkus RestEasy"
-        );
-        return Templates.post(post);
     }
 
 }

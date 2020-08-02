@@ -1,0 +1,235 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+    font-family: 'Lato', sans-serif, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol", sans-serif;
+}
+
+.bts-navbar {
+    background: #0f5dab;
+}
+
+.bts-body {
+    padding-top: 2.25rem;
+    padding-left: 0;
+    padding-right: 0;
+    background: #ffffff;
+    min-height: inherit;
+}
+
+.bts-container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    min-height: inherit;
+}
+
+.bts-container-fluid .bts-container-row,
+.bts-container-fluid .bts-container-col {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    height: inherit;
+    width: 100%;
+}
+
+.bts-content-area {
+    padding: 2rem 0.3rem !important;
+}
+
+.bts-card {
+    padding: 0;
+}
+
+.bts-card .bts-card-header,
+.bts-card .bts-card-body {
+    padding: .4rem 0.75rem;
+}
+
+.bts-card .bts-card-body {
+    padding-bottom: 0;
+}
+
+.bts-card .bts-card-header .bts-card-title {
+    font-weight: bold;
+}
+
+.bts-table {
+    font-size: 0.80rem;
+}
+
+.bts-table thead th {
+    border-bottom: 0;
+    border-top: 0;
+}
+
+.bts-table tbody tr:hover {
+    cursor: pointer;
+}
+
+.bts-nav-list-group {
+    background: #094582;
+    height: inherit;
+    border-radius: 0;
+    color: #f0f0f0;
+}
+
+.bts-nav-list-group .bts-nav-list-group-item {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    border-radius: inherit;
+    background: inherit;
+    border: 0;
+}
+
+.bts-nav-list-group .bts-nav-list-group-item:hover {
+    background: #0a3969;
+    cursor: pointer;
+}
+
+.btn-sm {
+    font-size: .75rem;
+    line-height: 1.2;
+}
+
+.bts-item-title {
+    font-weight: 500;
+}
+
+.bts-nav-list-group-item.active {
+    background: #083058;
+}
+
+.bts-textarea {
+    overflow: auto;
+    outline: none;
+    display: block;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    min-height: 80px;
+    resize: none;
+}
+
+.form-control {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    line-height: 1.25;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+/** Post styles **/
+.bts-post > .bts-post-body .bts-post-item {
+    padding-bottom: 0.25rem;
+}
+
+.bts-post > .bts-post-body .bts-post-item:last-child {
+    padding-bottom: 0;
+}
+
+.bts-post > .bts-post-body .bts-post-item .bts-post-title {
+    font-size: 3rem;
+    font-weight: 800;
+    /*color: #0f5dab !important;*/
+}
+
+.bts-post > .bts-post-body .bts-post-item .bts-post-metaTitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    padding: 0;
+    /*color: #0f5dab !important;*/
+}
+
+.bts-post > .bts-post-body .bts-post-item .bts-post-summary {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #000000;
+    padding: 0;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content h1 {
+    font-size: 2.35rem !important;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content h2 {
+    font-size: 1.95rem !important;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content h3 {
+    font-size: 1.75rem !important;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content h4 {
+    font-size: 1.5rem !important;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content h5 {
+    font-size: 1.35rem !important;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content h6 {
+    font-size: 1.15rem !important;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content * code {
+    color: #0c0c0c;
+    word-break: break-word;
+    /*background-color: #e9f9ed;*/
+    padding: 0.1rem 0.2rem;
+    border-radius: 1px;
+    border: 1px solid #eceeef;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content a {
+    font-weight: 500;
+    border-bottom: 1px solid #ebf2f9;
+    color: #0f5dab;
+    background-color: transparent;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content a:hover {
+    border-bottom: 1px solid #0f5dab;
+    text-decoration: none;
+}
+
+.bts-post .bts-post-body .bts-post-item .bts-post-content * code.hljs {
+    border-radius: 0;
+    border: 0;
+    background-color: #ffffff;
+}
+
+.blockquote {
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid #eceeef;
+    border-radius: 2px;
+    background: #f3f5f7;
+    font-size: 0.85rem;
+    color: #0b4177;
+}
+
+.blockquote p {
+    margin-bottom: 0;
+}
+
+/** highlight js customizations **/
+.hljs {
+    background: #ffffff;
+}
+
+.hljs-ln-numbers {
+    border-right: 2px solid #0b4177;
+}
+
+.hljs-ln-n {
+    margin-right: 12px !important;
+}
+
+.hljs-ln-code {
+    padding-left: 12px !important;
+}
