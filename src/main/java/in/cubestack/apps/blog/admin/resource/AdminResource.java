@@ -47,7 +47,7 @@ public class AdminResource {
     @GET
     @Path("/login")
     public TemplateInstance login(@QueryParam("invalid") String invalid) {
-        return Templates.login().data("invalid", invalid);
+        return Templates.login().data("invalid", invalid == null ? "" : invalid);
     }
 
     @POST
