@@ -19,7 +19,7 @@ public class Comment extends BaseModel {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private CommentStatus status;
+    private CommentStatus status = CommentStatus.PUBLISHED;
 
     @Column
     private String content;

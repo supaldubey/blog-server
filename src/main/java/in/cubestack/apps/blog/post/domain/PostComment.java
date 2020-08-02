@@ -14,7 +14,7 @@ public class PostComment extends BaseModel {
     @JoinColumn(name = "postId")
     private Post post;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "commentId")
     private Comment comment;
 
