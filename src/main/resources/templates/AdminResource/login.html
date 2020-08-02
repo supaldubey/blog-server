@@ -32,10 +32,10 @@
     <div class="container-fluid bts-container-fluid">
         <div class="row bts-container-row">
             <div class="col-sm-2 bts-container-col">
-                {#if invalid}
+                {#if invalid.length() > 0}
                     Invalid username / password
                 {/if}
-                {invalid}
+
             </div>
             <div class="col-sm-7 bts-container-col bts-content-area">
                 <div class="bts-post">
@@ -46,6 +46,11 @@
                             </h1>
                         </div>
                         <div class="bts-post-item">
+                            {#if invalid.length() > 0}
+                            <div class="alert alert-warning">
+                                Invalid username / password
+                            </div>
+                            {/if}
 
                         </div>
                         <div class="bts-post-item">

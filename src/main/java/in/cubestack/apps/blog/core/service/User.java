@@ -1,8 +1,10 @@
 package in.cubestack.apps.blog.core.service;
 
+import javax.security.auth.Subject;
+import java.security.Principal;
 import java.util.List;
 
-public class User {
+public class User implements Principal {
     private final Long personId;
     private final String userName;
     private final List<String> roles;
@@ -24,5 +26,15 @@ public class User {
 
     public List<String> getRoles() {
         return roles;
+    }
+
+    @Override
+    public String getName() {
+        return userName;
+    }
+
+    @Override
+    public boolean implies(Subject subject) {
+        return false;
     }
 }

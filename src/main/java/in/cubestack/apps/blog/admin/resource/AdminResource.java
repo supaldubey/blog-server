@@ -2,6 +2,7 @@ package in.cubestack.apps.blog.admin.resource;
 
 import in.cubestack.apps.blog.admin.service.AdminService;
 import in.cubestack.apps.blog.base.web.HttpHelper;
+import in.cubestack.apps.blog.core.service.User;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.api.CheckedTemplate;
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 
@@ -37,8 +39,9 @@ public class AdminResource {
     @GET
     @Path("dashboard")
     @RolesAllowed("Admin")
-    public TemplateInstance dashboard() {
-        return Templates.dashboard();
+    public TemplateInstance dashboard(@Context SecurityContext securityContext) {
+        User user = (User) securityContext.getUserPrincipal();
+        return Templates.dashboard().data("user", user);
     }
 
     @GET
@@ -52,16 +55,20 @@ public class AdminResource {
     public Response doLogin(@Context UriInfo uriInfo, @FormParam("username") String username, @FormParam("password") String password) {
         try {
             String token = adminService.login(username, password);
-            return Response.accepted().cookie(httpHelper.createTokenCookie(token)).build();
+            URI dashboardUri = uriInfo.getBaseUriBuilder()
+                    .path(AdminResource.class)
+                    .path("/dashboard")
+                    .build();
+            return Response.seeOther(dashboardUri).cookie(httpHelper.createTokenCookie(token)).build();
         } catch (Exception ex) {
             LOGGER.error("Error authenticating", ex);
 
-            URI resourceBaseUri = uriInfo.getBaseUriBuilder()
+            URI loginUri = uriInfo.getBaseUriBuilder()
                     .path(AdminResource.class)
                     .path("/login")
                     .queryParam("invalid", true)
                     .build();
-            return Response.seeOther(resourceBaseUri).build();
+            return Response.seeOther(loginUri).build();
         }
     }
 }
