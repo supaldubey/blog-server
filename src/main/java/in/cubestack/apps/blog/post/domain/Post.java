@@ -42,6 +42,9 @@ public class Post extends BaseModel {
     @Column
     private String content;
 
+    @OneToOne(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private PostAnalytics postAnalytics;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostComment> postComments = new ArrayList<>();
 
@@ -61,6 +64,7 @@ public class Post extends BaseModel {
         this.summary = summary;
         this.slug = slug;
         this.content = content;
+        this.postAnalytics = new PostAnalytics(this);
     }
 
     public void publish() {
@@ -135,5 +139,9 @@ public class Post extends BaseModel {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    public PostAnalytics getPostAnalytics() {
+        return postAnalytics;
     }
 }

@@ -17,8 +17,8 @@ public class PostService {
     @Inject
     PostRepository postRepository;
 
-    public Post findById(Long id) {
-        return postRepository.findById(id);
+    public Optional<Post> findById(Long id) {
+        return postRepository.findByIdOptional(id);
     }
 
     public Optional<Post> findBySlug(String slug) {

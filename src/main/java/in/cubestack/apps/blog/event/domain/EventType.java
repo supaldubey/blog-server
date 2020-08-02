@@ -1,12 +1,12 @@
-package in.cubestack.apps.blog.counter.domain;
+package in.cubestack.apps.blog.event.domain;
 
-public enum CounterType {
+public enum EventType {
 
     POST_VIEWS,
     POST_LIKES;
 
-    public static CounterType of(String counterType) {
-        for(CounterType type: values()) {
+    public static EventType of(String counterType) {
+        for(EventType type: values()) {
             if(type.name().equals(counterType)) return type;
         }
         throw new IllegalArgumentException("Invalid counter type " + counterType);
