@@ -2,6 +2,7 @@ package in.cubestack.apps.blog.core.resource;
 
 
 import in.cubestack.apps.blog.base.web.BlogResponse;
+import in.cubestack.apps.blog.base.web.HttpHelper;
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.core.domain.Role;
 import in.cubestack.apps.blog.core.service.AuthenticationService;
@@ -20,6 +21,9 @@ public class PersonResource {
 
     @Inject
     PersonService personService;
+
+    @Inject
+    HttpHelper httpHelper;
 
     @Inject
     AuthenticationService authenticationService;
@@ -51,7 +55,9 @@ public class PersonResource {
         }
 
         String token = authenticationService.generateToken(person);
-        return Response.ok().header("token", token).build();
+        return Response.ok()
+                .cookie(httpHelper.createTokenCookie(token))
+                .header("token", token).build();
     }
 
     @GET()

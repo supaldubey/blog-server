@@ -1,8 +1,6 @@
 package in.cubestack.apps.blog.post.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
-import in.cubestack.apps.blog.post.domain.Post;
-import in.cubestack.apps.blog.post.domain.PostCategory;
 
 import javax.persistence.*;
 import java.util.ArrayList;

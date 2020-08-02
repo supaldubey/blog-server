@@ -17,7 +17,8 @@ public class PersonRole extends BaseModel {
     @JoinColumn(name = "roleId")
     private Role role;
 
-    PersonRole() {}
+    PersonRole() {
+    }
 
     PersonRole(Person person, Role role) {
         this.person = person;

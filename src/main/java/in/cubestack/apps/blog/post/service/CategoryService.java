@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 @ApplicationScoped
 public class CategoryService {

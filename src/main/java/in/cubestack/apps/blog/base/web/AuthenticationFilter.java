@@ -25,13 +25,13 @@ import java.util.Optional;
 @RegisterForReflection
 public class AuthenticationFilter implements ContainerRequestFilter {
 
-    private static final String BASIC_AUTH_HEADER = "BASIC ";
-    public static final String AUTHENTICATION_HEADER = "Authentication";
-
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);
 
     @Context
     UriInfo uriInfo;
+
+    @Inject
+    HttpHelper httpHelper;
 
     @Inject
     AuthenticationService authenticationService;
@@ -88,11 +88,14 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
     private String parseToken(ContainerRequestContext requestContext) {
-        String authHeaderVal = requestContext.getHeaderString(AUTHENTICATION_HEADER);
+        // Find from Cookie
+        String token = httpHelper.getTokenFromCookie(requestContext);
 
-        if (authHeaderVal != null) {
-            return authHeaderVal.substring(BASIC_AUTH_HEADER.length());
+        if (token == null) {
+            // Try to get from header
+            token = httpHelper.getTokenFromHeader(requestContext);
         }
-        return null;
+
+        return token;
     }
 }

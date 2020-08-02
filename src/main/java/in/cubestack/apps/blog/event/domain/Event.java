@@ -18,7 +18,8 @@ public class Event extends BaseModel {
     private EventType eventType;
 
 
-    public Event() {}
+    public Event() {
+    }
 
     public Event(Long contentId, EventType eventType) {
         this.contentId = contentId;

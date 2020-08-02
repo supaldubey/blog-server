@@ -14,7 +14,6 @@ public class PersonCandidate {
     }
 
 
-
     public PersonCandidate(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
