@@ -78,7 +78,7 @@ public class PostService {
                 metatitle,
                 summary,
                 contentHelper.slugify(title),
-                contentHelper.markdownToHtml(content)
+                content
         );
         return save(post);
     }

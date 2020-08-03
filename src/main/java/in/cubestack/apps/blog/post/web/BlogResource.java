@@ -55,6 +55,7 @@ public class BlogResource {
     public TemplateInstance postView2(@QueryParam("postId") Long postId) {
         Post post = postService.findById(postId).orElseThrow(RuntimeException::new);
 
+        post.setHtmlContent(contentHelper.markdownToHtml(post.getContent()));
         return Templates.postView2(post);
     }
 }

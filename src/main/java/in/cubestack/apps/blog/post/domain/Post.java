@@ -39,6 +39,9 @@ public class Post extends BaseModel {
     @Column(name = "publishedAt")
     private LocalDateTime publishedAt;
 
+    @Transient
+    private String htmlContent;
+
     @Column
     private String content;
 
@@ -143,5 +146,13 @@ public class Post extends BaseModel {
 
     public PostAnalytics getPostAnalytics() {
         return postAnalytics;
+    }
+
+    public String getHtmlContent() {
+        return htmlContent;
+    }
+
+    public void setHtmlContent(String htmlContent) {
+        this.htmlContent = htmlContent;
     }
 }
