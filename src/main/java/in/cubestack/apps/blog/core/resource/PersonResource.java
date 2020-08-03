@@ -5,7 +5,7 @@ import in.cubestack.apps.blog.base.web.BlogResponse;
 import in.cubestack.apps.blog.base.web.HttpHelper;
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.core.domain.Role;
-import in.cubestack.apps.blog.core.service.AuthenticationService;
+import in.cubestack.apps.blog.core.service.TokenAuthenticationService;
 import in.cubestack.apps.blog.core.service.PersonService;
 
 import javax.inject.Inject;
@@ -26,7 +26,7 @@ public class PersonResource {
     HttpHelper httpHelper;
 
     @Inject
-    AuthenticationService authenticationService;
+    TokenAuthenticationService tokenAuthenticationService;
 
 
     public PersonResource(PersonService personService) {

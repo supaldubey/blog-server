@@ -2,6 +2,8 @@ package in.cubestack.apps.blog.admin.resource;
 
 import in.cubestack.apps.blog.admin.service.AdminService;
 import in.cubestack.apps.blog.base.web.HttpHelper;
+import in.cubestack.apps.blog.core.domain.Person;
+import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.core.service.User;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.service.PostService;
@@ -18,18 +20,12 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.List;
 
 @Path("/admin")
 public class AdminResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminResource.class);
-
-    @CheckedTemplate
-    public static class Templates {
-        public static native TemplateInstance login();
-
-        public static native TemplateInstance dashboard();
-    }
 
     @Inject
     AdminService adminService;
@@ -40,6 +36,17 @@ public class AdminResource {
     @Inject
     PostService postService;
 
+    @Inject
+    PersonService personService;
+
+    @CheckedTemplate
+    public static class Templates {
+        public static native TemplateInstance login();
+
+        public static native TemplateInstance dashboard();
+
+        public static native TemplateInstance user();
+    }
 
     @GET
     @Path("dashboard")
@@ -50,6 +57,33 @@ public class AdminResource {
     }
 
     @GET
+    @Path("users")
+    @RolesAllowed("Admin")
+    public TemplateInstance users(@Context SecurityContext securityContext, @QueryParam("created") String created) {
+        User user = (User) securityContext.getUserPrincipal();
+        List<Person> people = personService.findAll();
+        return Templates.user().data("user", user).data("people", people).data("created", created == null ? "" : created);
+    }
+
+    @POST
+    @Path("/users")
+    @RolesAllowed("Admin")
+    public Response createUser(@Context UriInfo uriInfo,
+                               @FormParam("firstName") String firstName,
+                               @FormParam("lastName") String lastName,
+                               @FormParam("password") String password,
+                               @FormParam("username") String username) {
+
+        personService.createPerson(firstName, lastName, password, username);
+        URI users = uriInfo.getBaseUriBuilder()
+                .path(AdminResource.class)
+                .path("/users")
+                .queryParam("created", true)
+                .build();
+        return Response.seeOther(users).build();
+    }
+
+    @GET
     @Path("/login")
     public TemplateInstance login(@QueryParam("invalid") String invalid) {
         return Templates.login().data("invalid", invalid == null ? "" : invalid);
@@ -57,14 +91,18 @@ public class AdminResource {
 
     @POST
     @Path("/posts")
-    public Response createPost(@Context SecurityContext securityContext,
+    @RolesAllowed("Admin")
+    public Response createPost(@Context UriInfo uriInfo,
+                               @Context SecurityContext securityContext,
                                @FormParam("title") String title,
                                @FormParam("metatitle") String metatitle,
                                @FormParam("summary") String summary,
                                @FormParam("content") String content) {
         User user = (User) securityContext.getUserPrincipal();
         Post post = postService.createPost(user, title, metatitle, summary, content);
-        return Response.ok("Created blog with id " + post.getId() + "View from http://localhost:8080/blog/posts/view2?postId=" + post.getId()).build();
+
+        String path = uriInfo.getBaseUri().toString();
+        return Response.ok("Created blog with id " + post.getId() + "View from " + path + "/blog/posts/view2?postId=" + post.getId()).build();
     }
 
     @POST

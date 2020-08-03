@@ -1,6 +1,6 @@
 package in.cubestack.apps.blog.base.web;
 
-import in.cubestack.apps.blog.core.service.AuthenticationService;
+import in.cubestack.apps.blog.core.service.TokenAuthenticationService;
 import in.cubestack.apps.blog.core.service.User;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     HttpHelper httpHelper;
 
     @Inject
-    AuthenticationService authenticationService;
+    TokenAuthenticationService tokenAuthenticationService;
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
@@ -54,7 +54,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
     private void addSecurityContext(ContainerRequestContext requestContext, String token) {
-        Optional<User> userOptional = authenticationService.fromToken(token);
+        Optional<User> userOptional = tokenAuthenticationService.fromToken(token);
         if (!userOptional.isPresent()) {
             return;
         }

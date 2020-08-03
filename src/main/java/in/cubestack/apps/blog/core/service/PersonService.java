@@ -34,4 +34,12 @@ public class PersonService {
         person.ifPresent(p -> p.getRoles().forEach(Role::getRoleName));
         return person;
     }
+
+    public Person createPerson(String firstName, String lastName, String password, String username) {
+        Person person = new Person(firstName, lastName, username);
+        person.updatePassword(password);
+
+        personRepository.persist(person);
+        return person;
+    }
 }
