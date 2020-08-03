@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 public class EventResource {
 
     @Inject
-    private EventService eventService;
+    EventService eventService;
 
     @PUT
     public void triggerEvent(@QueryParam("contentId") Long contentId, @QueryParam("eventType") String eventType) {
