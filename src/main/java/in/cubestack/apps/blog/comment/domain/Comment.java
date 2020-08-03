@@ -27,7 +27,8 @@ public class Comment extends BaseModel {
     @Column(name = "publishedAt")
     private LocalDateTime publishedAt;
 
-    Comment() {}
+    Comment() {
+    }
 
     public Comment(String title, CommentStatus status, String content, LocalDateTime publishedAt) {
         this.title = title;

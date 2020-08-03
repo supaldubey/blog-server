@@ -1,5 +1,5 @@
 package in.cubestack.apps.blog.core.domain;
 
-public enum  PostStatus {
+public enum PostStatus {
     PUBLISHED, DRAFT;
 }

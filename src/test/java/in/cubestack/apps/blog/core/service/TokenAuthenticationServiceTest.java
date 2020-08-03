@@ -11,14 +11,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AuthenticationServiceTest {
+public class TokenAuthenticationServiceTest {
 
-    private AuthenticationService authenticationService;
+    private TokenAuthenticationService tokenAuthenticationService;
 
     @BeforeEach
     public void init() {
-        authenticationService = new AuthenticationService();
-        authenticationService.jwtSecret = "Test";
+        tokenAuthenticationService = new TokenAuthenticationService();
+        tokenAuthenticationService.jwtSecret = "Test";
     }
 
     @Test
@@ -27,9 +27,9 @@ public class AuthenticationServiceTest {
         person.addRole(new Role("Admin"));
         person.addRole(new Role("Stupid"));
 
-        String token = authenticationService.generateToken(person);
+        String token = tokenAuthenticationService.generateToken(person);
 
-        Optional<User> optionalUser = authenticationService.fromToken(token);
+        Optional<User> optionalUser = tokenAuthenticationService.fromToken(token);
         assertTrue(optionalUser.isPresent());
 
         User user = optionalUser.get();
@@ -40,9 +40,9 @@ public class AuthenticationServiceTest {
 
     @Test
     public void testDecode() {
-        String token = authenticationService.generateToken(new Person("Supal", "Dubey", "supaldubey"));
+        String token = tokenAuthenticationService.generateToken(new Person("Supal", "Dubey", "supaldubey"));
 
-        Optional<User> optionalUser = authenticationService.fromToken(token);
+        Optional<User> optionalUser = tokenAuthenticationService.fromToken(token);
         assertTrue(optionalUser.isPresent());
 
         User user = optionalUser.get();
@@ -53,7 +53,7 @@ public class AuthenticationServiceTest {
 
     @Test
     public void testSign() {
-        String token = authenticationService.generateToken(new Person("Supal", "Dubey", "supaldubey"));
+        String token = tokenAuthenticationService.generateToken(new Person("Supal", "Dubey", "supaldubey"));
         assertNotNull(token);
     }
 

@@ -9,12 +9,13 @@ create TABLE person(
     status          VARCHAR(50),
     profileImage    VARCHAR(500),
     phone           VARCHAR(20),
+    salt            VARCHAR(200),
     countryCode     VARCHAR(10),
 
     createdAt TIMESTAMP NOT NULL,
     updatedAt TIMESTAMP NOT NULL
 );
 
-CREATE UNIQUE INDEX phone_unique_idx ON person (phone) WHERE (phone is NOT null);
-CREATE UNIQUE INDEX username_unique_idx ON person (username) WHERE (username is NOT null);
-CREATE UNIQUE INDEX email_unique_idx ON person (email) WHERE (email is NOT null);
+CREATE UNIQUE INDEX ON person (phone) WHERE (phone is NOT null);
+CREATE UNIQUE INDEX ON person (username) ;
+CREATE UNIQUE INDEX on person (email) WHERE (email is NOT null);

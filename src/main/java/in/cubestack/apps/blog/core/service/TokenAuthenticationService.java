@@ -20,9 +20,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class AuthenticationService {
+public class TokenAuthenticationService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokenAuthenticationService.class);
 
     @Inject
     @ConfigProperty(name = "jwt.secret")

@@ -18,7 +18,8 @@ public abstract class BaseModel {
     private LocalDateTime updatedAt;
 
 
-    public BaseModel() {}
+    public BaseModel() {
+    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

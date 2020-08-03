@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Post</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/highlightjs.min.css">
@@ -32,24 +32,42 @@
     <div class="container-fluid bts-container-fluid">
         <div class="row bts-container-row">
             <div class="col-sm-2 bts-container-col">
-                Left
+                {#if invalid.length() > 0}
+                    Invalid username / password
+                {/if}
+
             </div>
             <div class="col-sm-7 bts-container-col bts-content-area">
                 <div class="bts-post">
                     <div class="bts-post-body">
                         <div class="bts-post-item">
                             <h1 class="bts-post-title">
-                                {post.title}
+                                Please authenticate
                             </h1>
                         </div>
                         <div class="bts-post-item">
-                            <h1 class="bts-post-metaTitle">
-                                {post.metaTitle}
-                            </h1>
+                            {#if invalid.length() > 0}
+                            <div class="alert alert-warning">
+                                Invalid username / password
+                            </div>
+                            {/if}
+
                         </div>
                         <div class="bts-post-item">
                             <div class="bts-post-content">
-                                {post.htmlContent.raw}
+                                <form method="post" >
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Username</label>
+                                        <input name="username" type="text" class="form-control input-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+                                        <small id="usernameHelp" class="form-text text-muted">We'll never share your details with anyone else.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input name="password" type="password" class="form-control input-lg" id="password" placeholder="Password">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>

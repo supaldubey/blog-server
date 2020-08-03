@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Post</title>
+    <title>Administrator dashboard</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/highlightjs.min.css">
@@ -32,26 +32,49 @@
     <div class="container-fluid bts-container-fluid">
         <div class="row bts-container-row">
             <div class="col-sm-2 bts-container-col">
-                Left
+
             </div>
             <div class="col-sm-7 bts-container-col bts-content-area">
                 <div class="bts-post">
                     <div class="bts-post-body">
                         <div class="bts-post-item">
                             <h1 class="bts-post-title">
-                                {post.title}
+                                You are logged in as {user.userName}
                             </h1>
                         </div>
                         <div class="bts-post-item">
-                            <h1 class="bts-post-metaTitle">
-                                {post.metaTitle}
-                            </h1>
+
                         </div>
                         <div class="bts-post-item">
                             <div class="bts-post-content">
-                                {post.htmlContent.raw}
+                                Welcome welcome<p>Your roles</p>
+                                <ul>
+                                    {#for role in user.roles}
+                                        <li>{role}</li>
+                                    {/for}
+
+                                </ul>
                             </div>
                         </div>
+                        <h2>Create a new Post</h2>
+                        <form method="post" action="/admin/posts">
+                            <div class="form-group">
+                                <input name="title" type="text" class="form-control input-lg" placeholder="Enter Title">
+                            </div>
+                            <div class="form-group">
+                                <input name="metatitle" type="text" class="form-control input-lg"  placeholder="Meta title">
+                            </div>
+
+                            <div class="form-group">
+                                <input name="summary" type="text" class="form-control input-lg"  placeholder="Quick Summary">
+                            </div>
+
+                            <div class="form-group">
+                                <textarea name="content" placeholder="Markdown content" class="form-control input-lg"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>

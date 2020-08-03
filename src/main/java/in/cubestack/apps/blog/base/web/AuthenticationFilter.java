@@ -1,6 +1,6 @@
 package in.cubestack.apps.blog.base.web;
 
-import in.cubestack.apps.blog.core.service.AuthenticationService;
+import in.cubestack.apps.blog.core.service.TokenAuthenticationService;
 import in.cubestack.apps.blog.core.service.User;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.slf4j.Logger;
@@ -25,20 +25,20 @@ import java.util.Optional;
 @RegisterForReflection
 public class AuthenticationFilter implements ContainerRequestFilter {
 
-    private static final String BASIC_AUTH_HEADER = "BASIC ";
-    public static final String AUTHENTICATION_HEADER = "Authentication";
-
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);
 
     @Context
     UriInfo uriInfo;
 
     @Inject
-    AuthenticationService authenticationService;
+    HttpHelper httpHelper;
+
+    @Inject
+    TokenAuthenticationService tokenAuthenticationService;
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
-        String token = parseToken(requestContext);
+        String token = httpHelper.getTokenFromRequest(requestContext);
 
         if (token != null) {
             prepareSecurityContext(requestContext, token);
@@ -54,7 +54,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
     private void addSecurityContext(ContainerRequestContext requestContext, String token) {
-        Optional<User> userOptional = authenticationService.fromToken(token);
+        Optional<User> userOptional = tokenAuthenticationService.fromToken(token);
         if (!userOptional.isPresent()) {
             return;
         }
@@ -67,7 +67,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         requestContext.setSecurityContext(new SecurityContext() {
             @Override
             public Principal getUserPrincipal() {
-                return user::getUserName;
+                return user;
             }
 
             @Override
@@ -85,14 +85,5 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                 return BASIC_AUTH;
             }
         });
-    }
-
-    private String parseToken(ContainerRequestContext requestContext) {
-        String authHeaderVal = requestContext.getHeaderString(AUTHENTICATION_HEADER);
-
-        if (authHeaderVal != null) {
-            return authHeaderVal.substring(BASIC_AUTH_HEADER.length());
-        }
-        return null;
     }
 }

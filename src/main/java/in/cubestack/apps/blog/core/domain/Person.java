@@ -2,10 +2,14 @@ package in.cubestack.apps.blog.core.domain;
 
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
+import in.cubestack.apps.blog.util.EncryptionHelper;
+import org.jose4j.base64url.internal.apache.commons.codec.binary.Base64;
 
 import javax.persistence.*;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Entity
@@ -41,6 +45,9 @@ public class Person extends BaseModel {
     @Column
     private String countryCode;
 
+    @Column
+    private String salt;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<PersonRole> personRoles = new ArrayList<>();
 
@@ -51,16 +58,7 @@ public class Person extends BaseModel {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-    }
-
-    public Person(String firstName, String lastName, String username, String password, String email, String phone, String countryCode) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.countryCode = countryCode;
-        this.username = username;
-        this.password = password;
+        setSalt();
     }
 
     public Long getId() {
@@ -89,10 +87,6 @@ public class Person extends BaseModel {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void deactivate() {
@@ -124,8 +118,26 @@ public class Person extends BaseModel {
         return personRoles.stream().map(PersonRole::getRole).collect(Collectors.toList());
     }
 
+    public void setSalt() {
+        final Random r = new SecureRandom();
+        byte[] salt = new byte[64];
+        r.nextBytes(salt);
+        this.salt = Base64.encodeBase64String(salt);
+    }
+
     public void updatePassword(String password) {
-        this.password = password;
+        this.password = EncryptionHelper.getHash(password.toCharArray(), salt.getBytes());
+    }
+
+    public boolean isPasswordValid(String password) {
+        boolean authenticated = false;
+        if (password != null) {
+            String hashedPassword = EncryptionHelper.getHash(password.toCharArray(), salt.getBytes());
+            if (hashedPassword.equals(this.password)) {
+                authenticated = true;
+            }
+        }
+        return authenticated;
     }
 
     public void setFirstName(String firstName) {

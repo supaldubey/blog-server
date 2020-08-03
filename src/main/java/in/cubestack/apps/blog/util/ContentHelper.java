@@ -9,11 +9,17 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class ContentHelper {
 
+    private static final int MAX_LENGTH = 30;
+
     private Parser parser;
     private final Slugify slugify = new Slugify();
 
     public String slugify(String content) {
-        return slugify.slugify(content);
+        String consideredContent = content;
+        if (content.length() > MAX_LENGTH) {
+            consideredContent = content.substring(0, MAX_LENGTH);
+        }
+        return slugify.slugify(consideredContent);
     }
 
     public String markdownToHtml(String markdown) {

@@ -1,7 +1,5 @@
 package in.cubestack.apps.blog.post.web;
 
-import in.cubestack.apps.blog.core.domain.Person;
-import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.event.domain.EventType;
 import in.cubestack.apps.blog.event.service.EventService;
 import in.cubestack.apps.blog.post.domain.Post;
@@ -11,7 +9,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Path("posts")
@@ -25,8 +22,6 @@ public class PostResource {
     @Inject
     EventService eventService;
 
-    @Inject
-    PersonService personService;
 
     @GET
     public List<Post> findAll(
@@ -69,28 +64,6 @@ public class PostResource {
         return "Liked post with id : " + post.getId();
     }
 
-    @GET
-    @Path("test-create")
-    public String createPost() {
-        Person person = new Person("Arun", "Kumar", "bitsevn");
-
-        Optional<Person> p = personService.findByUsername("bitsevn");
-        if (!p.isPresent()) {
-            personService.save(person);
-        } else {
-            person = p.get();
-        }
-        Post post = postService.save(new Post(
-                person,
-                "REST APIs with Quarkus RestEasy",
-                "Getting started guide",
-                null,
-                "rest-apis-with-quarkus-resteasy",
-                "# REST APIs with Quarkus RestEasy"
-        ));
-
-        return "Created post with id : " + post.getId();
-    }
 
     @GET
     @Path("{id}")

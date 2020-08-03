@@ -13,11 +13,12 @@ public class PersonRole extends BaseModel {
     @JoinColumn(name = "personId")
     private Person person;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "roleId")
     private Role role;
 
-    PersonRole() {}
+    PersonRole() {
+    }
 
     PersonRole(Person person, Role role) {
         this.person = person;

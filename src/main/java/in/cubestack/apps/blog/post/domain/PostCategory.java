@@ -17,7 +17,8 @@ public class PostCategory extends BaseModel {
     @JoinColumn(name = "categoryId")
     private Category category;
 
-    PostCategory() {}
+    PostCategory() {
+    }
 
     public PostCategory(Category category) {
         this.category = category;

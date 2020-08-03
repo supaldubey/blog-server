@@ -2,9 +2,10 @@ package in.cubestack.apps.blog.core.resource;
 
 
 import in.cubestack.apps.blog.base.web.BlogResponse;
+import in.cubestack.apps.blog.base.web.HttpHelper;
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.core.domain.Role;
-import in.cubestack.apps.blog.core.service.AuthenticationService;
+import in.cubestack.apps.blog.core.service.TokenAuthenticationService;
 import in.cubestack.apps.blog.core.service.PersonService;
 
 import javax.inject.Inject;
@@ -22,7 +23,10 @@ public class PersonResource {
     PersonService personService;
 
     @Inject
-    AuthenticationService authenticationService;
+    HttpHelper httpHelper;
+
+    @Inject
+    TokenAuthenticationService tokenAuthenticationService;
 
 
     public PersonResource(PersonService personService) {
@@ -38,20 +42,16 @@ public class PersonResource {
         personService.save(person);
     }
 
-    @GET()
-    @Path("login")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response response(@QueryParam("username") String username, @QueryParam("role") List<String> roles) {
-        Person person = personService.findByUsername(username).orElseThrow(() -> new RuntimeException("No user found with username: " + username));
-
-        if (roles != null) {
-            for (String role : roles) {
-                person.addRole(new Role(role));
-            }
+    @GET
+    @Path("/mock-create")
+    public void save(@QueryParam("username") String username, @QueryParam("password") String password, @QueryParam("roles") List<String> roles) {
+        Random random = new Random();
+        Person person = new Person("Random : " + random.nextDouble(), "Random: " + random.nextDouble(), username);
+        person.updatePassword(password);
+        for(String role: roles) {
+            person.addRole(new Role(role));
         }
-
-        String token = authenticationService.generateToken(person);
-        return Response.ok().header("token", token).build();
+        personService.save(person);
     }
 
     @GET()

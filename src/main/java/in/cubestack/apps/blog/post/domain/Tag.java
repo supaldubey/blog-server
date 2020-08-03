@@ -18,9 +18,10 @@ public class Tag extends BaseModel {
     @Column
     private String content;
 
-    Tag() {}
+    Tag() {
+    }
 
-    public  Tag(Long id) {
+    public Tag(Long id) {
         this.id = id;
     }
 

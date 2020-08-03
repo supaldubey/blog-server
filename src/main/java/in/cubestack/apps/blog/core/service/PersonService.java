@@ -1,6 +1,7 @@
 package in.cubestack.apps.blog.core.service;
 
 import in.cubestack.apps.blog.core.domain.Person;
+import in.cubestack.apps.blog.core.domain.Role;
 import in.cubestack.apps.blog.core.repository.PersonRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -30,7 +31,15 @@ public class PersonService {
 
     public Optional<Person> findByUsername(String username) {
         Optional<Person> person = personRepository.find("username", username).firstResultOptional();
-        person.ifPresent(p -> p.getRoles().size());
+        person.ifPresent(p -> p.getRoles().forEach(Role::getRoleName));
+        return person;
+    }
+
+    public Person createPerson(String firstName, String lastName, String password, String username) {
+        Person person = new Person(firstName, lastName, username);
+        person.updatePassword(password);
+
+        personRepository.persist(person);
         return person;
     }
 }
