@@ -51,10 +51,16 @@ public class BlogResource {
     }
 
     @GET
+    @Path("posts/view2")
+    public TemplateInstance postView2(@QueryParam("postId") Long postId) {
+        Post post = postService.findById(postId).orElseThrow(RuntimeException::new);
+        post.setHtmlContent(contentHelper.markdownToHtml(post.getContent()));
+        return Templates.postView2(post);
+    }
+
     @Path("{slug}")
     public TemplateInstance postView2(@PathParam("slug") String slug) {
         Post post = postService.findBySlug(slug).orElseThrow(RuntimeException::new);
-
         post.setHtmlContent(contentHelper.markdownToHtml(post.getContent()));
         return Templates.postView2(post);
     }

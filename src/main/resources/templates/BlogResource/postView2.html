@@ -5,22 +5,26 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Post</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" crossorigin="anonymous">
     <title>{post.title}</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/highlightjs.min.css">
     <link rel="stylesheet" href="/css/blog2.css">
+    <style type="text/css">
+    </style>
 </head>
 <body>
 
 <header class="navbar fixed-top navbar-dark bts-navbar">
     <div class="container-fluid bts-container-fluid">
         <div class="row bts-container-row">
-            <div class="col-sm-2 bts-container-col">
+            <div class="col-sm-1 bts-container-col">
                 &nbsp;
             </div>
-            <div class="col-sm-8 bts-container-col">
-                <span class="navbar-brand mb-0">Blog</span>
+            <div class="col-sm-9 bts-container-col">
+                <span class="navbar-brand mb-0">Cubestack <i>Blog</i></span>
             </div>
             <div class="col-sm-2 bts-container-col">
                 &nbsp;
@@ -31,11 +35,11 @@
 <div class="bts-body">
     <div class="container-fluid bts-container-fluid">
         <div class="row bts-container-row">
-            <div class="col-sm-2 bts-container-col">
-                Left
+            <div class="col-sm-1 bts-container-col">
+                &nbsp;
             </div>
-            <div class="col-sm-7 bts-container-col bts-content-area">
-                <div class="bts-post">
+            <div class="col-sm-8 bts-container-col bts-content-area">
+                <div class="bts-post bts-post-series">
                     <div class="bts-post-body">
                         <div class="bts-post-item">
                             <h1 class="bts-post-title">
@@ -48,7 +52,7 @@
                             </h1>
                         </div>
                         <div class="bts-post-item">
-                            <div class="bts-post-content">
+                            <div class="bts-post-content bts-post-series-content">
                                 {post.htmlContent.raw}
                             </div>
                         </div>
@@ -56,7 +60,7 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                Right
+                &nbsp;
             </div>
         </div>
     </div>
