@@ -3,7 +3,7 @@ package in.cubestack.apps.blog.web;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/")
+@Path("/uni")
 @Produces(MediaType.TEXT_HTML)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UniversalResource {
