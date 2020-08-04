@@ -170,9 +170,16 @@ html, body {
     font-size: 2.25rem !important;
 }
 
+.bts-post .bts-post-body .bts-post-item .bts-post-content h2,
+.bts-post .bts-post-body .bts-post-item .bts-post-content h3,
+.bts-post .bts-post-body .bts-post-item .bts-post-content h4,
+.bts-post .bts-post-body .bts-post-item .bts-post-content h5,
+.bts-post .bts-post-body .bts-post-item .bts-post-content h6 {
+    font-weight: 300;
+}
+
 .bts-post .bts-post-body .bts-post-item .bts-post-content h2 {
     font-size: 1.85rem !important;
-    font-weight: 400;
 }
 
 .bts-post .bts-post-body .bts-post-item .bts-post-content h3 {
