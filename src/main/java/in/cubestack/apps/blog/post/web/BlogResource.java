@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-@Path("blog")
+@Path("/")
 @Produces(MediaType.TEXT_HTML)
 @Consumes(MediaType.APPLICATION_JSON)
 public class BlogResource {
@@ -54,6 +54,13 @@ public class BlogResource {
     @Path("posts/view2")
     public TemplateInstance postView2(@QueryParam("postId") Long postId) {
         Post post = postService.findById(postId).orElseThrow(RuntimeException::new);
+        post.setHtmlContent(contentHelper.markdownToHtml(post.getContent()));
+        return Templates.postView2(post);
+    }
+
+    @Path("{slug}")
+    public TemplateInstance postView2(@PathParam("slug") String slug) {
+        Post post = postService.findBySlug(slug).orElseThrow(RuntimeException::new);
         post.setHtmlContent(contentHelper.markdownToHtml(post.getContent()));
         return Templates.postView2(post);
     }
