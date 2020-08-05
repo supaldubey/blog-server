@@ -15,7 +15,7 @@ public class Role extends BaseModel {
     @Column
     private String roleName;
 
-    public Role() {
+    Role() {
     }
 
 

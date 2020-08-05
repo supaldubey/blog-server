@@ -44,6 +44,7 @@
                                 <div class="row cs-ad-container-row">
                                     <div class="col-sm-8 cs-ad-container-col">
                                         <div class="container-fluid cs-ad-container-fluid">
+                                            <form action="/persons" method="post" enctype="application/x-www-form-urlencoded">
                                             <div class="row">
                                                 <div class="col-sm-4 form-group">
                                                     <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First name">
@@ -70,13 +71,19 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-8 form-group">
-                                                    <select id="roles" multiple="multiple">
+                                                    <select name="roles" id="roles" multiple="multiple">
                                                         {#for role in roles}
                                                         <option value="{role.roleId}">{role.roleName}</option>
                                                         {/for}
                                                     </select>
                                                 </div>
                                             </div>
+                                                <div class="cs-ad-card-footer">
+                                                    <button type="submit" class="btn btn-primary btn-sm" >Save</button>
+                                                    &nbsp;
+                                                    <button type="reset" class="btn btn-danger btn-sm">Clear</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 cs-ad-container-col">
@@ -85,11 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="cs-ad-card-footer">
-                            <button type="button" class="btn btn-primary btn-sm" onclick="onSave()">Save</button>
-                            &nbsp;
-                            <button type="reset" class="btn btn-danger btn-sm">Clear</button>
-                        </div>
+
                     </div>
                 </div>
             </div>

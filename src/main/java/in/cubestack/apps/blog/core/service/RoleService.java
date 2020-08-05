@@ -17,7 +17,7 @@ public class RoleService {
     RoleRepository roleRepository;
 
     public List<RoleCandidate> findAll() {
-        return roleRepository.findAll().list().stream().map(o -> RoleCandidate.from(o)).collect(Collectors.toList());
+        return roleRepository.findAll().list().stream().map(RoleCandidate::from).collect(Collectors.toList());
     }
 
     public void save(RoleCandidate candidate) {

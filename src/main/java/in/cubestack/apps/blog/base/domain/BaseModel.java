@@ -51,10 +51,6 @@ public abstract class BaseModel {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @PrePersist
     public void prepareForSave() {
         this.createdAt = LocalDateTime.now();
