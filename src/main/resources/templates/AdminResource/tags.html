@@ -43,11 +43,9 @@
                             {#if tags.size() == 0}
                             <p>No tags</p>
                             {#else}
-                            <div class="cs-ad-tags">
-                                {#for tag in tags}
-                                <span>{tag.tagName}</span>
-                                {/for}
-                            </div>
+                            {#for tag in tags}
+                            <span class="badge badge-pill badge-primary cs-ad-badge">{tag.tagName}</span>
+                            {/for}
                             {/if}
                         </div>
                         <div class="col-sm-4 cs-ad-container-col">
@@ -58,9 +56,9 @@
                                 <div class="row cs-ad-container-row form-group form-inline">
                                     <form action="/tags" method="post" enctype="application/x-www-form-urlencoded">
                                         <input type="text" class="form-control" name="tagName" id="tagName"
-                                               placeholder="Tag name">
+                                               placeholder="Enter tag name">
                                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px;">
-                                            Save
+                                            Add tag
                                         </button>
                                     </form>
                                 </div>

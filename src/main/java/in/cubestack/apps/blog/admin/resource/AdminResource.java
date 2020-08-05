@@ -86,6 +86,7 @@ public class AdminResource {
         User user = (User) securityContext.getUserPrincipal();
         return Templates.users()
                 .data("user", user)
+                .data("roles", roleService.findAll())
                 .data("users", personService.findAll());
     }
 
@@ -146,7 +147,9 @@ public class AdminResource {
     public TemplateInstance createPostForm(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
         return Templates.createPost()
-                .data("user", user);
+                .data("user", user)
+                .data("categories", categoryService.findAll())
+                .data("tags", tagService.findAll());
     }
 
     @GET

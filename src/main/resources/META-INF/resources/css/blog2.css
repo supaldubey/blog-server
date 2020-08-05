@@ -428,7 +428,7 @@ textarea.form-control {
 
 .cs-ad-card .cs-ad-card-body {
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    /*padding-bottom: 1rem;*/
     background-color: #ffffff;
     height: 100%;
     font-size: 80%;
@@ -477,4 +477,11 @@ textarea.form-control {
     color: #ffffff;
     font-size: 1.15em;
     font-weight: 300;
+}
+
+.cs-ad-badge {
+    padding: .55em 1em !important;
+    font-size: 95% !important;
+    margin-top: 10px;
+    margin-right: 5px;
 }

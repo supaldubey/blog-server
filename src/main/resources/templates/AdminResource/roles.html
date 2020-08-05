@@ -43,11 +43,9 @@
                             {#if roles.size() == 0}
                             <p>No roles</p>
                             {#else}
-                            <div class="cs-ad-tags">
-                                {#for role in roles}
-                                <span>{role.roleName}</span>
-                                {/for}
-                            </div>
+                            {#for role in roles}
+                            <span class="badge badge-pill badge-primary cs-ad-badge">{role.roleName}</span>
+                            {/for}
                             {/if}
                         </div>
                         <div class="col-sm-4 cs-ad-container-col">
