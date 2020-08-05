@@ -1,14 +1,12 @@
 package in.cubestack.apps.blog.post.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
 @Entity
 @Table(name = "category")
 @SequenceGenerator(name = "default_gen", sequenceName = "category_id_seq", allocationSize = 1)

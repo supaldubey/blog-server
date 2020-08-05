@@ -1,15 +1,7 @@
 package in.cubestack.apps.blog.admin.resource;
 
 import in.cubestack.apps.blog.post.domain.Category;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class CategoryCandidate {
 
     private long id;
@@ -17,13 +9,17 @@ public class CategoryCandidate {
     private String metaTitle;
     private String slug;
 
+    public CategoryCandidate() {}
+
+    public CategoryCandidate(long id, String title, String metaTitle, String slug) {
+        this.id = id;
+        this.title = title;
+        this.metaTitle = metaTitle;
+        this.slug = slug;
+    }
+
     public static CategoryCandidate from(Category category) {
-        return CategoryCandidate.builder()
-                .id(category.getId())
-                .title(category.getTitle())
-                .metaTitle(category.getMetaTitle())
-                .slug(category.getSlug())
-                .build();
+        return new CategoryCandidate(category.getId(), category.getTitle(), category.getMetaTitle(), category.getSlug());
     }
 
     public Category toCategory() {
@@ -34,5 +30,37 @@ public class CategoryCandidate {
                 slug,
                 null
         );
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getMetaTitle() {
+        return metaTitle;
+    }
+
+    public void setMetaTitle(String metaTitle) {
+        this.metaTitle = metaTitle;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 }
