@@ -33,21 +33,53 @@
         <div class="card cs-ad-card">
             <div class="card-header cs-ad-card-header">
                 <div class="clearfix">
-                    <span class="cs-ad-card-title float-left">Tags</span>
-                    <a type="button" class="btn btn-outline-primary btn-sm float-right" href="/admin/users/create">Add</a>
+                    <span class="cs-ad-card-title float-left">Roles</span>
                 </div>
             </div>
             <div class="card-body cs-ad-card-body">
-                Tags
+                <div class="container-fluid cs-ad-container-fluid">
+                    <div class="row cs-ad-container-row">
+                        <div class="col-sm-8 cs-ad-container-col">
+                            {#if roles.size() == 0}
+                            <p>No roles</p>
+                            {#else}
+                            <div class="cs-ad-tags">
+                                {#for role in roles}
+                                <span>{role.roleName}</span>
+                                {/for}
+                            </div>
+                            {/if}
+                        </div>
+                        <div class="col-sm-4 cs-ad-container-col">
+                            <form action="/roles" method="post" enctype="application/x-www-form-urlencoded">
+                                <div class="container-fluid cs-ad-container-fluid">
+                                    <div class="row cs-ad-container-row form-group">
+                                        <span class="cs-ad-card-title cs-ad-card-title-heading">Add Role</span>
+                                    </div>
+                                    <div class="row cs-ad-container-row form-group form-inline">
+                                        <input type="hidden" name="roleId" id="roleId" value="0">
+                                        <input type="text" class="form-control" name="roleName" id="roleName"
+                                               placeholder="Enter role name">
+                                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px;">
+                                            Add role
+                                        </button>
+                                    </div>
+                                    <div class="row cs-ad-container-row form-group">
+                                        <div id="errorContainer"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="/js/jquery-3.5.1.min.js"></script>
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
 
-</script>
+    </script>
 </body>
 </html>

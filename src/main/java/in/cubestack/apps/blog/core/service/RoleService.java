@@ -6,11 +6,13 @@ import in.cubestack.apps.blog.core.resource.RoleCandidate;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
+@Transactional
 public class RoleService {
 
     @Inject

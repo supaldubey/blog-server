@@ -50,7 +50,7 @@
                                 Welcome welcome<p>Your roles</p>
                                 <ul>
                                     {#for role in user.roles}
-                                        <li>{role}</li>
+                                    <li>{role}</li>
                                     {/for}
 
                                 </ul>
@@ -74,18 +74,21 @@
                         <h2>Create a new User</h2>
                         <form method="post" action="/admin/users">
                             <div class="form-group">
-                                <input name="firstName" type="text" class="form-control input-lg" placeholder="First name">
+                                <input name="firstName" type="text" class="form-control input-lg"
+                                       placeholder="First name">
                             </div>
                             <div class="form-group">
-                                <input name="lastName" type="text" class="form-control input-lg"  placeholder="Last Name">
-                            </div>
-
-                            <div class="form-group">
-                                <input name="username" type="text" class="form-control input-lg"  placeholder="Username">
+                                <input name="lastName" type="text" class="form-control input-lg"
+                                       placeholder="Last Name">
                             </div>
 
                             <div class="form-group">
-                                <input name="password" type="password" placeholder="Password" class="form-control input-lg" />
+                                <input name="username" type="text" class="form-control input-lg" placeholder="Username">
+                            </div>
+
+                            <div class="form-group">
+                                <input name="password" type="password" placeholder="Password"
+                                       class="form-control input-lg"/>
                             </div>
 
                             <button type="submit" class="btn btn-success btn-lg">Create User</button>
@@ -113,6 +116,7 @@
             hljs.initLineNumbersOnLoad(block);
         });
     });
+
 </script>
 </body>
 </html>

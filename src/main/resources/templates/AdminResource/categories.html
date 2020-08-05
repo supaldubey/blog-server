@@ -38,33 +38,39 @@
             </div>
             <div class="card-body cs-ad-card-body">
                 <div class="container-fluid cs-ad-container-fluid">
-                <div class="row cs-ad-container-row">
-                    <div class="col-sm-8 cs-ad-container-col">
-                        {#if categories.size() == 0}
+                    <div class="row cs-ad-container-row">
+                        <div class="col-sm-8 cs-ad-container-col">
+                            {#if categories.size() == 0}
                             <p>No categories</p>
-                        {#else}
+                            {#else}
                             <div class="cs-ad-tags">
                                 {#for category in categories}
-                                <span>{category.categoryName}</span>
+                                <span>{category.title}</span>
                                 {/for}
                             </div>
-                        {/if}
-                    </div>
-                    <div class="col-sm-4 cs-ad-container-col">
-                        <div class="container-fluid cs-ad-container-fluid">
-                            <div class="row cs-ad-container-row form-group">
-                                <span class="cs-ad-card-title cs-ad-card-title-heading">Add Category</span>
-                            </div>
-                            <div class="row cs-ad-container-row form-group form-inline">
-                                <input type="text" class="form-control" name="categoryName" id="categoryName" placeholder="Category name">
-                                <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;" onclick="onSave()">Save</button>
-                            </div>
-                            <div class="row cs-ad-container-row form-group">
-                                <div id="errorContainer"></div>
+                            {/if}
+                        </div>
+                        <div class="col-sm-4 cs-ad-container-col">
+                            <div class="container-fluid cs-ad-container-fluid">
+                                <div class="row cs-ad-container-row form-group">
+                                    <span class="cs-ad-card-title cs-ad-card-title-heading">Add Category</span>
+                                </div>
+                                <div class="row cs-ad-container-row form-group form-inline">
+                                    <form action="/categories" method="post"
+                                          enctype="application/x-www-form-urlencoded">
+                                        <input type="text" class="form-control" name="title" id="title"
+                                               placeholder="Category name">
+                                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px;">
+                                            Save
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="row cs-ad-container-row form-group">
+                                    <div id="errorContainer"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -74,20 +80,5 @@
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/blog.js"></script>
-<script type="text/javascript">
-    function onSave() {
-        const categoryName = $('#categoryName').val();
-        if(categoryName && categoryName.length > 1) {
-            cs.RestCalls.save(
-                'categories',
-                { categoryName },
-                {
-                    onSuccess: (data) => cs.navigate('admin/categories')
-                },
-                'errorContainer'
-            );
-        }
-    }
-</script>
 </body>
 </html>

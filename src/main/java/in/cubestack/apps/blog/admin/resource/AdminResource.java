@@ -54,12 +54,19 @@ public class AdminResource {
         public static native TemplateInstance login();
 
         public static native TemplateInstance dashboard();
+
         public static native TemplateInstance posts();
+
         public static native TemplateInstance users();
+
         public static native TemplateInstance tags();
+
         public static native TemplateInstance roles();
+
         public static native TemplateInstance categories();
+
         public static native TemplateInstance createUser();
+
         public static native TemplateInstance createPost();
 
         public static native TemplateInstance user();

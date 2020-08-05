@@ -1,15 +1,20 @@
 package in.cubestack.apps.blog.admin.resource;
 
 import in.cubestack.apps.blog.post.domain.Category;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+import org.jboss.resteasy.annotations.jaxrs.FormParam;
 
+@RegisterForReflection
 public class CategoryCandidate {
 
     private long id;
+    @FormParam("title")
     private String title;
     private String metaTitle;
     private String slug;
 
-    public CategoryCandidate() {}
+    public CategoryCandidate() {
+    }
 
     public CategoryCandidate(long id, String title, String metaTitle, String slug) {
         this.id = id;
@@ -22,9 +27,8 @@ public class CategoryCandidate {
         return new CategoryCandidate(category.getId(), category.getTitle(), category.getMetaTitle(), category.getSlug());
     }
 
-    public Category toCategory() {
+    public Category toNewCategory() {
         return new Category(
-                id,
                 title,
                 metaTitle,
                 slug,

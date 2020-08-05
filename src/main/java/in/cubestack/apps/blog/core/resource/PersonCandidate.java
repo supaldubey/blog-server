@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 
 @RegisterForReflection
-@JsonIgnoreProperties(ignoreUnknown = true, value = { "password" })
+@JsonIgnoreProperties(ignoreUnknown = true, value = {"password"})
 public class PersonCandidate {
 
     private long id;

@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "personRole")
 @SequenceGenerator(name = "default_gen", sequenceName = "personRole_id_seq", allocationSize = 1)
-@JsonIgnoreProperties({ "person" })
+@JsonIgnoreProperties({"person"})
 public class PersonRole extends BaseModel {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
