@@ -42,7 +42,6 @@ public class RoleCandidate implements Comparable<RoleCandidate> {
     }
 
 
-
     public static RoleCandidate from(Role role) {
         return new RoleCandidate(String.valueOf(role.getId()), role.getRoleName());
     }

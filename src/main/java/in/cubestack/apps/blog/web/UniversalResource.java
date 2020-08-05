@@ -13,7 +13,7 @@ public class UniversalResource {
     public String page(@PathParam("url") String url) {
         System.out.println("Requested url: " + url);
         String homePage = String.format("<h1>Home page</h1><br/><h4>Requested url is: <i>%s</i></h4>", url);
-        if(url != null) {
+        if (url != null) {
             //TODO
         }
         return homePage;

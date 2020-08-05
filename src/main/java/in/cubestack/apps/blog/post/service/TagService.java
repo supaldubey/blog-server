@@ -21,7 +21,7 @@ public class TagService {
     TagRepository tagRepository;
 
     public List<TagCandidate> findAll() {
-        return tagRepository.findAll().list().stream().map(o -> TagCandidate.from(o)).collect(Collectors.toList());
+        return tagRepository.findAll().list().stream().map(TagCandidate::from).collect(Collectors.toList());
     }
 
     public Tag findOne(Long id) {
@@ -38,7 +38,7 @@ public class TagService {
     }
 
     public TagCandidate save(TagCandidate candidate) {
-        Tag tag = candidate.toTag();
+        Tag tag = candidate.toNewTag();
         tagRepository.persist(tag);
         return TagCandidate.from(tag);
     }

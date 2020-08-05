@@ -37,7 +37,8 @@ public class TagResource {
     }
 
     @POST
-    public TagCandidate save(TagCandidate tag) {
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public TagCandidate save(@Form @Valid TagCandidate tag) {
         return tagService.save(tag);
     }
 

@@ -14,7 +14,16 @@ public class TagCandidate {
     @NotBlank(message = "Tag name must not be blank")
     private String tagName;
 
-    public TagCandidate() {}
+    public TagCandidate() {
+    }
+
+    public long getTagId() {
+        return tagId;
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
 
     public TagCandidate(long tagId, String tagName) {
         this.tagId = tagId;
@@ -25,7 +34,7 @@ public class TagCandidate {
         return new TagCandidate(tag.getId(), tag.getTitle());
     }
 
-    public Tag toTag() {
-        return new Tag(tagId, tagName);
+    public Tag toNewTag() {
+        return new Tag(tagName);
     }
 }

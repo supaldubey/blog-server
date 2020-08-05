@@ -1,8 +1,8 @@
 package in.cubestack.apps.blog.admin.service;
 
 import in.cubestack.apps.blog.core.domain.Person;
-import in.cubestack.apps.blog.core.service.TokenAuthenticationService;
 import in.cubestack.apps.blog.core.service.PersonService;
+import in.cubestack.apps.blog.core.service.TokenAuthenticationService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

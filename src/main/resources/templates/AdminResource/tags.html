@@ -38,33 +38,38 @@
             </div>
             <div class="card-body cs-ad-card-body">
                 <div class="container-fluid cs-ad-container-fluid">
-                <div class="row cs-ad-container-row">
-                    <div class="col-sm-8 cs-ad-container-col">
-                        {#if tags.size() == 0}
+                    <div class="row cs-ad-container-row">
+                        <div class="col-sm-8 cs-ad-container-col">
+                            {#if tags.size() == 0}
                             <p>No tags</p>
-                        {#else}
+                            {#else}
                             <div class="cs-ad-tags">
                                 {#for tag in tags}
                                 <span>{tag.tagName}</span>
                                 {/for}
                             </div>
-                        {/if}
-                    </div>
-                    <div class="col-sm-4 cs-ad-container-col">
-                        <div class="container-fluid cs-ad-container-fluid">
-                            <div class="row cs-ad-container-row form-group">
-                                <span class="cs-ad-card-title cs-ad-card-title-heading">Add Tag</span>
-                            </div>
-                            <div class="row cs-ad-container-row form-group form-inline">
-                                <input type="text" class="form-control" name="tagName" id="tagName" placeholder="Tag name">
-                                <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;" onclick="onSave()">Save</button>
-                            </div>
-                            <div class="row cs-ad-container-row form-group">
-                                <div id="errorContainer"></div>
+                            {/if}
+                        </div>
+                        <div class="col-sm-4 cs-ad-container-col">
+                            <div class="container-fluid cs-ad-container-fluid">
+                                <div class="row cs-ad-container-row form-group">
+                                    <span class="cs-ad-card-title cs-ad-card-title-heading">Add Tag</span>
+                                </div>
+                                <div class="row cs-ad-container-row form-group form-inline">
+                                    <form action="/tags" method="post" enctype="application/x-www-form-urlencoded">
+                                        <input type="text" class="form-control" name="tagName" id="tagName"
+                                               placeholder="Tag name">
+                                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px;">
+                                            Save
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="row cs-ad-container-row form-group">
+                                    <div id="errorContainer"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -90,6 +95,7 @@
             );
         }
     }
+
 </script>
 </body>
 </html>

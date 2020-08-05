@@ -1,12 +1,19 @@
 package in.cubestack.apps.blog.post.web;
 
+import in.cubestack.apps.blog.admin.resource.AdminResource;
 import in.cubestack.apps.blog.admin.resource.CategoryCandidate;
 import in.cubestack.apps.blog.post.domain.Category;
 import in.cubestack.apps.blog.post.service.CategoryService;
+import org.jboss.resteasy.annotations.Form;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +37,16 @@ public class CategoryResource {
     }
 
     @POST
-    public CategoryCandidate save(CategoryCandidate category) {
-        return categoryService.save(category);
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response save(@Context UriInfo uriInfo, @Form @Valid CategoryCandidate category) {
+
+        categoryService.save(category);
+
+        URI dashboardUri = uriInfo.getBaseUriBuilder()
+                .path(AdminResource.class)
+                .path("/categories")
+                .build();
+        return Response.seeOther(dashboardUri).build();
     }
 
     @PUT

@@ -41,7 +41,7 @@ public class CategoryService {
     }
 
     public CategoryCandidate save(CategoryCandidate candidate) {
-        Category category = candidate.toCategory();
+        Category category = candidate.toNewCategory();
         category.setSlug(contentHelper.slugify(candidate.getTitle()));
         categoryRepository.persist(category);
         return CategoryCandidate.from(category);
