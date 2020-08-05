@@ -1,7 +1,9 @@
 package in.cubestack.apps.blog.core.resource;
 
 
+import in.cubestack.apps.blog.admin.resource.AdminResource;
 import in.cubestack.apps.blog.core.service.PersonService;
+import org.jboss.resteasy.annotations.Form;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 
 @ApplicationScoped
@@ -29,9 +32,15 @@ public class PersonResource {
     }
 
     @POST
-    public Response save(@Context UriInfo uriInfo, @Valid PersonCandidate candidate) {
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response save(@Context UriInfo uriInfo, @Form @Valid PersonCandidate candidate) {
         personService.save(candidate);
-        return Response.created(uriInfo.getRequestUri()).build();
+
+        URI dashboardUri = uriInfo.getBaseUriBuilder()
+                .path(AdminResource.class)
+                .path("/users")
+                .build();
+        return Response.seeOther(dashboardUri).build();
     }
 
     @GET()

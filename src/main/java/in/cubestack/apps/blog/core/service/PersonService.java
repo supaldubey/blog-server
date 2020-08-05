@@ -26,8 +26,8 @@ public class PersonService {
     }
 
     public void save(PersonCandidate candidate) {
-        Person person = candidate.toPerson();
-        person.updatePassword(person.getPassword());
+        Person person = new Person(candidate.getFirstName(), candidate.getLastName(), candidate.getUsername());
+        person.updatePassword(candidate.getPassword());
         personRepository.persist(person);
     }
 
@@ -44,7 +44,7 @@ public class PersonService {
     }
 
     public List<PersonCandidate> findAll() {
-        return personRepository.findAll().list().stream().map(o -> PersonCandidate.from(o)).collect(Collectors.toList());
+        return personRepository.findAll().list().stream().map(PersonCandidate::from).collect(Collectors.toList());
     }
 
     public Optional<Person> findByUsername(String username) {

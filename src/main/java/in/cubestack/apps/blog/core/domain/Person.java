@@ -51,9 +51,7 @@ public class Person extends BaseModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<PersonRole> personRoles = new ArrayList<>();
 
-    public Person() {
-        setSalt();
-    }
+    Person() {}
 
     public Person(String firstName, String lastName, String username) {
         this.firstName = firstName;
