@@ -1,13 +1,17 @@
 package in.cubestack.apps.blog.core.resource;
 
+import in.cubestack.apps.blog.admin.resource.AdminResource;
 import in.cubestack.apps.blog.core.service.RoleService;
+import org.jboss.resteasy.annotations.Form;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 
 @Path("roles")
@@ -19,9 +23,15 @@ public class RoleResource {
     RoleService roleService;
 
     @POST
-    public Response save(@Context UriInfo uriInfo, RoleCandidate candidate) {
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response save(@Context UriInfo uriInfo, @Form @Valid RoleCandidate candidate) {
         roleService.save(candidate);
-        return Response.created(uriInfo.getRequestUri()).build();
+
+        URI dashboardUri = uriInfo.getBaseUriBuilder()
+                .path(AdminResource.class)
+                .path("/roles")
+                .build();
+        return Response.seeOther(dashboardUri).build();
     }
 
     @GET()
