@@ -97,7 +97,7 @@ public class AdminResource {
     @RolesAllowed("Admin")
     public TemplateInstance roles(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
-        return Templates.tags()
+        return Templates.roles()
                 .data("user", user)
                 .data("roles", roleService.findAll());
     }
