@@ -43,11 +43,9 @@
                             {#if categories.size() == 0}
                             <p>No categories</p>
                             {#else}
-                            <div class="cs-ad-tags">
-                                {#for category in categories}
-                                <span>{category.title}</span>
-                                {/for}
-                            </div>
+                            {#for category in categories}
+                            <span class="badge badge-pill badge-primary cs-ad-badge">{category.title}</span>
+                            {/for}
                             {/if}
                         </div>
                         <div class="col-sm-4 cs-ad-container-col">
@@ -59,9 +57,9 @@
                                     <form action="/categories" method="post"
                                           enctype="application/x-www-form-urlencoded">
                                         <input type="text" class="form-control" name="title" id="title"
-                                               placeholder="Category name">
+                                               placeholder="Enter category name">
                                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px;">
-                                            Save
+                                            Add category
                                         </button>
                                     </form>
                                 </div>

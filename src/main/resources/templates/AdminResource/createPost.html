@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/highlightjs.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-multiselect.css"/>
     <link rel="stylesheet" href="/css/blog2.css">
     <style type="text/css">
         #editor {
@@ -55,24 +56,30 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 form-group">
-                                            <input type="text" class="form-control" name="metatitle" id="metatitle"
-                                                   placeholder="Meta title">
+                                            <textarea rows="2" type="text" class="form-control" name="metatitle" id="metatitle"
+                                                      placeholder="Meta title"></textarea>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 form-group">
-                                            <input type="text" class="form-control" name="summary" id="summary"
-                                                   placeholder="Quick summary">
+                                            <textarea rows="2" type="text" class="form-control" name="summary" id="summary"
+                                                      placeholder="Quick summary"></textarea>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6 form-group">
-                                            <input type="text" class="form-control" name="categories" id="categories"
-                                                   placeholder="Categories (like Java, Spring)">
+                                            <select name="categories" id="categories" multiple="multiple">
+                                                {#for category in categories}
+                                                <option value="{category.id}">{category.title}</option>
+                                                {/for}
+                                            </select>
                                         </div>
                                         <div class="col-sm-6 form-group">
-                                            <input type="text" class="form-control" name="tags" id="tags"
-                                                   placeholder="Tags (like JVM, Core Java)">
+                                            <select name="tags" id="tags" multiple="multiple">
+                                                {#for tag in tags}
+                                                <option value="{tag.tagId}">{tag.tagName}</option>
+                                                {/for}
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -99,6 +106,8 @@
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" crossorigin="anonymous"></script>
+<script src="/js/bootstrap-multiselect.js"></script>
+<script src="/js/blog.js"></script>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', (event) => {
         var editor = ace.edit("editor");
@@ -108,6 +117,14 @@
         var input = $('input[name="content"]');
         editor.getSession().on("change", function () {
             input.val(editor.getSession().getValue());
+        });
+
+        $('#categories').multiselect({
+            nonSelectedText: 'Select categories'
+        });
+
+        $('#tags').multiselect({
+            nonSelectedText: 'Select tags'
         });
     });
 
