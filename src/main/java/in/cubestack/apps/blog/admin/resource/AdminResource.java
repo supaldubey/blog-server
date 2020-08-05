@@ -100,7 +100,7 @@ public class AdminResource {
     }
 
     @GET
-    @Path("roles")
+    @Path("role")
     @RolesAllowed("Admin")
     public TemplateInstance roles(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
@@ -120,7 +120,7 @@ public class AdminResource {
     }
 
     @GET
-    @Path("categories")
+    @Path("category")
     @RolesAllowed("Admin")
     public TemplateInstance categories(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
@@ -134,7 +134,7 @@ public class AdminResource {
     @RolesAllowed("Admin")
     public TemplateInstance createUserForm(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
-        System.out.println("Logged in user: " + user);
+
         return Templates.createUser()
                 .data("user", user)
                 .data("roles", roleService.findAll());

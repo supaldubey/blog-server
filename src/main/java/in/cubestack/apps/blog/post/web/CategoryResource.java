@@ -44,7 +44,7 @@ public class CategoryResource {
 
         URI dashboardUri = uriInfo.getBaseUriBuilder()
                 .path(AdminResource.class)
-                .path("/categories")
+                .path("/category")
                 .build();
         return Response.seeOther(dashboardUri).build();
     }

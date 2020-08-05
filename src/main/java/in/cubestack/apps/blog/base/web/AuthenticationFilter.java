@@ -55,7 +55,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     private void addSecurityContext(ContainerRequestContext requestContext, String token) {
         Optional<User> userOptional = tokenAuthenticationService.fromToken(token);
-        if (!userOptional.isPresent()) {
+        if (userOptional.isEmpty()) {
             return;
         }
 

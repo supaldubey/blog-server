@@ -18,11 +18,6 @@ public class Role extends BaseModel {
     Role() {
     }
 
-
-    public Role(long id) {
-        this.id = id;
-    }
-
     public Role(String roleName) {
         this.roleName = roleName;
     }

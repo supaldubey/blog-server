@@ -47,7 +47,7 @@ public class RoleCandidate implements Comparable<RoleCandidate> {
     }
 
     public Role toRole() {
-        return new Role(getRoleId());
+        return new Role(roleName);
     }
 
 
