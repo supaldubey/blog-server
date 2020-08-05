@@ -1,5 +1,6 @@
 package in.cubestack.apps.blog.post.web;
 
+import in.cubestack.apps.blog.admin.resource.CategoryCandidate;
 import in.cubestack.apps.blog.post.domain.Category;
 import in.cubestack.apps.blog.post.service.CategoryService;
 
@@ -18,18 +19,18 @@ public class CategoryResource {
     CategoryService categoryService;
 
     @GET
-    public List<Category> findAll() {
+    public List<CategoryCandidate> findAll() {
         return categoryService.findAll();
     }
 
     @GET
-    @Path("id")
+    @Path("{id}")
     public Category findOne(@PathParam("id") Long id) {
         return categoryService.findOne(id);
     }
 
     @POST
-    public Category save(Category category) {
+    public CategoryCandidate save(CategoryCandidate category) {
         return categoryService.save(category);
     }
 
@@ -39,7 +40,7 @@ public class CategoryResource {
     }
 
     @GET
-    @Path("id")
+    @Path("{id}")
     public void delete(@PathParam("id") Long id) {
         categoryService.delete(id);
     }

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tag Management</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/highlightjs.min.css">
+    <link rel="stylesheet" href="/css/blog2.css">
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+
+<header class="navbar fixed-top navbar-dark bts-navbar">
+    <div class="container-fluid bts-container-fluid">
+        <a class="navbar-brand mb-0 cs-ad-brand" href="/admin/dashboard">Blog Management</a>
+    </div>
+</header>
+<div class="cs-ad-body">
+    <div class="cs-ad-sidenav">
+        <a href="/admin/users">Users</a>
+        <a href="/admin/posts">Posts</a>
+        <a href="/admin/categories">Categories</a>
+        <a href="/admin/tags" class="active">Tags</a>
+        <a href="/admin/roles">Roles</a>
+    </div>
+    <div class="cs-ad-main">
+        <div class="card cs-ad-card">
+            <div class="card-header cs-ad-card-header">
+                <div class="clearfix">
+                    <span class="cs-ad-card-title float-left">Tags</span>
+                </div>
+            </div>
+            <div class="card-body cs-ad-card-body">
+                <div class="container-fluid cs-ad-container-fluid">
+                <div class="row cs-ad-container-row">
+                    <div class="col-sm-8 cs-ad-container-col">
+                        {#if tags.size() == 0}
+                            <p>No tags</p>
+                        {#else}
+                            <div class="cs-ad-tags">
+                                {#for tag in tags}
+                                <span>{tag.tagName}</span>
+                                {/for}
+                            </div>
+                        {/if}
+                    </div>
+                    <div class="col-sm-4 cs-ad-container-col">
+                        <div class="container-fluid cs-ad-container-fluid">
+                            <div class="row cs-ad-container-row form-group">
+                                <span class="cs-ad-card-title cs-ad-card-title-heading">Add Tag</span>
+                            </div>
+                            <div class="row cs-ad-container-row form-group form-inline">
+                                <input type="text" class="form-control" name="tagName" id="tagName" placeholder="Tag name">
+                                <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;" onclick="onSave()">Save</button>
+                            </div>
+                            <div class="row cs-ad-container-row form-group">
+                                <div id="errorContainer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/blog.js"></script>
+<script type="text/javascript">
+    function onSave() {
+        const tagName = $('#tagName').val();
+        console.log("Tag name", tagName);
+        if(tagName && tagName.length > 1) {
+            console.log("Before save..")
+            cs.RestCalls.save(
+                'tags',
+                { tagName },
+                {
+                    onSuccess: (data) => cs.navigate('admin/tags')
+                },
+                'errorContainer'
+            );
+        }
+    }
+</script>
+</body>
+</html>

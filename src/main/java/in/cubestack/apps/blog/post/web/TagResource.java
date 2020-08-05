@@ -1,5 +1,6 @@
 package in.cubestack.apps.blog.post.web;
 
+import in.cubestack.apps.blog.admin.resource.TagCandidate;
 import in.cubestack.apps.blog.post.domain.Tag;
 import in.cubestack.apps.blog.post.service.TagService;
 
@@ -18,7 +19,7 @@ public class TagResource {
     TagService tagService;
 
     @GET
-    public List<Tag> findAll() {
+    public List<TagCandidate> findAll() {
         return tagService.findAll();
     }
 
@@ -29,7 +30,7 @@ public class TagResource {
     }
 
     @POST
-    public Tag save(Tag tag) {
+    public TagCandidate save(TagCandidate tag) {
         return tagService.save(tag);
     }
 

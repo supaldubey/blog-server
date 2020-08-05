@@ -34,11 +34,17 @@ public class Category extends BaseModel {
         this.id = id;
     }
 
-    public Category(String title, String metaTitle, String slug, String content) {
+
+    public Category(Long id, String title, String metaTitle, String slug, String content) {
+        this.id = id;
         this.title = title;
         this.metaTitle = metaTitle;
         this.slug = slug;
         this.content = content;
+    }
+
+    public Category(String title, String metaTitle, String slug, String content) {
+        this(null, title, metaTitle, slug, content);
     }
 
     public String getTitle() {

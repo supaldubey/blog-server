@@ -18,7 +18,11 @@ public class Tag extends BaseModel {
     @Column
     private String content;
 
-    Tag() {
+    public Tag() {}
+
+    public Tag(long id, String title) {
+        super(id);
+        this.title = title;
     }
 
     public Tag(Long id) {

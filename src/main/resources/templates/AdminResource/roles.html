@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Management</title>
+    <title>Role Management</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/highlightjs.min.css">
@@ -23,43 +23,22 @@
 </header>
 <div class="cs-ad-body">
     <div class="cs-ad-sidenav">
-        <a href="/admin/users" class="active">Users</a>
+        <a href="/admin/users">Users</a>
         <a href="/admin/posts">Posts</a>
         <a href="/admin/categories">Categories</a>
         <a href="/admin/tags">Tags</a>
-        <a href="/admin/roles">Roles</a>
+        <a href="/admin/roles" class="active">Roles</a>
     </div>
     <div class="cs-ad-main">
         <div class="card cs-ad-card">
             <div class="card-header cs-ad-card-header">
                 <div class="clearfix">
-                    <span class="cs-ad-card-title float-left">Users</span>
+                    <span class="cs-ad-card-title float-left">Tags</span>
                     <a type="button" class="btn btn-outline-primary btn-sm float-right" href="/admin/users/create">Add</a>
                 </div>
             </div>
             <div class="card-body cs-ad-card-body">
-                <table class="table table-sm table-hover cs-ad-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Roles</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {#for user in users}
-                    <tr>
-                        <td class="cs-ad-item-title">{user.firstName} {user.lastName}</td>
-                        <td>{user.username}</td>
-                        <td>{user.email}</td>
-                        <td>{user.personRoles}</td>
-                        <td>{user.status}</td>
-                    </tr>
-                    {/for}
-                    </tbody>
-                </table>
+                Tags
             </div>
         </div>
     </div>

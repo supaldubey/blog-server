@@ -21,6 +21,10 @@ public abstract class BaseModel {
     public BaseModel() {
     }
 
+    public BaseModel(long id) {
+        this.id = id;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
