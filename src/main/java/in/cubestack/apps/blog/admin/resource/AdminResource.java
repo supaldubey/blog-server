@@ -93,6 +93,16 @@ public class AdminResource {
     }
 
     @GET
+    @Path("roles")
+    @RolesAllowed("Admin")
+    public TemplateInstance roles(@Context SecurityContext securityContext) {
+        User user = (User) securityContext.getUserPrincipal();
+        return Templates.tags()
+                .data("user", user)
+                .data("roles", roleService.findAll());
+    }
+
+    @GET
     @Path("tags")
     @RolesAllowed("Admin")
     public TemplateInstance tags(@Context SecurityContext securityContext) {
