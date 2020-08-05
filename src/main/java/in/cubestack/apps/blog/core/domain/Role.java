@@ -15,7 +15,12 @@ public class Role extends BaseModel {
     @Column
     private String roleName;
 
-    Role() {
+    public Role() {
+    }
+
+
+    public Role(long id) {
+        this.id = id;
     }
 
     public Role(String roleName) {
@@ -24,5 +29,9 @@ public class Role extends BaseModel {
 
     public String getRoleName() {
         return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

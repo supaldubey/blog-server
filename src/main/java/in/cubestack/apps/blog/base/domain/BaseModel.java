@@ -30,6 +30,14 @@ public abstract class BaseModel {
         return updatedAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @PreUpdate
     public void prepareForUpdate() {
         this.updatedAt = LocalDateTime.now();
@@ -37,6 +45,10 @@ public abstract class BaseModel {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @PrePersist

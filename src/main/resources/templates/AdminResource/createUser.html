@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Management - Create User</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/highlightjs.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-multiselect.css"/>
+    <link rel="stylesheet" href="/css/blog2.css">
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+
+<header class="navbar fixed-top navbar-dark bts-navbar">
+    <div class="container-fluid bts-container-fluid">
+        <a class="navbar-brand mb-0 cs-ad-brand" href="/admin/dashboard">Blog Management</a>
+    </div>
+</header>
+<div class="cs-ad-body">
+    <div class="cs-ad-sidenav">
+        <a href="/admin/users" class="active">Users</a>
+        <a href="/admin/posts">Posts</a>
+        <a href="/admin/categories">Categories</a>
+        <a href="/admin/tags">Tags</a>
+    </div>
+    <div class="cs-ad-main">
+        <div class="container-fluid cs-ad-container-fluid">
+            <div class="row cs-ad-container-row">
+                <div class="col-sm-10">
+                    <div class="card cs-ad-card">
+                        <div class="card-header cs-ad-card-header">
+                            <div class="clearfix">
+                                <span class="cs-ad-card-title float-left">Create User</span>
+                            </div>
+                        </div>
+                        <div class="card-body cs-ad-card-body">
+                            <div class="container-fluid cs-ad-container-fluid">
+                                <div class="row cs-ad-container-row">
+                                    <div class="col-sm-8 cs-ad-container-col">
+                                        <div class="container-fluid cs-ad-container-fluid">
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First name">
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last name">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8 form-group">
+                                                    <select id="roles" multiple="multiple">
+                                                        {#for role in roles}
+                                                        <option value="{role.roleId}">{role.roleName}</option>
+                                                        {/for}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 cs-ad-container-col">
+                                        <div id="errorContainer"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cs-ad-card-footer">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="onSave()">Save</button>
+                            &nbsp;
+                            <button type="reset" class="btn btn-danger btn-sm">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap-multiselect.js"></script>
+<script src="/js/blog.js"></script>
+<script type="text/javascript">
+    $(() => {
+        $('#roles').multiselect({
+            nonSelectedText: 'Select roles'
+        });
+    });
+
+    function onSave() {
+        const roles = [];
+        const _roles = $("#roles").val();
+        for(let i=0; i<_roles; i++) {
+            roles.push({ roleId: _roles[i] });
+        }
+        const user = {
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            username: $("#username").val(),
+            password: $("#password").val(),
+            email: $("#email").val(),
+            roles: roles
+        }
+        cs.RestCalls.save(
+            'persons',
+            user,
+            {
+                onSuccess: (data) => cs.navigate('admin/users')
+            },
+            'errorContainer'
+        );
+    }
+</script>
+</body>
+</html>
