@@ -1,5 +1,6 @@
 package in.cubestack.apps.blog.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import in.cubestack.apps.blog.base.domain.BaseModel;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "personRole")
 @SequenceGenerator(name = "default_gen", sequenceName = "personRole_id_seq", allocationSize = 1)
+@JsonIgnoreProperties({ "person" })
 public class PersonRole extends BaseModel {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -17,10 +19,10 @@ public class PersonRole extends BaseModel {
     @JoinColumn(name = "roleId")
     private Role role;
 
-    PersonRole() {
+    public PersonRole() {
     }
 
-    PersonRole(Person person, Role role) {
+    public PersonRole(Person person, Role role) {
         this.person = person;
         this.role = role;
     }

@@ -40,4 +40,5 @@ public class CategoryService {
     public Map<Category, Long> findCategoryPostCounts() {
         return new HashMap<>();
     }
+
 }

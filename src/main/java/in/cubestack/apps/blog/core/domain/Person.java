@@ -51,7 +51,8 @@ public class Person extends BaseModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<PersonRole> personRoles = new ArrayList<>();
 
-    Person() {
+    public Person() {
+        setSalt();
     }
 
     public Person(String firstName, String lastName, String username) {
@@ -158,5 +159,37 @@ public class Person extends BaseModel {
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setStatus(PersonStatus status) {
+        this.status = status;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public List<PersonRole> getPersonRoles() {
+        return personRoles;
+    }
+
+    public void setPersonRoles(List<PersonRole> personRoles) {
+        this.personRoles = personRoles;
     }
 }

@@ -1,11 +1,13 @@
 package in.cubestack.apps.blog.core.service;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
+import lombok.Data;
 
 import javax.security.auth.Subject;
 import java.security.Principal;
 import java.util.List;
 
+@Data
 @RegisterForReflection
 public class User implements Principal {
     private final Long personId;
@@ -17,18 +19,6 @@ public class User implements Principal {
         this.personId = personId;
         this.userName = userName;
         this.roles = roles;
-    }
-
-    public Long getPersonId() {
-        return personId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public List<String> getRoles() {
-        return roles;
     }
 
     @Override
