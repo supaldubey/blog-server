@@ -1,12 +1,14 @@
 package in.cubestack.apps.blog.post.domain;
 
 import in.cubestack.apps.blog.base.domain.BaseModel;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 @Entity
 @Table(name = "category")
 @SequenceGenerator(name = "default_gen", sequenceName = "category_id_seq", allocationSize = 1)
@@ -34,11 +36,17 @@ public class Category extends BaseModel {
         this.id = id;
     }
 
-    public Category(String title, String metaTitle, String slug, String content) {
+
+    public Category(Long id, String title, String metaTitle, String slug, String content) {
+        this.id = id;
         this.title = title;
         this.metaTitle = metaTitle;
         this.slug = slug;
         this.content = content;
+    }
+
+    public Category(String title, String metaTitle, String slug, String content) {
+        this(null, title, metaTitle, slug, content);
     }
 
     public String getTitle() {

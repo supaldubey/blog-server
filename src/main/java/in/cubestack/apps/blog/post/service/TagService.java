@@ -1,23 +1,27 @@
 package in.cubestack.apps.blog.post.service;
 
+import in.cubestack.apps.blog.admin.resource.TagCandidate;
 import in.cubestack.apps.blog.post.domain.Tag;
 import in.cubestack.apps.blog.post.repo.TagRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
+@Transactional
 public class TagService {
 
     @Inject
     TagRepository tagRepository;
 
-    public List<Tag> findAll() {
-        return tagRepository.findAll().list();
+    public List<TagCandidate> findAll() {
+        return tagRepository.findAll().list().stream().map(o -> TagCandidate.from(o)).collect(Collectors.toList());
     }
 
     public Tag findOne(Long id) {
@@ -33,9 +37,10 @@ public class TagService {
         return tag;
     }
 
-    public Tag save(Tag tag) {
+    public TagCandidate save(TagCandidate candidate) {
+        Tag tag = candidate.toTag();
         tagRepository.persist(tag);
-        return tag;
+        return TagCandidate.from(tag);
     }
 
     private Supplier<UnsupportedOperationException> unsupportedOpsSupplier() {

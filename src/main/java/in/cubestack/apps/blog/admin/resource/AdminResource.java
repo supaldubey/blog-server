@@ -5,10 +5,10 @@ import in.cubestack.apps.blog.base.web.HttpHelper;
 import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.core.service.RoleService;
 import in.cubestack.apps.blog.core.service.User;
-import in.cubestack.apps.blog.post.domain.Category;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.service.CategoryService;
 import in.cubestack.apps.blog.post.service.PostService;
+import in.cubestack.apps.blog.post.service.TagService;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.api.CheckedTemplate;
 import org.slf4j.Logger;
@@ -46,6 +46,9 @@ public class AdminResource {
     @Inject
     RoleService roleService;
 
+    @Inject
+    TagService tagService;
+
     @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance login();
@@ -53,6 +56,9 @@ public class AdminResource {
         public static native TemplateInstance dashboard();
         public static native TemplateInstance posts();
         public static native TemplateInstance users();
+        public static native TemplateInstance tags();
+        public static native TemplateInstance roles();
+        public static native TemplateInstance categories();
         public static native TemplateInstance createUser();
         public static native TemplateInstance createPost();
 
@@ -84,6 +90,26 @@ public class AdminResource {
         return Templates.posts()
                 .data("user", user)
                 .data("posts", postService.findAll());
+    }
+
+    @GET
+    @Path("tags")
+    @RolesAllowed("Admin")
+    public TemplateInstance tags(@Context SecurityContext securityContext) {
+        User user = (User) securityContext.getUserPrincipal();
+        return Templates.tags()
+                .data("user", user)
+                .data("tags", tagService.findAll());
+    }
+
+    @GET
+    @Path("categories")
+    @RolesAllowed("Admin")
+    public TemplateInstance categories(@Context SecurityContext securityContext) {
+        User user = (User) securityContext.getUserPrincipal();
+        return Templates.tags()
+                .data("user", user)
+                .data("categories", categoryService.findAll());
     }
 
     @GET
@@ -148,21 +174,5 @@ public class AdminResource {
                     .build();
             return Response.seeOther(loginUri).build();
         }
-    }
-
-    @POST
-    @Path("categories")
-    @RolesAllowed("Admin")
-    public Response createCategory(@Context UriInfo uriInfo,
-                               @Context SecurityContext securityContext,
-                               @FormParam("title") String title,
-                               @FormParam("metatitle") String metatitle,
-                               @FormParam("slug") String slug,
-                               @FormParam("content") String content) {
-        User user = (User) securityContext.getUserPrincipal();
-        Category category = new Category(title, metatitle, slug, content);
-        category = categoryService.save(category);
-        String path = uriInfo.getBaseUri().toString();
-        return Response.ok().build();
     }
 }
