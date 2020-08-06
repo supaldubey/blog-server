@@ -45,7 +45,7 @@
                                 <span class="cs-ad-card-title float-left">Create Post</span>
                             </div>
                         </div>
-                        <form action="/admin/users">
+                        <form action="/admin/posts" method="post" enctype="application/x-www-form-urlencoded">
                             <div class="card-body cs-ad-card-body">
                                 <div class="container-fluid cs-ad-container-fluid">
                                     <div class="row">
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 form-group">
-                                            <textarea rows="2" type="text" class="form-control" name="summary" id="summary"
+                                            <textarea rows="2" class="form-control" name="summary" id="summary"
                                                       placeholder="Quick summary"></textarea>
                                         </div>
                                     </div>
@@ -78,6 +78,14 @@
                                             <select name="tags" id="tags" multiple="multiple">
                                                 {#for tag in tags}
                                                 <option value="{tag.tagId}">{tag.tagName}</option>
+                                                {/for}
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 form-group">
+                                            Type:
+                                            <select name="postType" id="postType" >
+                                                {#for type in postTypes}
+                                                    <option value="{type.name()}">{type.getDisplayName()}</option>
                                                 {/for}
                                             </select>
                                         </div>
@@ -120,6 +128,10 @@
         });
 
         $('#categories').multiselect({
+            nonSelectedText: 'Select categories'
+        });
+
+        $('#postType').multiselect({
             nonSelectedText: 'Select categories'
         });
 

@@ -46,13 +46,13 @@ public class Post extends BaseModel {
     @Column
     private String content;
 
-    @OneToOne(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
     private PostAnalytics postAnalytics;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostComment> postComments = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(mappedBy = "post")
     private List<PostCategory> postCategories = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
@@ -163,5 +163,9 @@ public class Post extends BaseModel {
 
     public void setHtmlContent(String htmlContent) {
         this.htmlContent = htmlContent;
+    }
+
+    public List<Category> getCategories() {
+        return postCategories.stream().map(PostCategory::getCategory).collect(Collectors.toList());
     }
 }

@@ -2,6 +2,7 @@ package in.cubestack.apps.blog.post.service;
 
 import in.cubestack.apps.blog.admin.resource.CategoryCandidate;
 import in.cubestack.apps.blog.post.domain.Category;
+import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.repo.CategoryRepository;
 import in.cubestack.apps.blog.util.ContentHelper;
 
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -51,4 +53,18 @@ public class CategoryService {
         return new HashMap<>();
     }
 
+    public void addPostToCategory(Post post, Category category) {
+        category.addPost(post);
+    }
+
+    public void addPostToCategory(Post post, Long categoryId) {
+        Category category = categoryRepository.findById(categoryId);
+        addPostToCategory(post, category);
+    }
+
+    public void associateCategories(Post post, Set<Long> categoryIds) {
+        for (Long id : categoryIds) {
+            addPostToCategory(post, id);
+        }
+    }
 }
