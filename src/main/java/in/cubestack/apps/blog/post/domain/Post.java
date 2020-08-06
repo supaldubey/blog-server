@@ -34,13 +34,14 @@ public class Post extends BaseModel {
 
     @Column
     @Enumerated(EnumType.STRING)
+    private PostType postType;
+
+    @Column
+    @Enumerated(EnumType.STRING)
     private PostStatus postStatus;
 
     @Column(name = "publishedAt")
     private LocalDateTime publishedAt;
-
-    @Transient
-    private String htmlContent;
 
     @Column
     private String content;
@@ -57,15 +58,19 @@ public class Post extends BaseModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostTag> postTags = new ArrayList<>();
 
+    @Transient
+    private String htmlContent;
+
     Post() {
     }
 
-    public Post(Person author, String title, String metaTitle, String summary, String slug, String content) {
+    public Post(Person author, String title, String metaTitle, String summary, String slug, PostType postType, String content) {
         this.author = author;
         this.title = title;
         this.metaTitle = metaTitle;
         this.summary = summary;
         this.slug = slug;
+        this.postType = postType;
         this.content = content;
         this.postAnalytics = new PostAnalytics(this);
     }
@@ -150,6 +155,10 @@ public class Post extends BaseModel {
 
     public String getHtmlContent() {
         return htmlContent;
+    }
+
+    public PostType getPostType() {
+        return postType;
     }
 
     public void setHtmlContent(String htmlContent) {

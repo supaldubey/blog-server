@@ -1,0 +1,1 @@
+ALTER TABLE post add postType VARCHAR(50) default 'POST';

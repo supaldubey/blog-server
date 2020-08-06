@@ -5,6 +5,7 @@ import in.cubestack.apps.blog.core.domain.PostStatus;
 import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.core.service.User;
 import in.cubestack.apps.blog.post.domain.Post;
+import in.cubestack.apps.blog.post.domain.PostType;
 import in.cubestack.apps.blog.post.repo.PostRepository;
 import in.cubestack.apps.blog.util.ContentHelper;
 
@@ -78,7 +79,7 @@ public class PostService {
                 metatitle,
                 summary,
                 contentHelper.slugify(title),
-                content
+                PostType.POST, content
         );
         return save(post);
     }
