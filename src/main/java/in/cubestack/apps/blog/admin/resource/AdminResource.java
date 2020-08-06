@@ -71,6 +71,8 @@ public class AdminResource {
 
         public static native TemplateInstance createPost();
 
+        public static native TemplateInstance editPost();
+
         public static native TemplateInstance user();
     }
 
@@ -160,6 +162,23 @@ public class AdminResource {
     }
 
     @GET
+    @Path("posts/edit/{postId}")
+    @Transactional
+    @RolesAllowed("Admin")
+    public TemplateInstance editPost(@Context SecurityContext securityContext, @PathParam("postId") Long postId) {
+        User user = (User) securityContext.getUserPrincipal();
+
+        Post post = postService.findById(postId).orElseThrow();
+        PostCandidate postCandidate = PostCandidate.from(post);
+        return Templates.editPost()
+                .data("user", user)
+                .data("post", postCandidate)
+                .data("postTypes", PostType.values())
+                .data("categories", categoryService.findAll())
+                .data("tags", tagService.findAll());
+    }
+
+    @GET
     @Path("/login")
     public TemplateInstance login(@QueryParam("invalid") String invalid) {
         return Templates.login().data("invalid", invalid == null ? "" : invalid);
@@ -169,10 +188,11 @@ public class AdminResource {
     @Path("/posts")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @RolesAllowed("Admin")
-    public Response createPost(@Context UriInfo uriInfo,
-                               @Context SecurityContext securityContext,
-                               @Form PostCandidate postCandidate) {
+    public Response persistPost(@Context UriInfo uriInfo,
+                                @Context SecurityContext securityContext,
+                                @Form PostCandidate postCandidate) {
         User user = (User) securityContext.getUserPrincipal();
+        postService.persistPost(user, postCandidate);
 
         URI dashboardUri = uriInfo.getBaseUriBuilder()
                 .path(AdminResource.class)

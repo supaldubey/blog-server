@@ -14,12 +14,13 @@ import java.util.Set;
 @RegisterForReflection
 public class PostCandidate {
 
-    private long id;
+    @FormParam("id")
+    private Long id;
 
     @FormParam("title")
     private String title;
 
-    @FormParam("metatitle")
+    @FormParam("metaTitle")
     private String metaTitle;
 
     @FormParam("summary")
@@ -37,8 +38,9 @@ public class PostCandidate {
     @FormParam("tags")
     private Set<Long> tags;
 
-    private List<TagCandidate> tagCandidates = new ArrayList<>();
-    private List<CategoryCandidate> categoryCandidates = new ArrayList<>();
+    private PersonCandidate person;
+    private final List<TagCandidate> tagCandidates = new ArrayList<>();
+    private final List<CategoryCandidate> categoryCandidates = new ArrayList<>();
 
     public PostCandidate() {
     }
@@ -52,7 +54,7 @@ public class PostCandidate {
         this.content = content;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -132,6 +134,14 @@ public class PostCandidate {
         categoryCandidates.add(new CategoryCandidate(category.getId(), category.getTitle(), category.getMetaTitle(), category.getSlug()));
     }
 
+    public boolean hasCategory(CategoryCandidate categoryCandidate) {
+        return categoryCandidates.stream().anyMatch(c -> c.getId() == categoryCandidate.getId());
+    }
+
+    public boolean hasTag(TagCandidate tagCandidate) {
+        return tagCandidates.stream().anyMatch(t -> t.getTagId() == tagCandidate.getTagId());
+    }
+
     public static PostCandidate from(Post post) {
         PostCandidate postCandidate = new PostCandidate(
                 post.getId(),
@@ -142,6 +152,7 @@ public class PostCandidate {
                 post.getContent()
         );
 
+        postCandidate.person = PersonCandidate.from(post.getAuthor());
         for (Tag tag : post.getTags()) {
             postCandidate.addTagCandidate(tag);
         }
@@ -151,5 +162,9 @@ public class PostCandidate {
         }
 
         return postCandidate;
+    }
+
+    public PersonCandidate getPerson() {
+        return person;
     }
 }

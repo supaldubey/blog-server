@@ -57,7 +57,7 @@
                         <tr>
                             <td class="cs-ad-item-title">{post.title}</td>
                             <td>{post.summary}</td>
-                            <td>{post.author.firstName}</td>
+                            <td>{post.person.firstName}</td>
                             <td>
                                 {#for category in post.categoryCandidates}
                                     {category.title} |
@@ -69,7 +69,7 @@
                                 {/for}
                             </td>
                             <td>
-                                <button type="button" class="btn btn-outline-primary btn-sm">Edit</button>
+                                <a class="btn btn-outline-primary btn-sm" href="/admin/posts/edit/{post.id}">Edit</a>
                             </td>
                         </tr>
                     {/for}

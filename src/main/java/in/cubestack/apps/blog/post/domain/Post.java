@@ -52,10 +52,10 @@ public class Post extends BaseModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostComment> postComments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostCategory> postCategories = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", orphanRemoval = true)
     private List<PostTag> postTags = new ArrayList<>();
 
     @Transient
@@ -167,5 +167,23 @@ public class Post extends BaseModel {
 
     public List<Category> getCategories() {
         return postCategories.stream().map(PostCategory::getCategory).collect(Collectors.toList());
+    }
+
+    public boolean hasCategory(Category category) {
+        return getCategories().stream().anyMatch(c -> c.equals(category));
+    }
+
+    public boolean hasTag(Tag tag) {
+        return getTags().stream().anyMatch(t -> t.equals(tag));
+    }
+
+    public void removeCategory(Category category) {
+        var matchedCategory = postCategories.stream().filter(pc -> pc.getCategory().equals(category)).findFirst();
+        matchedCategory.ifPresent(postCategories::remove);
+    }
+
+    public void removeTag(Tag tag) {
+        var matchedTag = postTags.stream().filter(pt -> pt.getTag().equals(tag)).findFirst();
+        matchedTag.ifPresent(postTags::remove);
     }
 }

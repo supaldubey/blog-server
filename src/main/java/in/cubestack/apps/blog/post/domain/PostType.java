@@ -5,6 +5,7 @@ public enum PostType {
 
 
     private final String displayName;
+
     PostType(String displayName) {
         this.displayName = displayName;
     }

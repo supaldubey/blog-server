@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Post Management - Edit Post</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/highlightjs.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-multiselect.css"/>
+    <link rel="stylesheet" href="/css/blog2.css">
+    <style type="text/css">
+        #editor {
+            width: 100%;
+            min-height: 300px;
+            border: 1px solid #c0c0c0;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="navbar fixed-top navbar-dark bts-navbar">
+    <div class="container-fluid bts-container-fluid">
+        <a class="navbar-brand mb-0 cs-ad-brand" href="/admin/dashboard">Blog Management</a>
+    </div>
+</header>
+<div class="cs-ad-body">
+    <div class="cs-ad-sidenav">
+        <a href="/admin/users">Users</a>
+        <a href="/admin/posts" class="active">Posts</a>
+        <a href="/admin/category">Categories</a>
+        <a href="/admin/tags" >Tags</a>
+        <a href="/admin/role">Roles</a>
+    </div>
+    <div class="cs-ad-main">
+        <div class="container-fluid cs-ad-container-fluid">
+            <div class="row cs-ad-container-row">
+                <div class="col-sm-12">
+                    <div class="card cs-ad-card">
+                        <div class="card-header cs-ad-card-header">
+                            <div class="clearfix">
+                                <span class="cs-ad-card-title float-left">Edit Post</span>
+                            </div>
+                        </div>
+                        <form action="/admin/posts" method="post" enctype="application/x-www-form-urlencoded">
+                            <input type="hidden" name="id" value="{post.id}">
+                            <div class="card-body cs-ad-card-body">
+                                <div class="container-fluid cs-ad-container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12 form-group">
+                                            <input type="text" class="form-control" name="title" id="title"
+                                                   placeholder="Title" value="{post.title}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 form-group">
+                                            <textarea rows="2" type="text" class="form-control" name="metaTitle" id="metatitle"
+                                                      placeholder="Meta title" >{post.metaTitle}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 form-group">
+                                            <textarea rows="2" class="form-control" name="summary" id="summary"
+                                                      placeholder="Quick summary">{post.summary}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            Categories:
+                                            <select name="categories" id="categories" multiple="multiple">
+                                                {#for category in categories}
+                                                <option  id="category_{category.id}" value="{category.id}">{category.title}</option>
+                                                {/for}
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 form-group">
+                                            Tags:
+                                            <select name="tags" id="tags" multiple="multiple">
+                                                {#for tag in tags}
+                                                        <option id="tag_{tag.tagId}" value="{tag.tagId}">{tag.tagName}</option>
+                                                {/for}
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 form-group">
+                                            Type: {post.postType}
+                                            <select name="postType" id="postType" >
+                                                {#for type in postTypes}
+                                                    {#if post.postType == type }
+                                                        <option selected value="{type.name()}">{type.getDisplayName()}</option>
+                                                    {#else}
+                                                        <option value="{type.name()}">{type.getDisplayName()}</option>
+                                                    {/if}
+                                                {/for}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 form-group">
+                                            <div id="editor">
+                                                {post.content}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input name="content" type="hidden" value="{post.content}">
+                                </div>
+                            </div>
+                            <div class="cs-ad-card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                &nbsp;
+                                <button type="reset" class="btn btn-danger btn-sm">Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" crossorigin="anonymous"></script>
+<script src="/js/bootstrap-multiselect.js"></script>
+<script src="/js/blog.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/chrome");
+        editor.session.setMode("ace/mode/markdown");
+
+        var input = $('input[name="content"]');
+        editor.getSession().on("change", function () {
+            input.val(editor.getSession().getValue());
+        });
+
+        {#for selectedTag in post.tagCandidates}
+            $("#tag_{selectedTag.tagId}").attr('selected', true);
+        {/for}
+
+        {#for cat in post.categoryCandidates}
+            $("#category_{cat.id}").attr('selected', true);
+        {/for}
+
+        $('#categories').multiselect({
+            nonSelectedText: 'Select categories'
+        });
+
+        $('#postType').multiselect({
+            nonSelectedText: 'Select Post Type'
+        });
+
+        $('#tags').multiselect({
+            nonSelectedText: 'Select tags'
+        });
+    });
+
+</script>
+</body>
+</html>
