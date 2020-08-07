@@ -50,6 +50,7 @@
                         <th>Category</th>
                         <th>Tags</th>
                         <th>Action</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,6 +71,13 @@
                             </td>
                             <td>
                                 <a class="btn btn-outline-primary btn-sm" href="/admin/posts/edit/{post.id}">Edit</a>
+                            </td>
+                            <td>
+                                {#if post.isPublished() }
+                                <i style="color: GREEN; font-size: 16pt" class="fa fa-check" aria-hidden="true"></i>
+                                {#else}
+                                <i style="color: RED; font-size: 16pt" class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                {/if}
                             </td>
                         </tr>
                     {/for}

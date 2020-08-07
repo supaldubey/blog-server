@@ -1,5 +1,6 @@
 package in.cubestack.apps.blog.admin.resource;
 
+import in.cubestack.apps.blog.core.domain.PostStatus;
 import in.cubestack.apps.blog.post.domain.Category;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.domain.PostType;
@@ -30,6 +31,9 @@ public class PostCandidate {
     @FormParam("postType")
     private PostType postType;
 
+    @FormParam("status")
+    private PostStatus status;
+
     @FormParam("content")
     private String content;
 
@@ -43,16 +47,18 @@ public class PostCandidate {
     private final List<TagCandidate> tagCandidates = new ArrayList<>();
     private final List<CategoryCandidate> categoryCandidates = new ArrayList<>();
 
-    public PostCandidate() {
-    }
 
-    public PostCandidate(long id, String title, String metaTitle, String summary, PostType postType, String content) {
+    public PostCandidate(long id, String title, String metaTitle, String summary, PostType postType, String content, PostStatus postStatus) {
         this.id = id;
         this.title = title;
         this.metaTitle = metaTitle;
         this.summary = summary;
         this.postType = postType;
         this.content = content;
+        this.status = postStatus;
+    }
+
+    public PostCandidate() {
     }
 
     public Long getId() {
@@ -152,7 +158,8 @@ public class PostCandidate {
                 post.getMetaTitle(),
                 post.getSummary(),
                 post.getPostType(),
-                post.getContent()
+                post.getContent(),
+                post.getPostStatus()
         );
 
         postCandidate.person = PersonCandidate.from(post.getAuthor());
@@ -171,4 +178,15 @@ public class PostCandidate {
         return person;
     }
 
+    public PostStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PostStatus status) {
+        this.status = status;
+    }
+
+    public boolean isPublished() {
+        return PostStatus.PUBLISHED == status;
+    }
 }

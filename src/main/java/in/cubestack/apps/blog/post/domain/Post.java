@@ -72,12 +72,15 @@ public class Post extends BaseModel {
         this.slug = slug;
         this.postType = postType;
         this.content = content;
+        this.postStatus = PostStatus.DRAFT;
         this.postAnalytics = new PostAnalytics(this);
     }
 
     public void publish() {
+        if (this.publishedAt == null) {
+            this.publishedAt = LocalDateTime.now();
+        }
         this.postStatus = PostStatus.PUBLISHED;
-        this.publishedAt = LocalDateTime.now();
     }
 
 
@@ -185,5 +188,10 @@ public class Post extends BaseModel {
     public void removeTag(Tag tag) {
         var matchedTag = postTags.stream().filter(pt -> pt.getTag().equals(tag)).findFirst();
         matchedTag.ifPresent(postTags::remove);
+    }
+
+    public void unPublish() {
+        postStatus = PostStatus.DRAFT;
+        this.publishedAt = null;
     }
 }

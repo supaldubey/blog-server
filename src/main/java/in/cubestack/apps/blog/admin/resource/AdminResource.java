@@ -2,6 +2,7 @@ package in.cubestack.apps.blog.admin.resource;
 
 import in.cubestack.apps.blog.admin.service.AdminService;
 import in.cubestack.apps.blog.base.web.HttpHelper;
+import in.cubestack.apps.blog.core.domain.PostStatus;
 import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.core.service.RoleService;
 import in.cubestack.apps.blog.core.service.User;
@@ -175,6 +176,7 @@ public class AdminResource {
                 .data("post", postCandidate)
                 .data("postTypes", PostType.values())
                 .data("categories", categoryService.findAll())
+                .data("postStatues", PostStatus.values())
                 .data("tags", tagService.findAll());
     }
 
