@@ -11,7 +11,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Collections;
 import java.util.List;
 
 @Path("author")
@@ -34,8 +33,6 @@ public class AuthorResource {
     @GET
     @Path("{username: .+}")
     public TemplateInstance authorPosts(@PathParam("username") String username) throws IOException, URISyntaxException {
-        List<Post> posts = Collections.EMPTY_LIST;
-        // TODO
-        return AuthorResource.Templates.author(posts);
+        return AuthorResource.Templates.author(List.of());
     }
 }

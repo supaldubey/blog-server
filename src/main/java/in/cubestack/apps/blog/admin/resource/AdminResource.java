@@ -129,7 +129,7 @@ public class AdminResource {
     }
 
     @GET
-    @Path("category")
+    @Path("categories/list")
     @RolesAllowed("Admin")
     public TemplateInstance categories(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
