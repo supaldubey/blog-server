@@ -77,6 +77,10 @@ public class PostService {
         return post;
     }
 
+    public List<PostSummary> getSummary() {
+        return postRepository.getPostSummary();
+    }
+
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
