@@ -34,38 +34,43 @@ public class Post extends BaseModel {
 
     @Column
     @Enumerated(EnumType.STRING)
+    private PostType postType;
+
+    @Column
+    @Enumerated(EnumType.STRING)
     private PostStatus postStatus;
 
     @Column(name = "publishedAt")
     private LocalDateTime publishedAt;
 
-    @Transient
-    private String htmlContent;
-
     @Column
     private String content;
 
-    @OneToOne(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
     private PostAnalytics postAnalytics;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostComment> postComments = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostCategory> postCategories = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", orphanRemoval = true)
     private List<PostTag> postTags = new ArrayList<>();
+
+    @Transient
+    private String htmlContent;
 
     Post() {
     }
 
-    public Post(Person author, String title, String metaTitle, String summary, String slug, String content) {
+    public Post(Person author, String title, String metaTitle, String summary, String slug, PostType postType, String content) {
         this.author = author;
         this.title = title;
         this.metaTitle = metaTitle;
         this.summary = summary;
         this.slug = slug;
+        this.postType = postType;
         this.content = content;
         this.postAnalytics = new PostAnalytics(this);
     }
@@ -152,7 +157,33 @@ public class Post extends BaseModel {
         return htmlContent;
     }
 
+    public PostType getPostType() {
+        return postType;
+    }
+
     public void setHtmlContent(String htmlContent) {
         this.htmlContent = htmlContent;
+    }
+
+    public List<Category> getCategories() {
+        return postCategories.stream().map(PostCategory::getCategory).collect(Collectors.toList());
+    }
+
+    public boolean hasCategory(Category category) {
+        return getCategories().stream().anyMatch(c -> c.equals(category));
+    }
+
+    public boolean hasTag(Tag tag) {
+        return getTags().stream().anyMatch(t -> t.equals(tag));
+    }
+
+    public void removeCategory(Category category) {
+        var matchedCategory = postCategories.stream().filter(pc -> pc.getCategory().equals(category)).findFirst();
+        matchedCategory.ifPresent(postCategories::remove);
+    }
+
+    public void removeTag(Tag tag) {
+        var matchedTag = postTags.stream().filter(pt -> pt.getTag().equals(tag)).findFirst();
+        matchedTag.ifPresent(postTags::remove);
     }
 }

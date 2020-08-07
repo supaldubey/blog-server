@@ -24,7 +24,7 @@ public class CategoryService {
     ContentHelper contentHelper;
 
     public List<CategoryCandidate> findAll() {
-        return categoryRepository.findAll().list().stream().map(o -> CategoryCandidate.from(o)).collect(Collectors.toList());
+        return categoryRepository.findAll().list().stream().map(CategoryCandidate::from).collect(Collectors.toList());
     }
 
     public Category findOne(Long id) {

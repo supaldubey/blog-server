@@ -6,22 +6,24 @@ import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.core.service.RoleService;
 import in.cubestack.apps.blog.core.service.User;
 import in.cubestack.apps.blog.post.domain.Post;
+import in.cubestack.apps.blog.post.domain.PostType;
 import in.cubestack.apps.blog.post.service.CategoryService;
 import in.cubestack.apps.blog.post.service.PostService;
 import in.cubestack.apps.blog.post.service.TagService;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.api.CheckedTemplate;
+import org.jboss.resteasy.annotations.Form;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/admin")
 public class AdminResource {
@@ -69,6 +71,8 @@ public class AdminResource {
 
         public static native TemplateInstance createPost();
 
+        public static native TemplateInstance editPost();
+
         public static native TemplateInstance user();
     }
 
@@ -92,12 +96,16 @@ public class AdminResource {
 
     @GET
     @Path("posts")
+    @Transactional
     @RolesAllowed("Admin")
     public TemplateInstance posts(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
+        List<PostCandidate> postCandidates = postService.findAll().stream()
+                .map(PostCandidate::from).collect(Collectors.toList());
+
         return Templates.posts()
                 .data("user", user)
-                .data("posts", postService.findAll());
+                .data("posts", postCandidates);
     }
 
     @GET
@@ -148,6 +156,24 @@ public class AdminResource {
         User user = (User) securityContext.getUserPrincipal();
         return Templates.createPost()
                 .data("user", user)
+                .data("postTypes", PostType.values())
+                .data("categories", categoryService.findAll())
+                .data("tags", tagService.findAll());
+    }
+
+    @GET
+    @Path("posts/edit/{postId}")
+    @Transactional
+    @RolesAllowed("Admin")
+    public TemplateInstance editPost(@Context SecurityContext securityContext, @PathParam("postId") Long postId) {
+        User user = (User) securityContext.getUserPrincipal();
+
+        Post post = postService.findById(postId).orElseThrow();
+        PostCandidate postCandidate = PostCandidate.from(post);
+        return Templates.editPost()
+                .data("user", user)
+                .data("post", postCandidate)
+                .data("postTypes", PostType.values())
                 .data("categories", categoryService.findAll())
                 .data("tags", tagService.findAll());
     }
@@ -160,18 +186,19 @@ public class AdminResource {
 
     @POST
     @Path("/posts")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @RolesAllowed("Admin")
-    public Response createPost(@Context UriInfo uriInfo,
-                               @Context SecurityContext securityContext,
-                               @FormParam("title") String title,
-                               @FormParam("metatitle") String metatitle,
-                               @FormParam("summary") String summary,
-                               @FormParam("content") String content) {
+    public Response persistPost(@Context UriInfo uriInfo,
+                                @Context SecurityContext securityContext,
+                                @Form PostCandidate postCandidate) {
         User user = (User) securityContext.getUserPrincipal();
-        Post post = postService.createPost(user, title, metatitle, summary, content);
+        postService.persistPost(user, postCandidate);
 
-        String path = uriInfo.getBaseUri().toString();
-        return Response.ok("Created blog with id " + post.getId() + "View from " + path + "/blog/posts/view2?postId=" + post.getId()).build();
+        URI dashboardUri = uriInfo.getBaseUriBuilder()
+                .path(AdminResource.class)
+                .path("/posts")
+                .build();
+        return Response.seeOther(dashboardUri).build();
     }
 
     @POST

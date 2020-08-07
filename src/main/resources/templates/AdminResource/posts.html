@@ -49,27 +49,30 @@
                         <th>Author</th>
                         <th>Category</th>
                         <th>Tags</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="cs-ad-item-title">REST APIs with Spring Boot</td>
-                        <td>Building Restful webservices with Spring Boot</td>
-                        <td>Arun Kumar</td>
-                        <td>Spring Boot, Webservices</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary btn-sm">Edit</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="cs-ad-item-title">Basic Authentication using Spring Security</td>
-                        <td>Secure your webservices with Basic Authentication</td>
-                        <td>Arun Kumar</td>
-                        <td>Spring Security, Auth</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary btn-sm">Edit</button>
-                        </td>
-                    </tr>
+                    {#for post in posts}
+                        <tr>
+                            <td class="cs-ad-item-title">{post.title}</td>
+                            <td>{post.summary}</td>
+                            <td>{post.person.firstName}</td>
+                            <td>
+                                {#for category in post.categoryCandidates}
+                                    {category.title} |
+                                {/for}
+                            </td>
+                            <td>
+                                {#for tag in post.tagCandidates}
+                                    {tag.tagName} |
+                                {/for}
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary btn-sm" href="/admin/posts/edit/{post.id}">Edit</a>
+                            </td>
+                        </tr>
+                    {/for}
                     </tbody>
                 </table>
             </div>

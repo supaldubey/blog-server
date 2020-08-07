@@ -2,6 +2,7 @@ package in.cubestack.apps.blog.post.web;
 
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.post.domain.Post;
+import in.cubestack.apps.blog.post.domain.PostType;
 import in.cubestack.apps.blog.post.service.PostService;
 import in.cubestack.apps.blog.util.ContentHelper;
 import io.quarkus.qute.TemplateInstance;
@@ -45,7 +46,7 @@ public class BlogResource {
                 "Getting started guide",
                 null,
                 "rest-apis-with-quarkus-resteasy",
-                contentHelper.markdownToHtml(content)
+                PostType.POST, contentHelper.markdownToHtml(content)
         );
         return Templates.postView1(post);
     }
