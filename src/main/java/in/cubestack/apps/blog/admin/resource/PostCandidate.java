@@ -128,7 +128,7 @@ public class PostCandidate {
     }
 
     private void addTagCandidate(Tag tag) {
-        tagCandidates.add(new TagCandidate(tag.getId(), tag.getTitle()));
+        tagCandidates.add(new TagCandidate(tag.getId(), tag.getSlug(), tag.getTitle()));
         tags.add(tag.getId());
     }
 

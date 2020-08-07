@@ -3,6 +3,7 @@ package in.cubestack.apps.blog.post.service;
 import in.cubestack.apps.blog.admin.resource.TagCandidate;
 import in.cubestack.apps.blog.post.domain.Tag;
 import in.cubestack.apps.blog.post.repo.TagRepository;
+import in.cubestack.apps.blog.util.ContentHelper;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,6 +20,9 @@ public class TagService {
 
     @Inject
     TagRepository tagRepository;
+
+    @Inject
+    ContentHelper contentHelper;
 
     public List<TagCandidate> findAll() {
         return tagRepository.findAll().list().stream().map(TagCandidate::from).collect(Collectors.toList());
@@ -39,6 +43,7 @@ public class TagService {
 
     public TagCandidate save(TagCandidate candidate) {
         Tag tag = candidate.toNewTag();
+        tag.setSlug(contentHelper.slugify(tag.getTitle()));
         tagRepository.persist(tag);
         return TagCandidate.from(tag);
     }

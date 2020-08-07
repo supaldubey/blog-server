@@ -64,6 +64,10 @@ public class PersonCandidate {
     @FormParam("roles")
     private Set<RoleCandidate> roles = new TreeSet<>();
 
+    private void test() {
+        roles.stream().map(RoleCandidate::getRoleName).collect(Collectors.joining(","));
+    }
+
     public static PersonCandidate from(Person person) {
         PersonCandidate candidate = new PersonCandidate();
         candidate.setFirstName(person.getFirstName());
