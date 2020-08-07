@@ -67,22 +67,21 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6 form-group">
+                                        <div class="col-sm-4 form-group">
                                             <select name="categories" id="categories" multiple="multiple">
                                                 {#for category in categories}
                                                 <option value="{category.id}">{category.title}</option>
                                                 {/for}
                                             </select>
                                         </div>
-                                        <div class="col-sm-6 form-group">
+                                        <div class="col-sm-4 form-group">
                                             <select name="tags" id="tags" multiple="multiple">
                                                 {#for tag in tags}
                                                 <option value="{tag.tagId}">{tag.tagName}</option>
                                                 {/for}
                                             </select>
                                         </div>
-                                        <div class="col-sm-6 form-group">
-                                            Type:
+                                        <div class="col-sm-4 form-group">
                                             <select name="postType" id="postType" >
                                                 {#for type in postTypes}
                                                     <option value="{type.name()}">{type.getDisplayName()}</option>
@@ -132,7 +131,7 @@
         });
 
         $('#postType').multiselect({
-            nonSelectedText: 'Select categories'
+            nonSelectedText: 'Select post'
         });
 
         $('#tags').multiselect({

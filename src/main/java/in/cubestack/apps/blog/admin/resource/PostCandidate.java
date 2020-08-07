@@ -8,6 +8,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.jboss.resteasy.annotations.jaxrs.FormParam;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,10 +34,10 @@ public class PostCandidate {
     private String content;
 
     @FormParam("categories")
-    private Set<Long> categories;
+    private Set<Long> categories = new HashSet<>();
 
     @FormParam("tags")
-    private Set<Long> tags;
+    private Set<Long> tags = new HashSet<>();
 
     private PersonCandidate person;
     private final List<TagCandidate> tagCandidates = new ArrayList<>();
@@ -128,10 +129,12 @@ public class PostCandidate {
 
     private void addTagCandidate(Tag tag) {
         tagCandidates.add(new TagCandidate(tag.getId(), tag.getTitle()));
+        tags.add(tag.getId());
     }
 
     private void addCategoryCandidate(Category category) {
         categoryCandidates.add(new CategoryCandidate(category.getId(), category.getTitle(), category.getMetaTitle(), category.getSlug()));
+        categories.add(category.getId());
     }
 
     public boolean hasCategory(CategoryCandidate categoryCandidate) {
@@ -167,4 +170,5 @@ public class PostCandidate {
     public PersonCandidate getPerson() {
         return person;
     }
+
 }
