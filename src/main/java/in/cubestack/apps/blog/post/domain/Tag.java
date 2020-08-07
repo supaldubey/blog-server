@@ -16,6 +16,9 @@ public class Tag extends BaseModel {
     private String title;
 
     @Column
+    private String slug;
+
+    @Column
     private String content;
 
     public Tag() {
@@ -39,5 +42,17 @@ public class Tag extends BaseModel {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 }

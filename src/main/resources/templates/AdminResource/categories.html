@@ -43,12 +43,29 @@
                             {#if categories.size() == 0}
                             <p>No categories</p>
                             {#else}
-                            {#for category in categories}
-                            <span class="badge badge-pill badge-primary cs-ad-badge">{category.title}</span>
-                            {/for}
+                            <table class="table table-sm table-hover cs-ad-table">
+                                <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Slug</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {#for category in categories}
+                                <tr>
+                                    <td class="cs-ad-item-title">{category.title}</td>
+                                    <td>{category.slug}</td>
+                                    <td>
+                                        <a class="btn btn-outline-primary btn-sm" href="/admin/categories/edit/{categogy.id}">Edit</a>
+                                    </td>
+                                </tr>
+                                <!--                                <span class="badge badge-pill badge-primary cs-ad-badge">{tag.tagName}</span>-->
+                                {/for}
+                                </tbody>
+                            </table>
                             {/if}
                         </div>
-                        <div class="col-sm-4 cs-ad-container-col">
+                        <div class="col-sm-4">
                             <div class="container-fluid cs-ad-container-fluid">
                                 <div class="row cs-ad-container-row form-group">
                                     <span class="cs-ad-card-title cs-ad-card-title-heading">Add Category</span>

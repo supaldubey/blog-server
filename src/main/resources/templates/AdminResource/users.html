@@ -54,7 +54,11 @@
                         <td class="cs-ad-item-title">{user.firstName} {user.lastName}</td>
                         <td>{user.username}</td>
                         <td>{user.email}</td>
-                        <td>{user.personRoles}</td>
+                        <td>
+                            {#for role in user.roles}
+                            {role.roleName} |
+                            {/for}
+                        </td>
                         <td>{user.status}</td>
                     </tr>
                     {/for}
