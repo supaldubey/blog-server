@@ -1,11 +1,14 @@
 package in.cubestack.apps.blog.post.service;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RegisterForReflection
 public class PostSummary {
 
     private Long id;
