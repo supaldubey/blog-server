@@ -31,7 +31,7 @@
     <div class="cs-ad-sidenav">
         <a href="/admin/users">Users</a>
         <a href="/admin/posts" class="active">Posts</a>
-        <a href="/admin/category">Categories</a>
+        <a href="/admin/categories/list">Categories</a>
         <a href="/admin/tags" >Tags</a>
         <a href="/admin/role">Roles</a>
     </div>
@@ -101,6 +101,18 @@
                                                 {/for}
                                             </select>
                                         </div>
+                                        <div class="col-sm-4 form-group">
+
+                                            <select name="status" id="postStatus" >
+                                                {#for status in postStatues}
+                                                {#if status eq post.status }
+                                                <option selected="selected" value="{status.name()}">{status.getDisplayName()}</option>
+                                                {#else}
+                                                <option value="{status.name()}">{status.getDisplayName()}</option>
+                                                {/if}
+                                                {/for}
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 form-group">
@@ -152,6 +164,14 @@
         $('#tags').multiselect({
             nonSelectedText: 'Select tags'
         });
+        $('#postStatus').multiselect({
+            nonSelectedText: 'Select Status'
+        });
+
+        {#if post.status}
+            $('#postStatus').val("{post.status.name()}");
+        {/if}
+
     });
 
 </script>

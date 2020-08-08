@@ -4,6 +4,7 @@ import in.cubestack.apps.blog.base.domain.BaseModel;
 import in.cubestack.apps.blog.comment.domain.Comment;
 import in.cubestack.apps.blog.core.domain.Person;
 import in.cubestack.apps.blog.core.domain.PostStatus;
+import in.cubestack.apps.blog.post.service.PostSummary;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
+@SqlResultSetMapping(
+        name = "PostViewMapping",
+        classes = @ConstructorResult(
+                targetClass = PostSummary.class,
+                columns = {@ColumnResult(name = "id", type = Long.class),
+                        @ColumnResult(name = "firstName"),
+                        @ColumnResult(name = "lastName"),
+                        @ColumnResult(name = "username"),
+                        @ColumnResult(name = "title"),
+                        @ColumnResult(name = "metaTitle"),
+                        @ColumnResult(name = "summary"),
+                        @ColumnResult(name = "slug"),
+                        @ColumnResult(name = "postType"),
+                        @ColumnResult(name = "postStatus"),
+                        @ColumnResult(name = "publishedAt"),
+                        @ColumnResult(name = "likes"),
+                        @ColumnResult(name = "views")
+                }))
 @Table(name = "post")
 @SequenceGenerator(name = "default_gen", sequenceName = "post_id_seq", allocationSize = 1)
 public class Post extends BaseModel {
@@ -61,7 +80,7 @@ public class Post extends BaseModel {
     @Transient
     private String htmlContent;
 
-    Post() {
+    public Post() {
     }
 
     public Post(Person author, String title, String metaTitle, String summary, String slug, PostType postType, String content) {
@@ -72,12 +91,15 @@ public class Post extends BaseModel {
         this.slug = slug;
         this.postType = postType;
         this.content = content;
+        this.postStatus = PostStatus.DRAFT;
         this.postAnalytics = new PostAnalytics(this);
     }
 
     public void publish() {
+        if (this.publishedAt == null) {
+            this.publishedAt = LocalDateTime.now();
+        }
         this.postStatus = PostStatus.PUBLISHED;
-        this.publishedAt = LocalDateTime.now();
     }
 
 
@@ -189,5 +211,10 @@ public class Post extends BaseModel {
 
     public void setPostStatus(PostStatus postStatus) {
         this.postStatus = postStatus;
+    }
+
+    public void unPublish() {
+        postStatus = PostStatus.DRAFT;
+        this.publishedAt = null;
     }
 }

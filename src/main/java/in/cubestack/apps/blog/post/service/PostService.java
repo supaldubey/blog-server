@@ -81,6 +81,10 @@ public class PostService {
         return post;
     }
 
+    public List<PostSummary> getSummary() {
+        return postRepository.getPostSummary();
+    }
+
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
@@ -128,6 +132,11 @@ public class PostService {
         post.setTitle(postCandidate.getTitle());
         post.setMetaTitle(postCandidate.getMetaTitle());
         post.setSummary(postCandidate.getSummary());
+        if(postCandidate.isPublished()) {
+            post.publish();
+        } else {
+            post.unPublish();
+        }
         post.setSlug(contentHelper.slugify(postCandidate.getTitle()));
     }
 
