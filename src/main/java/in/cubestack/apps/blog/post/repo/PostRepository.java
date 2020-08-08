@@ -12,7 +12,7 @@ import java.util.Optional;
 public class PostRepository implements PanacheRepositoryBase<Post, Long> {
 
     public Optional<Post> findBySlug(String slug) {
-        return find("slug", slug).firstResultOptional();
+        return find("slug = ?1 and postStatus = ?2", slug, PostStatus.PUBLISHED).firstResultOptional();
     }
 
     public List<Post> findAllPublishedPostsByCategories(List<Long> categories) {

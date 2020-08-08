@@ -1,0 +1,300 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --cs-theme-primary-color: #6ccff6;
+
+    /* https://maketintsandshades.com/#6ccff6 */
+    --cs-theme-primary-color-dark-1: #61badd;
+    --cs-theme-primary-color-dark-2: #56a6c5;
+    --cs-theme-primary-color-dark-3: #4c91ac;
+    --cs-theme-primary-color-dark-4: #417c94;
+    --cs-theme-primary-color-dark-5: #36687b;
+    --cs-theme-primary-color-dark-6: #2b5362;
+    --cs-theme-primary-color-dark-7: #203e4a;
+    --cs-theme-primary-color-dark-8: #162931;
+
+    --cs-theme-primary-color-light-1: #f0fafe;
+    --cs-theme-primary-color-light-2: #e2f5fd;
+    --cs-theme-primary-color-light-3: #d3f1fc;
+    --cs-theme-primary-color-light-4: #c4ecfb;
+    --cs-theme-primary-color-light-5: #b6e7fb;
+    --cs-theme-primary-color-light-6: #a7e2fa;
+    --cs-theme-primary-color-light-7: #98ddf9;
+    --cs-theme-primary-color-light-8: #89d9f8;
+    --cs-theme-primary-color-light-9: #7bd4f7;
+
+
+    --cs-theme-body-bg-color: #ffffff;
+    --cs-theme-fonts-color: #000000;
+    --cs-theme-code-block-color: #1c8c3b;
+    --cs-theme-links-color: var(--cs-theme-primary-color-dark-4);
+    --cs-theme-links-border-bottom: 1px solid #ebf2f9;
+
+    --cs-theme-hljs-item-color: #1f1d1d;
+    --cs-theme-hljs-bg-color: #ffffff;
+    --cs-theme-hljs-ln-numbers-border-right: 2px solid #85CC57;
+
+    --cs-theme-blockquote-border: 1px solid #eceeef;
+    --cs-theme-blockquote-bg-color: #f3f5f7;
+    --cs-theme-blockquote-color: #0b4177;
+
+    --cs-theme-meta-badge-border-radius: 1rem;
+
+    --cs-theme-meta-badge-categories-bg-color: var(--cs-theme-primary-color-dark-1);
+    --cs-theme-meta-badge-categories-border-color: var(--cs-theme-primary-color-dark-2);
+    --cs-theme-meta-badge-categories-bg-color-hover: var(--cs-theme-primary-color-dark-2);
+
+    --cs-theme-meta-badge-tags-bg-color: var(--cs-theme-primary-color-dark-4);
+    --cs-theme-meta-badge-tags-border-color: var(--cs-theme-primary-color-dark-5);
+    --cs-theme-meta-badge-tags-bg-color-hover: var(--cs-theme-primary-color-dark-5);
+}
+
+.cs-theme-parent .cs-blog-navbar {
+    background: var(--cs-theme-primary-color);
+    padding: 0rem 0.25rem;
+}
+
+.cs-theme-parent .cs-blog-body {
+    padding-top: 2.25rem;
+    padding-left: 0;
+    padding-right: 0;
+    background: var(--cs-theme-body-bg-color);
+    min-height: inherit;
+}
+
+.cs-theme-parent .cs-blog-container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    min-height: inherit;
+}
+
+.cs-theme-parent .cs-blog-container-fluid .cs-blog-container-row,
+.cs-theme-parent .cs-blog-container-fluid .cs-blog-container-col {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    height: inherit;
+    width: 100%;
+}
+
+.cs-theme-parent .cs-blog-content-area {
+    padding: 2rem 0.3rem !important;
+}
+
+.cs-theme-parent .cs-blog-post > .cs-blog-post-body .cs-blog-post-item {
+    padding-bottom: 1rem;
+}
+
+.cs-theme-parent .cs-blog-post > .cs-blog-post-body .cs-blog-post-item:last-child {
+    padding-bottom: 0;
+}
+
+.cs-theme-parent .cs-blog-post > .cs-blog-post-body .cs-blog-post-item .cs-blog-post-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    /*color: #0f5dab !important;*/
+}
+
+.cs-theme-parent .cs-blog-post > .cs-blog-post-body .cs-blog-post-item .cs-blog-post-metaTitle {
+    font-size: 1.3rem;
+    font-weight: 300;
+    padding: 0;
+    /*color: #0f5dab !important;*/
+}
+
+.cs-theme-parent .cs-blog-post > .cs-blog-post-body .cs-blog-post-item .cs-blog-post-summary {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--cs-theme-fonts-color);
+    padding: 0;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h1 {
+    font-size: 2.25rem !important;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h2,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h3,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h4,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h5,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h6 {
+    font-weight: 300;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h2 {
+    font-size: 1.85rem !important;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h3 {
+    font-size: 1.65rem !important;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h4 {
+    font-size: 1.4rem !important;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h5 {
+    font-size: 1.25rem !important;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h6 {
+    font-size: 1.05rem !important;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * code {
+    color: var(--cs-theme-code-block-color);
+    word-break: break-word;
+    /*background-color: #e9f9ed;*/
+    padding: 0.1rem 0.2rem;
+    border-radius: 1px;
+    /*border: 1px solid #eceeef;*/
+    -webkit-font-feature-settings: "liga" on, "calt" on;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: 'JetBrains Mono';
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-section,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-title,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-params,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-ln-code {
+    color: var(--cs-theme-hljs-item-color);
+    font-weight: 400;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-keyword,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-string,
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-tag {
+    color: var(--cs-theme-code-block-color);
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content a {
+    font-weight: 500;
+    border-bottom: var(--cs-theme-links-border-bottom);
+    color: var(--cs-theme-links-color);
+    background-color: transparent;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content a:hover {
+    border-bottom: var(--cs-theme-links-border-bottom);
+    text-decoration: none;
+}
+
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content.cs-blog-post-series-content h1 {
+    font-size: 2rem !important;
+    font-weight: 300;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content.cs-blog-post-series-content a {
+    color: var(--cs-theme-links-color);
+    border: none;
+    font-weight: 400;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content.cs-blog-post-series-content a:hover {
+    text-decoration: underline;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content.cs-blog-post-series-content ul {
+    list-style-type: circle;
+    padding: 0.5rem 0rem 0.5rem 2rem;
+}
+
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * code.hljs {
+    border-radius: 0;
+    border: 0;
+    background-color: var(--cs-theme-hljs-bg-color);
+}
+
+.cs-theme-parent .cs-blog-post-author {
+    border-left: 2px solid var(--cs-theme-primary-color-light-6);
+    padding-left: 10px;
+}
+
+.cs-theme-parent .cs-blog-post-author .cs-blog-post-last-modified,
+.cs-theme-parent .cs-blog-post-author .cs-blog-post-authored-by {
+    font-weight: 300;
+    font-style: normal;
+    font-size: 0.9rem;
+}
+
+.cs-theme-parent .cs-blog-post-author .cs-blog-post-last-modified {
+    font-weight: 100;
+}
+
+.cs-theme-parent .cs-blog-post-author .cs-blog-post-authored-by .person {
+    color: var(--cs-theme-primary-color-dark-3);
+}
+
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge {
+    padding: .50em 0.75em !important;
+    font-size: 0.70rem !important;
+    color: #ffffff;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge:last-child {
+    margin-bottom: 0;
+}
+
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge span {
+    margin-right: 4px;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--cs-theme-meta-badge-border-radius);
+}
+
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge span:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge .cs-blog-post-meta-badge-categories {
+    background-color: var(--cs-theme-meta-badge-categories-bg-color);
+    border-color: var(--cs-theme-meta-badge-categories-border-color);
+}
+
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge .cs-blog-post-meta-badge-categories:hover {
+    background-color: var(--cs-theme-meta-badge-categories-bg-color-hover);
+}
+
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge .cs-blog-post-meta-badge-tags {
+    background-color: var(--cs-theme-meta-badge-tags-bg-color);
+    border-color: var(--cs-theme-meta-badge-tags-border-color);
+}
+
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge .cs-blog-post-meta-badge-tags:hover {
+    background-color: var(--cs-theme-meta-badge-tags-bg-color-hover);
+}
+
+.blockquote {
+    margin: 0;
+    padding: 1rem;
+    border: var(--cs-theme-blockquote-border);
+    border-radius: 2px;
+    background: var(--cs-theme-blockquote-bg-color);
+    font-size: 0.85rem;
+    color: var(--cs-theme-blockquote-color);
+}
+
+.blockquote p {
+    margin-bottom: 0;
+}
+
+/** highlight js customizations **/
+.hljs {
+    background: var(--cs-theme-hljs-bg-color);
+}
+
+.hljs-ln-numbers {
+    border-right: var(--cs-theme-hljs-ln-numbers-border-right);
+}
+
+.hljs-ln-n {
+    margin-right: 12px !important;
+}
+
+.hljs-ln-code {
+    padding-left: 12px !important;
+}

@@ -43,9 +43,24 @@
                             {#if roles.size() == 0}
                             <p>No roles</p>
                             {#else}
-                            {#for role in roles}
-                            <span class="badge badge-pill badge-primary cs-ad-badge">{role.roleName}</span>
-                            {/for}
+                            <table class="table table-sm table-hover cs-ad-table">
+                                <thead>
+                                <tr>
+                                    <th>Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {#for role in roles}
+                                <tr>
+                                    <td class="cs-ad-item-title">{role.roleName}</td>
+                                    <td>
+                                        <a class="btn btn-outline-primary btn-sm" href="/admin/roles/edit/{categogy.id}">Edit</a>
+                                    </td>
+                                </tr>
+                                <!--                                <span class="badge badge-pill badge-primary cs-ad-badge">{tag.tagName}</span>-->
+                                {/for}
+                                </tbody>
+                            </table>
                             {/if}
                         </div>
                         <div class="col-sm-4 cs-ad-container-col">

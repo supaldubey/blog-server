@@ -186,4 +186,8 @@ public class Post extends BaseModel {
         var matchedTag = postTags.stream().filter(pt -> pt.getTag().equals(tag)).findFirst();
         matchedTag.ifPresent(postTags::remove);
     }
+
+    public void setPostStatus(PostStatus postStatus) {
+        this.postStatus = postStatus;
+    }
 }
