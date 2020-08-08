@@ -28,6 +28,9 @@ import java.util.stream.Collectors;
                         @ColumnResult(name = "postType"),
                         @ColumnResult(name = "postStatus"),
                         @ColumnResult(name = "publishedAt"),
+                        @ColumnResult(name = "content"),
+                        @ColumnResult(name = "tags"),
+                        @ColumnResult(name = "categories"),
                         @ColumnResult(name = "likes"),
                         @ColumnResult(name = "views")
                 }))

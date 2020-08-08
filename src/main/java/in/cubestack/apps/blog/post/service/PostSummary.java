@@ -1,7 +1,10 @@
 package in.cubestack.apps.blog.post.service;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PostSummary {
 
@@ -15,12 +18,16 @@ public class PostSummary {
     private String slug;
     private String postType;
     private String postStatus;
+    private String content;
+    private String htmlContent;
     private Date publishedAt;
+    private String tags;
+    private String categories;
 
     private BigInteger likes;
     private BigInteger views;
 
-    public PostSummary(Long id, String firstName, String lastName, String username, String title, String metaTitle, String summary, String slug, String postType, String postStatus, Date publishedAt, BigInteger likes, BigInteger views) {
+    public PostSummary(Long id, String firstName, String lastName, String username, String title, String metaTitle, String summary, String slug, String postType, String postStatus, Date publishedAt, String content, String tags, String categories, BigInteger likes, BigInteger views) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +41,9 @@ public class PostSummary {
         this.publishedAt = publishedAt;
         this.likes = likes;
         this.views = views;
+        this.content = content;
+        this.tags = tags;
+        this.categories = categories;
     }
 
     public Long getId() {
@@ -86,5 +96,33 @@ public class PostSummary {
 
     public BigInteger getViews() {
         return views;
+    }
+
+    public String getHtmlContent() {
+        return htmlContent;
+    }
+
+    public void setHtmlContent(String htmlContent) {
+        this.htmlContent = htmlContent;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public String getCategories() {
+        return categories;
+    }
+
+    public List<String> getCategoryTitles() {
+        return Arrays.stream(categories.split(",")).map(String::trim).distinct().collect(Collectors.toList());
+    }
+
+    public List<String> getTagTitles() {
+        return Arrays.stream(tags.split(",")).map(String::trim).distinct().collect(Collectors.toList());
     }
 }

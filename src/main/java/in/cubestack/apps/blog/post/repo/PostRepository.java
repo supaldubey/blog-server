@@ -19,7 +19,8 @@ public class PostRepository implements PanacheRepository<Post> {
     EntityManager entityManager;
 
     public Optional<Post> findBySlug(String slug) {
-        return find("slug = ?1 and postStatus = ?2", slug, PostStatus.PUBLISHED).firstResultOptional();
+        return find("slug = ?1 and postStatus = ?2", slug, PostStatus.PUBLISHED)
+                .firstResultOptional();
     }
 
     public List<Post> findAllPublishedPostsByCategories(List<Long> categories) {
@@ -31,8 +32,21 @@ public class PostRepository implements PanacheRepository<Post> {
     }
 
     public List<PostSummary> getPostSummary() {
-        Query nativeQuery = entityManager.createNativeQuery("select p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, a.firstName, a.lastName, a.userName, pa.likes, pa.views from post p inner join person a on a.id = p.authorId inner join postAnalytics pa on pa.postId = p.id  ", "PostViewMapping");
+        Query nativeQuery = entityManager.createNativeQuery("select p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views from post p inner join person a on a.id = p.authorId inner join postAnalytics pa on pa.postId = p.id  ", "PostViewMapping");
         return nativeQuery.getResultList();
+    }
+
+    public PostSummary getPostSummary(String slug) {
+        Query nativeQuery = entityManager.createNativeQuery("select p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views, string_agg(t.title, ', ') tags, string_agg(c.title, ', ') categories " +
+                        "from post p inner join person a on a.id = p.authorId " +
+                        "inner join postAnalytics pa on pa.postId = p.id " +
+                        "inner join postCategory pc on pc.postId = p.id inner join category c on c.id = pc.categoryId " +
+                        "inner join postTag pt on pt.postId = p.id inner join tag t on t.id = pt.tagId " +
+                        "and p.slug = :slug " +
+                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views",
+                "PostViewMapping");
+        nativeQuery.setParameter("slug", slug);
+        return (PostSummary) nativeQuery.getSingleResult();
     }
 
     public List<Post> findAllByPostStatus(PostStatus postStatus) {
