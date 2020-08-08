@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --cs-theme-primary-color: #6ccff6;
-
+    /* https://coolors.co/palettes/trending */
     /* https://maketintsandshades.com/#6ccff6 */
     --cs-theme-primary-color-dark-1: #61badd;
     --cs-theme-primary-color-dark-2: #56a6c5;
@@ -25,13 +25,13 @@
 
     --cs-theme-body-bg-color: #ffffff;
     --cs-theme-fonts-color: #000000;
-    --cs-theme-code-block-color: #1c8c3b;
+    --cs-theme-code-block-color: var(--cs-theme-primary-color-dark-1);
     --cs-theme-links-color: var(--cs-theme-primary-color-dark-4);
     --cs-theme-links-border-bottom: 1px solid #ebf2f9;
 
     --cs-theme-hljs-item-color: #1f1d1d;
     --cs-theme-hljs-bg-color: #ffffff;
-    --cs-theme-hljs-ln-numbers-border-right: 2px solid #85CC57;
+    --cs-theme-hljs-ln-numbers-border-right: 2px solid var(--cs-theme-primary-color-dark-1);
 
     --cs-theme-blockquote-border: 1px solid #eceeef;
     --cs-theme-blockquote-bg-color: #f3f5f7;

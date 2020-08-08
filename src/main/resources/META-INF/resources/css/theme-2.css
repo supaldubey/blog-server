@@ -1,26 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --cs-theme-primary-color: #4785ff;
+    --cs-theme-primary-color: #48cae4;
 
-    /* https://maketintsandshades.com/#6ccff6 */
-    --cs-theme-primary-color-dark-1: #4078e6;
-    --cs-theme-primary-color-dark-2: #396acc;
-    --cs-theme-primary-color-dark-3: #325db3;
-    --cs-theme-primary-color-dark-4: #2b5099;
-    --cs-theme-primary-color-dark-5: #244380;
-    --cs-theme-primary-color-dark-6: #1c3566;
-    --cs-theme-primary-color-dark-7: #15284c;
-    --cs-theme-primary-color-dark-8: #0e1b33;
+    /* https://maketintsandshades.com/#48cae4 */
+    --cs-theme-primary-color-dark-1: #41b6cd;
+    --cs-theme-primary-color-dark-2: #3aa2b6;
+    --cs-theme-primary-color-dark-3: #328da0;
+    --cs-theme-primary-color-dark-4: #2b7989;
+    --cs-theme-primary-color-dark-5: #246572;
+    --cs-theme-primary-color-dark-6: #1d515b;
+    --cs-theme-primary-color-dark-7: #163d44;
+    --cs-theme-primary-color-dark-8: #0e282e;
 
-    --cs-theme-primary-color-light-1: #edf3ff;
-    --cs-theme-primary-color-light-2: #dae7ff;
-    --cs-theme-primary-color-light-3: #c8daff;
-    --cs-theme-primary-color-light-4: #b5ceff;
-    --cs-theme-primary-color-light-5: #a3c2ff;
-    --cs-theme-primary-color-light-6: #91b6ff;
-    --cs-theme-primary-color-light-7: #7eaaff;
-    --cs-theme-primary-color-light-8: #6c9dff;
-    --cs-theme-primary-color-light-9: #5991ff;
+    --cs-theme-primary-color-light-1: #edfafc;
+    --cs-theme-primary-color-light-2: #daf4fa;
+    --cs-theme-primary-color-light-3: #c8eff7;
+    --cs-theme-primary-color-light-4: #b6eaf4;
+    --cs-theme-primary-color-light-5: #a4e5f2;
+    --cs-theme-primary-color-light-6: #91dfef;
+    --cs-theme-primary-color-light-7: #7fdaec;
+    --cs-theme-primary-color-light-8: #6dd5e9;
+    --cs-theme-primary-color-light-9: #5acfe7;
 
 
     --cs-theme-body-bg-color: #ffffff;
