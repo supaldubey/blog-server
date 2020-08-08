@@ -37,7 +37,7 @@
     --cs-theme-blockquote-bg-color: #f3f5f7;
     --cs-theme-blockquote-color: #0b4177;
 
-    --cs-theme-meta-badge-border-radius: 1rem;
+    --cs-theme-meta-badge-border-radius: 4px;
 
     --cs-theme-meta-badge-categories-bg-color: var(--cs-theme-primary-color-dark-1);
     --cs-theme-meta-badge-categories-border-color: var(--cs-theme-primary-color-dark-2);
@@ -241,7 +241,7 @@
 
 .cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge span {
     margin-right: 4px;
-    padding: 0.35rem 0.75rem;
+    padding: 0.25rem 0.55rem;
     border-radius: var(--cs-theme-meta-badge-border-radius);
 }
 

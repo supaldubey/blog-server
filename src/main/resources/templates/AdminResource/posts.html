@@ -60,7 +60,7 @@
                         <tr>
                             <td class="cs-ad-item-title">{post.title}</td>
                             <td>{post.metaTitle}</td>
-                            <td>{post.slug}</td>
+                            <td> <a href="/blog/{post.slug}">{post.slug}</a> </td>
                             <td>{post.person.firstName}</td>
                             <td>
                                 {#for category in post.categoryCandidates}
