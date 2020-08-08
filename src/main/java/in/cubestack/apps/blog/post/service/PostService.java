@@ -43,8 +43,12 @@ public class PostService {
         return postRepository.findByIdOptional(id);
     }
 
-    public Optional<Post> findBySlug(String slug) {
-        return postRepository.findBySlug(slug);
+    public PostCandidate findBySlug(String slug) {
+        Optional<Post> postOpt = postRepository.findBySlug(slug);
+        Post post = postOpt.orElseThrow(() -> new RuntimeException("Post not found for the slug " + slug));
+        PostCandidate candidate = PostCandidate.from(post);
+        candidate.setHtmlContent(contentHelper.markdownToHtml(candidate.getContent()));
+        return candidate;
     }
 
     public List<Post> findAll() {
@@ -112,6 +116,7 @@ public class PostService {
                     postCandidate.getPostType(),
                     postCandidate.getContent()
             );
+            post.setPostStatus(PostStatus.DRAFT);
         } else {
             post = postRepository.findById(postCandidate.getId());
             updatePost(post, postCandidate);

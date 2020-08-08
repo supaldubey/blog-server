@@ -45,10 +45,12 @@
                     <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Summary</th>
+                        <th>Meta title</th>
+                        <th>Slug</th>
                         <th>Author</th>
                         <th>Category</th>
                         <th>Tags</th>
+                        <th>Status</th>
                         <th>Action</th>
                         <th>Status</th>
                     </tr>
@@ -57,7 +59,8 @@
                     {#for post in posts}
                         <tr>
                             <td class="cs-ad-item-title">{post.title}</td>
-                            <td>{post.summary}</td>
+                            <td>{post.metaTitle}</td>
+                            <td> <a href="/blog/{post.slug}">{post.slug}</a> </td>
                             <td>{post.person.firstName}</td>
                             <td>
                                 {#for category in post.categoryCandidates}
@@ -69,6 +72,7 @@
                                     {tag.tagName} |
                                 {/for}
                             </td>
+                            <td>{post.postStatus}</td>
                             <td>
                                 <a class="btn btn-outline-primary btn-sm" href="/admin/posts/edit/{post.id}">Edit</a>
                             </td>

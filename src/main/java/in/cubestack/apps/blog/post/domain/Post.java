@@ -80,7 +80,7 @@ public class Post extends BaseModel {
     @Transient
     private String htmlContent;
 
-    Post() {
+    public Post() {
     }
 
     public Post(Person author, String title, String metaTitle, String summary, String slug, PostType postType, String content) {
@@ -207,6 +207,10 @@ public class Post extends BaseModel {
     public void removeTag(Tag tag) {
         var matchedTag = postTags.stream().filter(pt -> pt.getTag().equals(tag)).findFirst();
         matchedTag.ifPresent(postTags::remove);
+    }
+
+    public void setPostStatus(PostStatus postStatus) {
+        this.postStatus = postStatus;
     }
 
     public void unPublish() {

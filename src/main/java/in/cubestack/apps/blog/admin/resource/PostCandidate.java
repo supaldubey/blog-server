@@ -43,6 +43,14 @@ public class PostCandidate {
     @FormParam("tags")
     private Set<Long> tags = new HashSet<>();
 
+    private String slug;
+
+    private String htmlContent;
+
+    private String postStatus;
+
+    private boolean seriesOrGuide;
+
     private PersonCandidate person;
     private final List<TagCandidate> tagCandidates = new ArrayList<>();
     private final List<CategoryCandidate> categoryCandidates = new ArrayList<>();
@@ -151,6 +159,38 @@ public class PostCandidate {
         return tagCandidates.stream().anyMatch(t -> t.getTagId() == tagCandidate.getTagId());
     }
 
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public String getPostStatus() {
+        return postStatus;
+    }
+
+    public void setPostStatus(String postStatus) {
+        this.postStatus = postStatus;
+    }
+
+    public String getHtmlContent() {
+        return htmlContent;
+    }
+
+    public void setHtmlContent(String htmlContent) {
+        this.htmlContent = htmlContent;
+    }
+
+    public boolean isSeriesOrGuide() {
+        return seriesOrGuide;
+    }
+
+    public void setSeriesOrGuide(boolean seriesOrGuide) {
+        this.seriesOrGuide = seriesOrGuide;
+    }
+
     public static PostCandidate from(Post post) {
         PostCandidate postCandidate = new PostCandidate(
                 post.getId(),
@@ -161,6 +201,10 @@ public class PostCandidate {
                 post.getContent(),
                 post.getPostStatus()
         );
+
+        postCandidate.setSlug(post.getSlug());
+        postCandidate.setPostStatus(post.getPostStatus().name());
+        postCandidate.setSeriesOrGuide(!post.getPostType().equals(PostType.POST));
 
         postCandidate.person = PersonCandidate.from(post.getAuthor());
         for (Tag tag : post.getTags()) {

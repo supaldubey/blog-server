@@ -19,7 +19,7 @@ public class PostRepository implements PanacheRepository<Post> {
     EntityManager entityManager;
 
     public Optional<Post> findBySlug(String slug) {
-        return find("slug", slug).firstResultOptional();
+        return find("slug = ?1 and postStatus = ?2", slug, PostStatus.PUBLISHED).firstResultOptional();
     }
 
     public List<Post> findAllPublishedPostsByCategories(List<Long> categories) {
