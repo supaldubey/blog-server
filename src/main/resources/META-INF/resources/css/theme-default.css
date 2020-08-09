@@ -298,3 +298,34 @@
 .hljs-ln-code {
     padding-left: 12px !important;
 }
+
+/** Home Page Styles **/
+.cs-blog-card {
+    padding: 1rem;
+    min-height: 200px;
+}
+
+.cs-blog-card.cs-blog-card-guides {
+    background-color: var(--cs-theme-primary-color-light-3);
+    /*border: 1px solid var(--cs-theme-primary-color-light-4);*/
+}
+
+.cs-blog-card.cs-blog-card-tutorials {
+    background-color: var(--cs-theme-primary-color-light-5);
+}
+
+.cs-blog-card.cs-blog-card-articles {
+    background-color: var(--cs-theme-primary-color-light-7);
+}
+
+.cs-blog-card .cs-blog-card-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--cs-theme-primary-color-dark-7);
+}
+
+.cs-blog-card .cs-blog-card-body {
+    font-size: 1rem;
+    font-weight: 300;
+    margin-top: 16px;
+}
