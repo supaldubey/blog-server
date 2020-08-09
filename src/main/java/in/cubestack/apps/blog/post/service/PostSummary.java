@@ -3,6 +3,9 @@ package in.cubestack.apps.blog.post.service;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +26,7 @@ public class PostSummary {
     private String postStatus;
     private String content;
     private String htmlContent;
-    private Date publishedAt;
+    private String publishedAt;
     private String tags;
     private String categories;
 
@@ -41,7 +44,7 @@ public class PostSummary {
         this.slug = slug;
         this.postType = postType;
         this.postStatus = postStatus;
-        this.publishedAt = publishedAt;
+        this.publishedAt = DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a").format(LocalDateTime.ofInstant(publishedAt.toInstant(), ZoneId.systemDefault()));
         this.likes = likes;
         this.views = views;
         this.content = content;
@@ -89,7 +92,7 @@ public class PostSummary {
         return postStatus;
     }
 
-    public Date getPublishedAt() {
+    public String getPublishedAt() {
         return publishedAt;
     }
 
@@ -124,6 +127,7 @@ public class PostSummary {
     public List<String> getCategoryTitles() {
         return Arrays.stream(categories.split(",")).map(String::trim).distinct().collect(Collectors.toList());
     }
+
 
     public List<String> getTagTitles() {
         return Arrays.stream(tags.split(",")).map(String::trim).distinct().collect(Collectors.toList());
