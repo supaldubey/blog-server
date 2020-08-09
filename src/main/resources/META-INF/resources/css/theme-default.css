@@ -113,11 +113,16 @@
     font-size: 2.25rem !important;
 }
 
+.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h1,
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h2,
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h3,
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h4,
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h5,
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h6 {
+    font-weight: 300;
+}
+
+em {
     font-weight: 300;
 }
 
