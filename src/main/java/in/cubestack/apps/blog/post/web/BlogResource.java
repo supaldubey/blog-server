@@ -42,6 +42,6 @@ public class BlogResource {
     public TemplateInstance getPostBySlug(@PathParam("slug") String slug) {
         return Templates
                 .post()
-                .data("post", postService.findBySlug(slug));
+                .data("post", postService.getSummary(slug));
     }
 }

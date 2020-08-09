@@ -81,8 +81,10 @@ public class PostService {
         return post;
     }
 
-    public List<PostSummary> getSummary() {
-        return postRepository.getPostSummary();
+    public PostSummary getSummary(String slug) {
+        PostSummary postSummary = postRepository.getPostSummary(slug);
+        postSummary.setHtmlContent(contentHelper.markdownToHtml(postSummary.getContent()));
+        return postSummary;
     }
 
     public void delete(Long id) {

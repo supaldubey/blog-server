@@ -51,21 +51,21 @@
                             <div class="clearfix">
                                 <div class="cs-blog-post-author float-left">
                                     <div class="cs-blog-post-last-modified">
-                                        <span>Last updated: August 1, 2020</span>
+                                        <span>Last updated: {post.publishedAt}</span>
                                     </div>
                                     <div class="cs-blog-post-authored-by">
-                                        <span>Author: </span><span class="person">{post.person.firstName} {post.person.lastName}</span>
+                                        <span>Author: </span><span class="person">{post.firstName} {post.lastName}</span>
                                     </div>
                                 </div>
                                 <div class="cs-blog-post-meta float-right">
                                     <div class="cs-blog-post-meta-badge">
-                                        {#for category in post.categoryCandidates}
-                                            <span class="cs-blog-post-meta-badge-categories">{category.title}</span>
+                                        {#for category in post.getCategoryTitles()}
+                                            <span class="cs-blog-post-meta-badge-categories">{category}</span>
                                         {/for}
                                     </div>
                                     <div class="cs-blog-post-meta-badge">
-                                        {#for tag in post.tagCandidates}
-                                            <span class="cs-blog-post-meta-badge-tags">{tag.tagName}</span>
+                                        {#for tag in post.getTagTitles()}
+                                            <span class="cs-blog-post-meta-badge-tags">{tag}</span>
                                         {/for}
                                     </div>
                                 </div>
