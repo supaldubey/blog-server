@@ -1,26 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --cs-theme-primary-color: #6ccff6;
-    /* https://coolors.co/palettes/trending */
-    /* https://maketintsandshades.com/#6ccff6 */
-    --cs-theme-primary-color-dark-1: #61badd;
-    --cs-theme-primary-color-dark-2: #56a6c5;
-    --cs-theme-primary-color-dark-3: #4c91ac;
-    --cs-theme-primary-color-dark-4: #417c94;
-    --cs-theme-primary-color-dark-5: #36687b;
-    --cs-theme-primary-color-dark-6: #2b5362;
-    --cs-theme-primary-color-dark-7: #203e4a;
-    --cs-theme-primary-color-dark-8: #162931;
+    --cs-theme-primary-color: #4785ff;
 
-    --cs-theme-primary-color-light-1: #f0fafe;
-    --cs-theme-primary-color-light-2: #e2f5fd;
-    --cs-theme-primary-color-light-3: #d3f1fc;
-    --cs-theme-primary-color-light-4: #c4ecfb;
-    --cs-theme-primary-color-light-5: #b6e7fb;
-    --cs-theme-primary-color-light-6: #a7e2fa;
-    --cs-theme-primary-color-light-7: #98ddf9;
-    --cs-theme-primary-color-light-8: #89d9f8;
-    --cs-theme-primary-color-light-9: #7bd4f7;
+    /* https://maketintsandshades.com/#6ccff6 */
+    --cs-theme-primary-color-dark-1: #4078e6;
+    --cs-theme-primary-color-dark-2: #396acc;
+    --cs-theme-primary-color-dark-3: #325db3;
+    --cs-theme-primary-color-dark-4: #2b5099;
+    --cs-theme-primary-color-dark-5: #244380;
+    --cs-theme-primary-color-dark-6: #1c3566;
+    --cs-theme-primary-color-dark-7: #15284c;
+    --cs-theme-primary-color-dark-8: #0e1b33;
+
+    --cs-theme-primary-color-light-1: #edf3ff;
+    --cs-theme-primary-color-light-2: #dae7ff;
+    --cs-theme-primary-color-light-3: #c8daff;
+    --cs-theme-primary-color-light-4: #b5ceff;
+    --cs-theme-primary-color-light-5: #a3c2ff;
+    --cs-theme-primary-color-light-6: #91b6ff;
+    --cs-theme-primary-color-light-7: #7eaaff;
+    --cs-theme-primary-color-light-8: #6c9dff;
+    --cs-theme-primary-color-light-9: #5991ff;
 
 
     --cs-theme-body-bg-color: #ffffff;
@@ -122,10 +122,6 @@
     font-weight: 300;
 }
 
-em {
-    font-weight: 300;
-}
-
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h2 {
     font-size: 1.85rem !important;
 }
@@ -144,33 +140,6 @@ em {
 
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h6 {
     font-size: 1.05rem !important;
-}
-
-.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * code {
-    color: var(--cs-theme-code-block-color);
-    word-break: break-word;
-    /*background-color: #e9f9ed;*/
-    padding: 0.1rem 0.2rem;
-    border-radius: 1px;
-    /*border: 1px solid #eceeef;*/
-    -webkit-font-feature-settings: "liga" on, "calt" on;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-family: 'JetBrains Mono';
-}
-
-.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-section,
-.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-title,
-.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-params,
-.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-ln-code {
-    color: var(--cs-theme-hljs-item-color);
-    font-weight: 400;
-}
-
-.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-keyword,
-.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-string,
-.cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * .hljs-tag {
-    color: var(--cs-theme-code-block-color);
 }
 
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content a {
@@ -287,23 +256,6 @@ em {
     margin-bottom: 0;
 }
 
-/** highlight js customizations **/
-.hljs {
-    background: var(--cs-theme-hljs-bg-color);
-}
-
-.hljs-ln-numbers {
-    border-right: var(--cs-theme-hljs-ln-numbers-border-right);
-}
-
-.hljs-ln-n {
-    margin-right: 12px !important;
-}
-
-.hljs-ln-code {
-    padding-left: 12px !important;
-}
-
 /** Home Page Styles **/
 .cs-blog-card {
     padding: 1rem;
@@ -325,7 +277,7 @@ em {
 
 .cs-blog-card .cs-blog-card-title {
     font-size: 1.5rem;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--cs-theme-primary-color-dark-7);
 }
 
@@ -333,4 +285,13 @@ em {
     font-size: 1rem;
     font-weight: 300;
     margin-top: 16px;
+    height: 100%;
+}
+
+.cs-card-blog.guides-alt-style {
+    background-color: #ffffff;
+}
+
+.cs-card-blog.guides-alt-style .cs-blog-card-body {
+    background-color: var(--cs-theme-primary-color-light-3);
 }

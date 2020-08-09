@@ -20,7 +20,14 @@ public class BlogResource {
 
     @CheckedTemplate
     public static class Templates {
+        public static native TemplateInstance blog();
         public static native TemplateInstance post();
+    }
+
+    @GET
+    public TemplateInstance home() {
+        return Templates
+                .blog();
     }
 
     @GET

@@ -1,14 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@font-face {
-    font-family: 'JetBrains Mono';
-    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/eot/JetBrainsMono-Regular.eot') format('embedded-opentype'),
-    url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
-    url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff/JetBrainsMono-Regular.woff') format('woff'),
-    url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/ttf/JetBrainsMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 html, body {
     padding: 0;
     margin: 0;
@@ -171,11 +161,16 @@ html, body {
     font-size: 2.25rem !important;
 }
 
+.bts-post .bts-post-body .bts-post-item .bts-post-content h1,
 .bts-post .bts-post-body .bts-post-item .bts-post-content h2,
 .bts-post .bts-post-body .bts-post-item .bts-post-content h3,
 .bts-post .bts-post-body .bts-post-item .bts-post-content h4,
 .bts-post .bts-post-body .bts-post-item .bts-post-content h5,
 .bts-post .bts-post-body .bts-post-item .bts-post-content h6 {
+    font-weight: 300 !important;
+}
+
+em {
     font-weight: 300;
 }
 
@@ -199,33 +194,6 @@ html, body {
     font-size: 1.05rem !important;
 }
 
-.bts-post .bts-post-body .bts-post-item .bts-post-content * code {
-    color: #1c8c3b;
-    word-break: break-word;
-    /*background-color: #e9f9ed;*/
-    padding: 0.1rem 0.2rem;
-    border-radius: 1px;
-    /*border: 1px solid #eceeef;*/
-    -webkit-font-feature-settings: "liga" on, "calt" on;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-family: 'JetBrains Mono';
-}
-
-.bts-post .bts-post-body .bts-post-item .bts-post-content * .hljs-section,
-.bts-post .bts-post-body .bts-post-item .bts-post-content * .hljs-title,
-.bts-post .bts-post-body .bts-post-item .bts-post-content * .hljs-params,
-.bts-post .bts-post-body .bts-post-item .bts-post-content * .hljs-ln-code {
-    color: #1f1d1d;
-    font-weight: 400;
-}
-
-.bts-post .bts-post-body .bts-post-item .bts-post-content * .hljs-keyword,
-.bts-post .bts-post-body .bts-post-item .bts-post-content * .hljs-string,
-.bts-post .bts-post-body .bts-post-item .bts-post-content * .hljs-tag {
-    color: #1c8c3b;
-}
-
 .bts-post .bts-post-body .bts-post-item .bts-post-content a {
     font-weight: 500;
     border-bottom: 1px solid #ebf2f9;
@@ -236,12 +204,6 @@ html, body {
 .bts-post .bts-post-body .bts-post-item .bts-post-content a:hover {
     border-bottom: 1px solid #0f5dab;
     text-decoration: none;
-}
-
-.bts-post .bts-post-body .bts-post-item .bts-post-content * code.hljs {
-    border-radius: 0;
-    border: 0;
-    background-color: #ffffff;
 }
 
 .blockquote {
@@ -256,23 +218,6 @@ html, body {
 
 .blockquote p {
     margin-bottom: 0;
-}
-
-/** highlight js customizations **/
-.hljs {
-    background: #ffffff;
-}
-
-.hljs-ln-numbers {
-    border-right: 2px solid #85CC57;
-}
-
-.hljs-ln-n {
-    margin-right: 12px !important;
-}
-
-.hljs-ln-code {
-    padding-left: 12px !important;
 }
 
 /****** Tests *********/
@@ -329,23 +274,14 @@ textarea.form-control {
 .cs-ad-brand {
     margin-left: 1rem;
     color: #ffffff;
-    -webkit-font-feature-settings: "liga" on, "calt" on;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-family: 'JetBrains Mono';
     font-weight: 600;
 }
 .cs-ad-body, .cs-ad-body-login {
     padding-left: 0;
     padding-right: 0;
-    /*background: #f0f0f0;*/
     min-height: inherit;
     height: inherit;
     font-size: 0.85rem;
-    /*-webkit-font-feature-settings: "liga" on, "calt" on;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-family: 'JetBrains Mono';*/
 }
 
 .cs-ad-sidenav {
