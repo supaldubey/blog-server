@@ -44,12 +44,19 @@ public class PostSummary {
         this.slug = slug;
         this.postType = postType;
         this.postStatus = postStatus;
-        this.publishedAt = DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a").format(LocalDateTime.ofInstant(publishedAt.toInstant(), ZoneId.systemDefault()));
+        this.publishedAt = findTime(publishedAt);
         this.likes = likes;
         this.views = views;
         this.content = content;
         this.tags = tags;
         this.categories = categories;
+    }
+
+    private String findTime(Date publishedAt) {
+        if (publishedAt == null) {
+            return "NA";
+        }
+        return DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a").format(LocalDateTime.ofInstant(publishedAt.toInstant(), ZoneId.systemDefault()));
     }
 
     public Long getId() {
