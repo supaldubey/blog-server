@@ -1,5 +1,6 @@
 package in.cubestack.apps.blog.post.web;
 
+import in.cubestack.apps.blog.admin.resource.PostCandidate;
 import in.cubestack.apps.blog.event.domain.EventType;
 import in.cubestack.apps.blog.event.service.EventService;
 import in.cubestack.apps.blog.post.domain.Post;
@@ -24,7 +25,7 @@ public class PostResource {
 
 
     @GET
-    public List<Post> findAll(
+    public List<PostCandidate> findAll(
             @QueryParam("categories") List<String> categories,
             @QueryParam("tags") List<String> tags) {
 

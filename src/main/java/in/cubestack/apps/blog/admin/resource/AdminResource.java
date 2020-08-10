@@ -23,8 +23,6 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Path("/admin")
 public class AdminResource {
@@ -101,12 +99,9 @@ public class AdminResource {
     @RolesAllowed("Admin")
     public TemplateInstance posts(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
-        List<PostCandidate> postCandidates = postService.findAll().stream()
-                .map(PostCandidate::from).collect(Collectors.toList());
-
         return Templates.posts()
                 .data("user", user)
-                .data("posts", postCandidates);
+                .data("posts", postService.findAll());
     }
 
     @GET

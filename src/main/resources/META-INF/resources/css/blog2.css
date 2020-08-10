@@ -8,10 +8,25 @@ html, body {
     font-family: 'Roboto', sans-serif;
 }
 
+.cs-blog-navbar-logo {
+    height: 18px;
+    width: 18px;
+    margin-right: 4px;
+}
+
 .bts-navbar {
     /*background: #1c8c3b;*/
     background: #85cc57;
     padding: 0rem 0.25rem;
+}
+
+.navbar-brand.mb-0 {
+    font-size: 1.05rem;
+    color: white !important;
+}
+
+.cs-blog-navbar-brand {
+    cursor: pointer;
 }
 
 .navbar-brand.mb-0 i {
