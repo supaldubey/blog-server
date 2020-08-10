@@ -142,7 +142,7 @@ public class PostService {
         post.setTitle(postCandidate.getTitle());
         post.setMetaTitle(postCandidate.getMetaTitle());
         post.setSummary(postCandidate.getSummary());
-        if(postCandidate.isPublished()) {
+        if (postCandidate.isPublished()) {
             post.publish();
         } else {
             post.unPublish();

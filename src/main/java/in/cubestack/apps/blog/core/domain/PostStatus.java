@@ -4,6 +4,7 @@ public enum PostStatus {
     PUBLISHED("Published"), DRAFT("Draft");
 
     private final String displayName;
+
     PostStatus(String displayName) {
         this.displayName = displayName;
     }
