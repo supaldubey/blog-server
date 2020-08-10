@@ -34,7 +34,8 @@ public class BlogResource {
     @GET
     public TemplateInstance home() {
         return Templates
-                .blog();
+                .blog()
+                .data("posts", postService.findAllPublished());
     }
 
     @GET

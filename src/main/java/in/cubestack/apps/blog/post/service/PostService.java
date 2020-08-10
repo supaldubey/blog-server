@@ -51,20 +51,28 @@ public class PostService {
         return candidate;
     }
 
-    public List<Post> findAll() {
-        return postRepository.findAll().list();
+    public List<PostCandidate> findAll() {
+        return toCandidates(postRepository.findAll().list());
     }
 
-    public List<Post> findAllPublishedPostsByCategories(List<Long> categories) {
-        return postRepository.findAllPublishedPostsByCategories(categories);
+    public List<PostCandidate> findAllPublishedPostsByCategories(List<Long> categories) {
+        return toCandidates(postRepository.findAllPublishedPostsByCategories(categories));
     }
 
-    public List<Post> findAllPublishedPostsByTags(List<Long> tags) {
-        return postRepository.findAllPublishedPostsByTags(tags);
+    public List<PostCandidate> findAllPublishedPostsByTags(List<Long> tags) {
+        return toCandidates(postRepository.findAllPublishedPostsByTags(tags));
     }
 
-    public List<Post> findAllPublished() {
-        return postRepository.findAllByPostStatus(PostStatus.PUBLISHED);
+    public List<PostCandidate> findAllPublished() {
+        return toCandidates(postRepository.findAllByPostStatus(PostStatus.PUBLISHED));
+    }
+
+    private List<PostCandidate> toCandidates(List<Post> posts) {
+        return posts.stream().map(o -> {
+            PostCandidate candidate = PostCandidate.from(o);
+            candidate.setHtmlContent(contentHelper.markdownToHtml(candidate.getContent()));
+            return candidate;
+        }).collect(Collectors.toList());
     }
 
     public List<Post> findAllDrafts() {

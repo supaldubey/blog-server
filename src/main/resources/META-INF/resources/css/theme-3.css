@@ -257,9 +257,11 @@
 }
 
 /** Home Page Styles **/
-.cs-blog-card {
+.cs-blog-card,
+.cs-blog-post-card {
     padding: 1rem;
     min-height: 200px;
+    background-color: white;
 }
 
 .cs-blog-card.cs-blog-card-guides {
@@ -275,10 +277,24 @@
     background-color: var(--cs-theme-primary-color-light-7);
 }
 
-.cs-blog-card .cs-blog-card-title {
+.cs-blog-card .cs-blog-card-title,
+.cs-blog-post-card .cs-blog-post-card-title {
     font-size: 1.5rem;
     font-weight: 400;
     color: var(--cs-theme-primary-color-dark-7);
+}
+
+.cs-blog-post-card .cs-blog-post-card-body .cs-blog-post-card-post-title  {
+    color: var(--cs-theme-primary-color);
+    font-weight: 300;
+    font-size: 1.35rem;
+    padding: 2px 0px;
+    border-bottom: 1px solid var(--cs-theme-primary-color-light-1);
+}
+
+.cs-blog-post-card .cs-blog-post-card-body .cs-blog-post-card-post-title a:hover {
+    cursor: pointer;
+    color: var(--cs-theme-primary-color-dark-2);
 }
 
 .cs-blog-card .cs-blog-card-body {
