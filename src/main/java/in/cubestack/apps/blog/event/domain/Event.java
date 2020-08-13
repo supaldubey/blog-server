@@ -42,4 +42,11 @@ public class Event extends BaseModel {
         this.eventType = eventType;
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "contentId=" + contentId +
+                ", eventType=" + eventType +
+                '}';
+    }
 }
