@@ -2,7 +2,9 @@ package in.cubestack.apps.blog.post.web;
 
 import in.cubestack.apps.blog.event.domain.EventType;
 import in.cubestack.apps.blog.event.service.EventService;
+import in.cubestack.apps.blog.post.service.CategoryService;
 import in.cubestack.apps.blog.post.service.PostService;
+import in.cubestack.apps.blog.post.service.TagService;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.api.CheckedTemplate;
 import org.eclipse.microprofile.metrics.MetricUnits;
@@ -23,6 +25,12 @@ public class BlogResource {
     @Inject
     EventService eventService;
 
+    @Inject
+    CategoryService categoryService;
+
+    @Inject
+    TagService tagService;
+
     @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance blog();
@@ -34,7 +42,9 @@ public class BlogResource {
     public TemplateInstance home() {
         return Templates
                 .blog()
-                .data("posts", postService.findAllPublished());
+                .data("posts", postService.findAllPublished())
+                .data("categories", categoryService.findAll())
+                .data("tags", tagService.findAll());
     }
 
     @GET

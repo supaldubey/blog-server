@@ -5,6 +5,7 @@ import in.cubestack.apps.blog.post.domain.Category;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.domain.PostType;
 import in.cubestack.apps.blog.post.domain.Tag;
+import in.cubestack.apps.blog.util.DateTimeHelper;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.jboss.resteasy.annotations.jaxrs.FormParam;
 
@@ -54,6 +55,8 @@ public class PostCandidate {
     private PersonCandidate person;
     private final List<TagCandidate> tagCandidates = new ArrayList<>();
     private final List<CategoryCandidate> categoryCandidates = new ArrayList<>();
+
+    private String updatedAt;
 
 
     public PostCandidate(long id, String title, String metaTitle, String summary, PostType postType, String content, PostStatus postStatus) {
@@ -141,6 +144,14 @@ public class PostCandidate {
         return categoryCandidates;
     }
 
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     private void addTagCandidate(Tag tag) {
         tagCandidates.add(new TagCandidate(tag.getId(), tag.getSlug(), tag.getTitle()));
         tags.add(tag.getId());
@@ -214,6 +225,8 @@ public class PostCandidate {
         for (Category category : post.getCategories()) {
             postCandidate.addCategoryCandidate(category);
         }
+
+        postCandidate.setUpdatedAt(DateTimeHelper.toDateString(post.getUpdatedAt()));
 
         return postCandidate;
     }
