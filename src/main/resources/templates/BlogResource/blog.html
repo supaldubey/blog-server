@@ -74,32 +74,65 @@
                         </div>
                     </div>
                 </div>
-                <br/><br/>
+                <br/>
                 <div class="row">
-                        <div class="col-sm-6">
-                            <div class="cs-blog-post-card">
-                                <div class="cs-blog-post-card-title">On Java &rarr;</div>
-                                <div class="cs-blog-post-card-body">
-                                    {#for post in posts}
-                                        <div class="cs-blog-post-card-post-title">
-                                            <a href="/blog/{post.slug}">{post.title} &rarr;</a>
+                    <div class="col-sm-9">
+                        <div class="cs-blog-latest-articles">
+                            <div class="row">
+                                {#for post in posts}
+                                <div class="col-sm-4">
+                                    <div class="cs-blog-post-block">
+                                        <a class="cs-blog-post-block-head">
+                                            <h1 href="/blog/{post.slug}">{post.title}</h1>
+                                            <div class="cs-blog-post-block-summary">
+                                                <p>{post.metaTitle}</p>
+                                            </div>
+                                        </a>
+                                        <div class="cs-blog-post-block-meta">
+                                            <div class="cs-blog-post-block-meta-item cs-blog-avatar-container">
+                                                <img src="https://cdn-images-1.medium.com/fit/c/43/43/1*5EoVYcZOgoqPZVspD2nZCA@2x.jpeg" alt="" class="cs-blog-avatar">
+                                            </div>
+                                            <div class="cs-blog-post-block-meta-item">
+                                                <a class="meta-author" href="/blog/authors/{post.person.username}">{post.person.firstName} {post.person.lastName}</a>
+                                                <div class="meta-time">
+                                                    <span>{post.updatedAt}</span>
+                                                    <span>.</span>
+                                                    <span>6 min read</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    {/for}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="cs-blog-post-card">
-                                <div class="cs-blog-post-card-title">On Spring &rarr;</div>
-                                <div class="cs-blog-post-card-body">
-                                    {#for post in posts}
-                                    <div class="cs-blog-post-card-post-title">
-                                        <a href="/blog/{post.slug}">{post.title} &rarr;</a>
                                     </div>
-                                    {/for}
+                                </div>
+                                {/for}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="cs-blog-panel">
+                                    <h1>Categories</h1>
+                                    <div class="cs-blog-panel-body">
+                                        {#for category in categories}
+                                        <a class="badge badge-primary cs-blog-badge" href="/blog/categories/{category.slug}">{category.title}</a>
+                                        {/for}
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="cs-blog-panel">
+                                    <h1>Tags</h1>
+                                    <div class="cs-blog-panel-body">
+                                        {#for tag in tags}
+                                        <a class="badge badge-primary cs-blog-badge" href="/blog/tags/{tag.slug}">{tag.tagName}</a>
+                                        {/for}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-1">
@@ -112,17 +145,5 @@
 <script src="/js/jquery-3.5.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/highlight.min.js"></script>
-<script src="/js/highlightjs-line-numbers.min.js"></script>
-<script type="text/javascript">
-    hljs.configure();
-    document.addEventListener('DOMContentLoaded', (event) => {
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightBlock(block);
-            hljs.initLineNumbersOnLoad(block);
-        });
-    });
-
-</script>
 </body>
 </html>

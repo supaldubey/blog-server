@@ -50,6 +50,6 @@ public class PostRepository implements PanacheRepository<Post> {
     }
 
     public List<Post> findAllByPostStatus(PostStatus postStatus) {
-        return find("postStatus", postStatus).list();
+        return find("select p from Post p where p.postStatus = ?1 order by p.updatedAt desc", postStatus).list();
     }
 }
