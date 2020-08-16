@@ -14,15 +14,16 @@ html, body {
     margin-right: 4px;
 }
 
-.bts-navbar {
+.cs-blog-navbar {
     /*background: #1c8c3b;*/
     background: #85cc57;
     padding: 0rem 0.25rem;
 }
 
 .navbar-brand.mb-0 {
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     color: white !important;
+    line-height: 45px;
 }
 
 .cs-blog-navbar-brand {

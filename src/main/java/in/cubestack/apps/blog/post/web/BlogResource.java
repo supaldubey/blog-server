@@ -34,7 +34,7 @@ public class BlogResource {
     @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance blog();
-
+        public static native TemplateInstance blog2();
         public static native TemplateInstance post();
     }
 
