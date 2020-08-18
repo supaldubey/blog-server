@@ -5,6 +5,8 @@ import in.cubestack.apps.blog.core.domain.PersonRole;
 import in.cubestack.apps.blog.core.domain.Role;
 import in.cubestack.apps.blog.core.repository.PersonRepository;
 import in.cubestack.apps.blog.core.resource.PersonCandidate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class PersonService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
+
     @Inject
     PersonRepository personRepository;
 
@@ -26,9 +30,14 @@ public class PersonService {
     }
 
     public Person save(PersonCandidate candidate) {
+        LOGGER.info("Saving person {}", candidate);
         Person person = new Person(candidate.getFirstName(), candidate.getLastName(), candidate.getUsername());
         person.updatePassword(candidate.getPassword());
+
+        person.addRole(new Role("Admin"));
         personRepository.persist(person);
+
+        LOGGER.info("Person saved {}", person.getId());
         return person;
     }
 

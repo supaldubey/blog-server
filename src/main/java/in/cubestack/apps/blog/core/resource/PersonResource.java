@@ -2,15 +2,12 @@ package in.cubestack.apps.blog.core.resource;
 
 
 import in.cubestack.apps.blog.admin.resource.AdminResource;
-import in.cubestack.apps.blog.core.domain.Person;
-import in.cubestack.apps.blog.core.domain.Role;
 import in.cubestack.apps.blog.core.service.PersonService;
 import org.jboss.resteasy.annotations.Form;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -47,7 +44,6 @@ public class PersonResource {
     }
 
     @GET
-    @Transactional
     @Path("mock-crete")
     public Response mockCreate(@Context UriInfo uriInfo,
                                @QueryParam("firstName") String firstName,
@@ -61,8 +57,7 @@ public class PersonResource {
         personCandidate.setUsername(username);
         personCandidate.setPassword(password);
 
-        Person person = personService.save(personCandidate);
-        person.addRole(new Role("Admin"));
+        personService.save(personCandidate);
 
         URI dashboardUri = uriInfo.getBaseUriBuilder()
                 .path(AdminResource.class)
