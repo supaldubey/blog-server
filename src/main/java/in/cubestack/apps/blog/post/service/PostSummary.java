@@ -33,6 +33,8 @@ public class PostSummary {
     private BigInteger likes;
     private BigInteger views;
 
+    private String readTime;
+
     public static class PostMeta {
         private String name;
         private String slug;
@@ -77,6 +79,7 @@ public class PostSummary {
         this.likes = likes;
         this.views = views;
         this.content = content;
+        this.readTime = readTime(content);
         this.tags = toMeta(tags);
         this.categories = toMeta(categories);
     }
@@ -87,6 +90,16 @@ public class PostSummary {
                 .map(o1 -> o1.trim().split("\\|"))
                 .map(o2 -> new PostMeta(o2[0].trim(), o2[1].trim()))
                 .collect(Collectors.toList());
+    }
+
+    private String readTime(String content) {
+        int wpm = 200;
+        int wordLength = 5;
+        int totalWords = 0;
+        for(String word: content.split(" ")) {
+            totalWords += word.length()/wordLength;
+        }
+        return totalWords/wpm + " min read";
     }
 
     private String findTime(Date publishedAt) {
@@ -168,4 +181,11 @@ public class PostSummary {
         return categories;
     }
 
+    public String getReadTime() {
+        return readTime;
+    }
+
+    public void setReadTime(String readTime) {
+        this.readTime = readTime;
+    }
 }
