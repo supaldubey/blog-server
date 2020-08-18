@@ -212,13 +212,14 @@
     margin-bottom: 0;
 }
 
-.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge span {
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge a {
     margin-right: 4px;
     padding: 0.25rem 0.55rem;
     border-radius: var(--cs-theme-meta-badge-border-radius);
+    color: white !important;
 }
 
-.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge span:hover {
+.cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge a:hover {
     cursor: pointer;
     text-decoration: underline;
 }

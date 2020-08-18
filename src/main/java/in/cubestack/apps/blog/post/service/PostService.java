@@ -95,6 +95,18 @@ public class PostService {
         return postSummary;
     }
 
+    public List<PostSummary> getPostSummaryByCategorySlug(String slug) {
+        List<PostSummary> postSummaries = postRepository.getPostSummaryByCategorySlug(slug);
+        postSummaries.forEach(ps -> ps.setHtmlContent(contentHelper.markdownToHtml(ps.getContent())));
+        return postSummaries;
+    }
+
+    public List<PostSummary> getPostSummaryByTagSlug(String slug) {
+        List<PostSummary> postSummaries = postRepository.getPostSummaryByTagSlug(slug);
+        postSummaries.forEach(ps -> ps.setHtmlContent(contentHelper.markdownToHtml(ps.getContent())));
+        return postSummaries;
+    }
+
     public void delete(Long id) {
         postRepository.deleteById(id);
     }

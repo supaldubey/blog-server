@@ -65,13 +65,13 @@
                                 </div>
                                 <div class="cs-blog-post-meta float-right">
                                     <div class="cs-blog-post-meta-badge">
-                                        {#for category in post.getCategoryTitles()}
-                                            <span class="cs-blog-post-meta-badge-categories">{category}</span>
+                                        {#for meta in post.categories}
+                                            <a href="/blog/category/{meta.slug}" class="cs-blog-post-meta-badge-categories">{meta.name}</a>
                                         {/for}
                                     </div>
                                     <div class="cs-blog-post-meta-badge">
-                                        {#for tag in post.getTagTitles()}
-                                            <span class="cs-blog-post-meta-badge-tags">{tag}</span>
+                                        {#for meta in post.tags}
+                                            <a href="/blog/tag/{meta.slug}" class="cs-blog-post-meta-badge-tags">{meta.name}</a>
                                         {/for}
                                     </div>
                                 </div>
