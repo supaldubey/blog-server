@@ -66,6 +66,53 @@
     min-height: inherit;
 }
 
+.cs-blog-logo-container {
+    display: inline-flex;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+.cs-blog-logo-container:hover {
+    text-decoration: none;
+}
+
+.cs-blog-logo-container img {
+    margin-top: 10px;
+}
+
+.cs-blog-logo-container .cs-blog-logo-text {
+    color: white;
+    padding-top: 4px;
+}
+
+.cs-blog-logo-footer img {
+    height: 40px;
+    width: 40px;
+}
+
+.cs-blog-page-footer .cs-blog-logo-text {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 24px;
+}
+
+.navbar-nav .nav-item:hover {
+    background-color: var(--cs-theme-primary-color-dark-3);
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: white !important;
+}
+
+@media (max-width: 600px) {
+    .cs-blog-logo-container {
+        margin-left: 38px;
+    }
+}
+
 .cs-theme-parent .cs-blog-container-fluid .cs-blog-container-row,
 .cs-theme-parent .cs-blog-container-fluid .cs-blog-container-col {
     margin-left: 0;
@@ -118,7 +165,7 @@
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h4,
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h5,
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h6 {
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content h2 {
@@ -174,10 +221,19 @@
     padding: 0.5rem 0rem 0.5rem 2rem;
 }
 
+@media (max-width: 600px)  {
+    .cs-blog-post-body {
+        padding: 10px;
+    }
+}
+
 .cs-theme-parent .cs-blog-post .cs-blog-post-body .cs-blog-post-item .cs-blog-post-content * code.hljs {
     border-radius: 0;
     border: 0;
     background-color: var(--cs-theme-hljs-bg-color);
+    border-left: 2px solid var(--cs-theme-primary-color);
+    margin-left: 20px;
+    padding-left: 20px;
 }
 
 .cs-theme-parent .cs-blog-post-author {
@@ -449,8 +505,8 @@ img.cs-blog-avatar {
 }
 
 .cs-blog-page-footer .footer-brand .footer-logo {
-    height: 32px;
-    width: 32px;
+    height: 40px;
+    width: 40px;
     margin-right: 10px;
 }
 
@@ -495,6 +551,11 @@ nav.menu {
     line-height: 40px;
 
 }
+
+.xs-menu ul {
+    list-style-type: none;
+}
+
 .menu > ul li a, .xs-menu li a {
     text-decoration: none;
     color: #fff;
@@ -561,6 +622,10 @@ nav.menu {
     padding: 0;
 }
 
+#menutoggle:hover .xs-menu {
+    display: block !important;
+}
+
 
 /*--column--*/
 .mm-6column:after, .mm-6column:before, .mm-3column:after, .mm-3column:before{
@@ -595,11 +660,23 @@ nav.menu {
     display: block;
     line-height: normal;
     margin: 0;
-    padding: 5px 0;
+    padding: 8px 0;
+    color: var(--cs-theme-primary-color);
 }
-.categories-list li :hover{
+
+.categories-list li:last-child {
+    margin-top: 16px;
+}
+
+.categories-list li:hover{
     background:inherit !important;
 }
+
+.categories-list li a:hover {
+    text-decoration: none;
+    color: white !important;
+}
+
 .left-images > p {
     background: none repeat scroll 0 0 #ff7f50;
     display: block;
@@ -626,6 +703,12 @@ nav.menu {
     line-height: normal;
     padding: 5px 8px !important;
     margin-top:10px;
+}
+.mm-view-more:hover,
+.mm-view-more-box:hover {
+    text-decoration: none;
+    background: #f15e2b;
+    color: white !important;
 }
 .display-on{
     display:block;
