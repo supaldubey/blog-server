@@ -151,4 +151,19 @@ public class PersonCandidate {
     public void setRoles(Set<RoleCandidate> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "PersonCandidate{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", status=" + status +
+                ", roles=" + roles +
+                '}';
+    }
 }
