@@ -9,15 +9,15 @@ html, body {
 }
 
 .cs-blog-navbar-logo {
-    height: 18px;
-    width: 18px;
+    height: 24px;
+    width: 24px;
     margin-right: 4px;
 }
 
 .cs-blog-navbar {
     /*background: #1c8c3b;*/
     background: #85cc57;
-    padding: 0rem 0.25rem;
+    padding: 0px 0.25rem;
 }
 
 .navbar-brand.mb-0 {

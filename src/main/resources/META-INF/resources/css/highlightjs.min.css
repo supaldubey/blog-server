@@ -1,7 +1,7 @@
 /** Custom for cubestack blog **/
 
 code {
-    /*color: var(--cs-theme-code-block-color);*/
+    color: var(--cs-theme-code-block-color);
     word-break: break-word;
     padding: 0.1rem 0.2rem;
     border-radius: 1px;
