@@ -31,12 +31,19 @@ public class PostRepository implements PanacheRepository<Post> {
         return find("select distinct p from Post p left join p.postTags pt where pt.tag.id in ?1 and p.postStatus = ?2  order by p.publishedAt desc", tags, PostStatus.PUBLISHED).list();
     }
 
-    public List<PostSummary> getPostSummary() {
-        Query nativeQuery = entityManager.createNativeQuery("select p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views from post p inner join person a on a.id = p.authorId inner join postAnalytics pa on pa.postId = p.id  ", "PostViewMapping");
-        return nativeQuery.getResultList();
+    public List<PostSummary> getAllPostSummaries() {
+        Query nativeQuery = entityManager.createNativeQuery("select p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views, string_agg(concat(t.title,'|',t.slug), ',') tags, string_agg(concat(c.title,'|',c.slug), ',') categories " +
+                        "from post p inner join person a on a.id = p.authorId " +
+                        "inner join postAnalytics pa on pa.postId = p.id " +
+                        "inner join postCategory pc on pc.postId = p.id inner join category c on c.id = pc.categoryId " +
+                        "inner join postTag pt on pt.postId = p.id inner join tag t on t.id = pt.tagId " +
+                        "and p.postStatus = 'PUBLISHED' " +
+                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views order by p.publishedAt desc",
+                "PostViewMapping");
+        return (List<PostSummary>) nativeQuery.getResultList();
     }
 
-    public PostSummary getPostSummary(String slug) {
+    public PostSummary getAllPostSummaries(String slug) {
         Query nativeQuery = entityManager.createNativeQuery("select p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views, string_agg(concat(t.title,'|',t.slug), ',') tags, string_agg(concat(c.title,'|',c.slug), ',') categories " +
                         "from post p inner join person a on a.id = p.authorId " +
                         "inner join postAnalytics pa on pa.postId = p.id " +

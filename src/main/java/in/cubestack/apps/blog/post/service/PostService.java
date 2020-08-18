@@ -67,6 +67,10 @@ public class PostService {
         return toCandidates(postRepository.findAllByPostStatus(PostStatus.PUBLISHED));
     }
 
+    public List<PostSummary> getAllPostSummaries() {
+        return postRepository.getAllPostSummaries();
+    }
+
     private List<PostCandidate> toCandidates(List<Post> posts) {
         return posts.stream().map(o -> {
             PostCandidate candidate = PostCandidate.from(o);
@@ -90,7 +94,7 @@ public class PostService {
     }
 
     public PostSummary getSummary(String slug) {
-        PostSummary postSummary = postRepository.getPostSummary(slug);
+        PostSummary postSummary = postRepository.getAllPostSummaries(slug);
         postSummary.setHtmlContent(contentHelper.markdownToHtml(postSummary.getContent()));
         return postSummary;
     }

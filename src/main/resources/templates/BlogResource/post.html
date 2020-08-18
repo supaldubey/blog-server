@@ -56,11 +56,12 @@
                         <div class="cs-blog-post-item">
                             <div class="clearfix">
                                 <div class="cs-blog-post-author float-left">
-                                    <div class="cs-blog-post-last-modified">
-                                        <span>Last updated: {post.publishedAt}</span>
-                                    </div>
-                                    <div class="cs-blog-post-authored-by">
-                                        <span>Author: </span><span class="person">{post.firstName} {post.lastName}</span>
+                                    <div class="cs-blog-post-block-meta-item">
+                                        <div class="meta-time">
+                                            <span>{post.publishedAt}</span>
+                                            <span>.</span>
+                                            <span>{post.readTime}</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="cs-blog-post-meta float-right">

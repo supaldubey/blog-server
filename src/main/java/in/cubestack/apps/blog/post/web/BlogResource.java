@@ -45,7 +45,7 @@ public class BlogResource {
     public TemplateInstance home() {
         return Templates
                 .blog()
-                .data("posts", postService.findAllPublished())
+                .data("posts", postService.getAllPostSummaries())
                 .data("categories", categoryService.findAll())
                 .data("tags", tagService.findAll());
     }
