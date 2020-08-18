@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
+@SuppressWarnings("unchecked")
 public class PostRepository implements PanacheRepository<Post> {
 
     @Inject

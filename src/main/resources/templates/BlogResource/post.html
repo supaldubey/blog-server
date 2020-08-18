@@ -21,24 +21,9 @@
 </head>
 <body class="cs-theme-parent">
 
-<header class="navbar fixed-top navbar-dark cs-blog-navbar">
-    <div class="container-fluid cs-blog-container-fluid">
-        <div class="row cs-blog-container-row">
-            <div class="col-sm-1 cs-blog-container-col">
-                &nbsp;
-            </div>
-            <div class="col-sm-9 cs-blog-container-col cs-blog-navbar-brand">
-                <a class="navbar-brand mb-0" href="/blog">
-                    <img class="cs-blog-navbar-logo" src="/svgs/blog/leaf.svg" height="16px" width="16px" alt="Cubestack blog">
-                    Cubestack <i>Blog</i>
-                </a>
-            </div>
-            <div class="col-sm-2 cs-blog-container-col">
-                &nbsp;
-            </div>
-        </div>
-    </div>
-</header>
+{#include header}
+{/include}
+
 <div class="cs-blog-body">
     <div class="container-fluid cs-blog-container-fluid">
         <div class="row cs-blog-container-row">
@@ -97,6 +82,9 @@
         </div>
     </div>
 </div>
+
+{#include footer}
+{/include}
 
 <script src="/js/jquery-3.5.1.min.js"></script>
 <script src="/js/popper.min.js"></script>

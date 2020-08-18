@@ -95,7 +95,6 @@ public class AdminResource {
 
     @GET
     @Path("posts")
-    @Transactional
     @RolesAllowed("Admin")
     public TemplateInstance posts(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();

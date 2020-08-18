@@ -54,13 +54,10 @@ public class BlogResource {
     @Path("category/{slug}")
     public TemplateInstance category(@PathParam("slug") String slug) {
         List<PostSummary> posts = postService.getPostSummaryByCategorySlug(slug);
-        boolean notFound = false;
-        if(posts.isEmpty()) {
-            notFound = true;
-        }
+
         return Templates
                 .category()
-                .data("notFound", notFound)
+                .data("notFound", posts.isEmpty())
                 .data("slug", slug)
                 .data("posts", posts)
                 .data("categories", categoryService.findAll());
@@ -70,13 +67,10 @@ public class BlogResource {
     @Path("tag/{slug}")
     public TemplateInstance tag(@PathParam("slug") String slug) {
         List<PostSummary> posts = postService.getPostSummaryByTagSlug(slug);
-        boolean notFound = false;
-        if(posts.isEmpty()) {
-            notFound = true;
-        }
+
         return Templates
                 .tag()
-                .data("notFound", notFound)
+                .data("notFound", posts.isEmpty())
                 .data("slug", slug)
                 .data("posts", posts)
                 .data("tags", tagService.findAll());
