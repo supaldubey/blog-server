@@ -9,7 +9,8 @@
     <link rel="icon" href="/icons/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap"
+          rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/blog2.css">
@@ -44,7 +45,8 @@
                         <div class="cs-blog-card cs-blog-card-tutorials">
                             <div class="cs-blog-card-title">Precise Tutorials &rarr;</div>
                             <div class="cs-blog-card-body">
-                                Skim through various tutorials to quickly get started on Java, Spring, Persistence, REST and more.
+                                Skim through various tutorials to quickly get started on Java, Spring, Persistence, REST
+                                and more.
                             </div>
                         </div>
                     </div>
@@ -57,9 +59,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="display: none">
+                <div class="row" style="">
                     <div class="col sm-12">
-                        <div style="height: 40px;">&nbsp;</div>
+
+                        {#if notFound}
+                        <div style="height: 40px; margin-bottom: 80px">
+                            <div class="alert alert-warning" role="alert">
+                                Sorry, looks like the link is broken.
+                                <br/><br/>
+                                Maybe look at what other things we have written, while we get to fixing this issue.
+                            </div>
+                        </div>
+                        {/if}
+
+
                     </div>
                 </div>
                 <div class="row">
@@ -85,7 +98,8 @@
                                             </div>
                                             <div class="cs-blog-post-block-meta-item">
                                                 <!--                                                <a class="meta-author" href="/blog/authors/{post.person.username}">{post.person.firstName} {post.person.lastName}</a>-->
-                                                <a class="btn btn-primary btn-sm" href="/{post.slug}">Read more &rarr;</a>
+                                                <a class="btn btn-primary btn-sm" href="/{post.slug}">Read more
+                                                    &rarr;</a>
                                             </div>
                                         </div>
                                     </div>
@@ -162,6 +176,7 @@
         });
 
     });
+
 </script>
 </body>
 </html>

@@ -18,6 +18,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -93,10 +94,19 @@ public class PostService {
         return post;
     }
 
-    public PostSummary getSummary(String slug) {
-        PostSummary postSummary = postRepository.getAllPostSummaries(slug);
-        postSummary.setHtmlContent(contentHelper.markdownToHtml(postSummary.getContent()));
-        return postSummary;
+    public Optional<PostSummary> getSummary(String slug) {
+        return findSummaryForSlug(slug);
+    }
+
+    private Optional<PostSummary> findSummaryForSlug(String slug) {
+        try {
+            PostSummary postSummary = postRepository.getPostSummary(slug);
+            postSummary.setHtmlContent(contentHelper.markdownToHtml(postSummary.getContent()));
+            return Optional.of(postSummary);
+        } catch (Exception ignore) {
+            // These is mostly page not found
+        }
+        return Optional.empty();
     }
 
     public List<PostSummary> getPostSummaryByCategorySlug(String slug) {

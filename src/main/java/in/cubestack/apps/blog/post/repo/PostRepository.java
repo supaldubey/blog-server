@@ -44,7 +44,7 @@ public class PostRepository implements PanacheRepository<Post> {
         return (List<PostSummary>) nativeQuery.getResultList();
     }
 
-    public PostSummary getAllPostSummaries(String slug) {
+    public PostSummary getPostSummary(String slug) {
         Query nativeQuery = entityManager.createNativeQuery("select p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views, string_agg(concat(t.title,'|',t.slug), ',') tags, string_agg(concat(c.title,'|',c.slug), ',') categories " +
                         "from post p inner join person a on a.id = p.authorId " +
                         "inner join postAnalytics pa on pa.postId = p.id " +

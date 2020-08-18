@@ -36,8 +36,11 @@ public class BlogResource {
     @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance blog();
+
         public static native TemplateInstance category();
+
         public static native TemplateInstance tag();
+
         public static native TemplateInstance post();
     }
 
@@ -80,11 +83,21 @@ public class BlogResource {
     @Path("{slug}")
     @Timed(name = "blogFetchTime", description = "A measure of how long it takes to Fetch blog.", unit = MetricUnits.MILLISECONDS)
     public TemplateInstance getPostBySlug(@PathParam("slug") String slug) {
-        var summary = postService.getSummary(slug);
-        eventService.trigger(summary.getId(), EventType.POST_VIEWS);
+        var postSummaryOptional = postService.getSummary(slug);
+        if (postSummaryOptional.isPresent()) {
+            PostSummary summary = postSummaryOptional.get();
+            eventService.trigger(summary.getId(), EventType.POST_VIEWS);
 
-        return Templates
-                .post()
-                .data("post", summary);
+            return Templates
+                    .post()
+                    .data("post", summary);
+        } else {
+            return Templates.blog()
+                    .data("notFound", true)
+                    .data("posts", postService.getAllPostSummaries())
+                    .data("categories", categoryService.findAll())
+                    .data("tags", tagService.findAll());
+
+        }
     }
 }
