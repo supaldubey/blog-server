@@ -34,7 +34,6 @@ public class PersonService {
         Person person = new Person(candidate.getFirstName(), candidate.getLastName(), candidate.getUsername());
         person.updatePassword(candidate.getPassword());
 
-        person.addRole(new Role("Admin"));
         personRepository.persist(person);
 
         LOGGER.info("Person saved {}", person.getId());
