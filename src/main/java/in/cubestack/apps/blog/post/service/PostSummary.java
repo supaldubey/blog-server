@@ -14,6 +14,9 @@ import java.util.stream.Stream;
 @RegisterForReflection
 public class PostSummary {
 
+    public static final int WORDS_PER_MINUTE = 200;
+    public static final int AVERAGE_CHARS_PER_WORD = 6;
+
     private Long id;
     private String firstName;
     private String lastName;
@@ -39,7 +42,8 @@ public class PostSummary {
         private String name;
         private String slug;
 
-        public PostMeta() {}
+        public PostMeta() {
+        }
 
         public PostMeta(String name, String slug) {
             this.name = name;
@@ -93,13 +97,9 @@ public class PostSummary {
     }
 
     private String readTime(String content) {
-        int wpm = 200;
-        int wordLength = 5;
-        int totalWords = 0;
-        for(String word: content.split(" ")) {
-            totalWords += word.length()/wordLength;
-        }
-        return totalWords/wpm + " min read";
+        int words = content.length() / AVERAGE_CHARS_PER_WORD;
+
+        return words / WORDS_PER_MINUTE + " min read";
     }
 
     private String findTime(Date publishedAt) {

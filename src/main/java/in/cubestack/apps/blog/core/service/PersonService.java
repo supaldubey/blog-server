@@ -25,10 +25,11 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public void save(PersonCandidate candidate) {
+    public Person save(PersonCandidate candidate) {
         Person person = new Person(candidate.getFirstName(), candidate.getLastName(), candidate.getUsername());
         person.updatePassword(candidate.getPassword());
         personRepository.persist(person);
+        return person;
     }
 
     public void update(PersonCandidate candidate) {
