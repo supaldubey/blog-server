@@ -16,7 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("blog")
+@Path("/")
 @Produces(MediaType.TEXT_HTML)
 @Consumes(MediaType.APPLICATION_JSON)
 public class BlogResource {

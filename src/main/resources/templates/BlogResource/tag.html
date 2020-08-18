@@ -37,7 +37,7 @@
                         </div>
                         {#else}
                         <div class="cs-blog-panel">
-                            <h1>All posts on tag <a href="/blog/tag/{slug}" style="text-decoration: underline">{slug}</a></h1>
+                            <h1>All posts on tag <a href="/tag/{slug}" style="text-decoration: underline">{slug}</a></h1>
                             <br/>
                             <div class="cs-blog-panel-body">
                                 <div class="cs-blog-latest-articles">
@@ -45,8 +45,8 @@
                                         {#for post in posts}
                                         <div class="col-sm-4">
                                             <div class="cs-blog-post-block">
-                                                <a class="cs-blog-post-block-head" href="/blog/{post.slug}">
-                                                    <h1 href="/blog/{post.slug}">{post.title}</h1>
+                                                <a class="cs-blog-post-block-head" href="/{post.slug}">
+                                                    <h1 href="/{post.slug}">{post.title}</h1>
                                                     <div class="cs-blog-post-block-summary">
                                                         <p>{post.metaTitle}</p>
                                                     </div>
@@ -60,8 +60,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="cs-blog-post-block-meta-item">
-                                                        <!--<a class="meta-author" href="/blog/authors/{post.person.username}">{post.person.firstName} {post.person.lastName}</a>-->
-                                                        <a class="btn btn-primary btn-sm" href="/blog/{post.slug}">Read more &rarr;</a>
+                                                        <a class="btn btn-primary btn-sm" href="/{post.slug}">Read more &rarr;</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +80,7 @@
                             <h1>All tags</h1>
                             <div class="cs-blog-panel-body">
                                 {#for tag in tags}
-                                <a class="badge badge-primary cs-blog-badge" href="/blog/tag/{tag.slug}">{tag.tagName}</a>
+                                <a class="badge badge-primary cs-blog-badge" href="/tag/{tag.slug}">{tag.tagName}</a>
                                 {/for}
                             </div>
                         </div>
