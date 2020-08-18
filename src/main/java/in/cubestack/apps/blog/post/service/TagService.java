@@ -8,6 +8,7 @@ import in.cubestack.apps.blog.util.ContentHelper;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class TagService {
     ContentHelper contentHelper;
 
     public List<TagCandidate> findAll() {
-        return tagRepository.findAll().list().stream().map(TagCandidate::from).collect(Collectors.toList());
+        return tagRepository.findAll().list().stream().sorted(Comparator.comparing(Tag::getTitle)).map(TagCandidate::from).collect(Collectors.toList());
     }
 
     public Tag findOne(Long id) {

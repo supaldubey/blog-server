@@ -6,10 +6,10 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RegisterForReflection
 public class PostSummary {
@@ -27,13 +27,42 @@ public class PostSummary {
     private String content;
     private String htmlContent;
     private String publishedAt;
-    private String tags;
-    private String categories;
+    private List<PostMeta> tags;
+    private List<PostMeta> categories;
 
     private BigInteger likes;
     private BigInteger views;
 
-    public PostSummary(Long id, String firstName, String lastName, String username, String title, String metaTitle, String summary, String slug, String postType, String postStatus, Date publishedAt, String content, String tags, String categories, BigInteger likes, BigInteger views) {
+    public static class PostMeta {
+        private String name;
+        private String slug;
+
+        public PostMeta() {}
+
+        public PostMeta(String name, String slug) {
+            this.name = name;
+            this.slug = slug;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getSlug() {
+            return slug;
+        }
+
+        public void setSlug(String slug) {
+            this.slug = slug;
+        }
+    }
+
+    public PostSummary(Long id, String firstName, String lastName, String username, String title, String metaTitle, String summary, String slug,
+                       String postType, String postStatus, Date publishedAt, String content, String tags, String categories, BigInteger likes, BigInteger views) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -48,15 +77,23 @@ public class PostSummary {
         this.likes = likes;
         this.views = views;
         this.content = content;
-        this.tags = tags;
-        this.categories = categories;
+        this.tags = toMeta(tags);
+        this.categories = toMeta(categories);
+    }
+
+    private List<PostMeta> toMeta(String metas) {
+        return Stream.of(metas.split(","))
+                .distinct()
+                .map(o1 -> o1.trim().split("\\|"))
+                .map(o2 -> new PostMeta(o2[0].trim(), o2[1].trim()))
+                .collect(Collectors.toList());
     }
 
     private String findTime(Date publishedAt) {
         if (publishedAt == null) {
             return "NA";
         }
-        return DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a").format(LocalDateTime.ofInstant(publishedAt.toInstant(), ZoneId.systemDefault()));
+        return DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a").format(LocalDateTime.ofInstant(publishedAt.toInstant(), ZoneId.systemDefault()));
     }
 
     public Long getId() {
@@ -123,20 +160,12 @@ public class PostSummary {
         return content;
     }
 
-    public String getTags() {
+    public List<PostMeta> getTags() {
         return tags;
     }
 
-    public String getCategories() {
+    public List<PostMeta> getCategories() {
         return categories;
     }
 
-    public List<String> getCategoryTitles() {
-        return Arrays.stream(categories.split(",")).map(String::trim).distinct().collect(Collectors.toList());
-    }
-
-
-    public List<String> getTagTitles() {
-        return Arrays.stream(tags.split(",")).map(String::trim).distinct().collect(Collectors.toList());
-    }
 }

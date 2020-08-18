@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cubestack Blog - Java, Spring & More</title>
+    <title>Cubestack Blog - Tag {slug}</title>
     <link rel="icon" href="/icons/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet" crossorigin="anonymous">
@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/blog2.css">
     <link rel="stylesheet" href="/css/theme-3.css">
-    <!-- highlightjs.min.css must appear after theme-n.css file -->
-    <link rel="stylesheet" href="/css/highlightjs.min.css">
     <style type="text/css">
     </style>
 </head>
@@ -59,7 +57,7 @@
                                         <a href="/blog">Home</a>
                                     </li>
                                     <li>
-                                    <!--<li class="drop-down">-->
+                                        <!--<li class="drop-down">-->
                                         <a href="/blog/category/java">Java</a>
                                         <!--<div class="mega-menu fadeIn animated">
                                             <div class="mm-3column">
@@ -87,7 +85,7 @@
                                         </div>-->
                                     </li>
                                     <li>
-                                    <!--<li class="drop-down">-->
+                                        <!--<li class="drop-down">-->
                                         <a href="/blog/category/spring">Spring</a>
                                         <!--<div class="mega-menu fadeIn animated">
                                             <div class="mm-3column">
@@ -155,92 +153,60 @@
                 &nbsp;
             </div>
             <div class="col-sm-10 cs-blog-container-col cs-blog-content-area">
-                <div class="row" style="display: none">
-                    <div class="col-sm-4">
-                        <div class="cs-blog-card cs-blog-card-guides">
-                            <div class="cs-blog-card-title">Comprehensive Guides &rarr;</div>
-                            <div class="cs-blog-card-body">
-                                Explore wide range of comprehensive guides with projects on subjects of your interest.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="cs-blog-card cs-blog-card-tutorials">
-                            <div class="cs-blog-card-title">Precise Tutorials &rarr;</div>
-                            <div class="cs-blog-card-body">
-                                Skim through various tutorials to quickly get started on Java, Spring, Persistence, REST and more.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="cs-blog-card cs-blog-card-articles">
-                            <div class="cs-blog-card-title">Latest Articles &rarr;</div>
-                            <div class="cs-blog-card-body">
-                                Read our latest articles to equip yourself with current technologies.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="display: none">
-                    <div class="col sm-12">
-                        <div style="height: 40px;">&nbsp;</div>
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="col-sm-9">
-                        <div class="cs-blog-latest-articles">
-                            <div class="row">
-                                {#for post in posts}
-                                <div class="col-sm-4">
-                                    <div class="cs-blog-post-block">
-                                        <a class="cs-blog-post-block-head" href="/blog/{post.slug}">
-                                            <h1 href="/blog/{post.slug}">{post.title}</h1>
-                                            <div class="cs-blog-post-block-summary">
-                                                <p>{post.metaTitle}</p>
-                                            </div>
-                                        </a>
-                                        <div class="cs-blog-post-block-meta">
-                                            <div class="cs-blog-post-block-meta-item">
-                                                <div class="meta-time">
-                                                    <span>{post.updatedAt}</span>
-                                                    <span>.</span>
-                                                    <span>6 min read</span>
+                    <div class="col-sm-12">
+                        {#if notFound}
+                        <div class="alert alert-info" role="alert">
+                            We didn't find any thing on tag <strong><i>{slug}</i></strong>
+                        </div>
+                        {#else}
+                        <div class="cs-blog-panel">
+                            <h1>All posts on tag <a href="/blog/tag/{slug}" style="text-decoration: underline">{slug}</a></h1>
+                            <br/>
+                            <div class="cs-blog-panel-body">
+                                <div class="cs-blog-latest-articles">
+                                    <div class="row">
+                                        {#for post in posts}
+                                        <div class="col-sm-4">
+                                            <div class="cs-blog-post-block">
+                                                <a class="cs-blog-post-block-head" href="/blog/{post.slug}">
+                                                    <h1 href="/blog/{post.slug}">{post.title}</h1>
+                                                    <div class="cs-blog-post-block-summary">
+                                                        <p>{post.metaTitle}</p>
+                                                    </div>
+                                                </a>
+                                                <div class="cs-blog-post-block-meta">
+                                                    <div class="cs-blog-post-block-meta-item">
+                                                        <div class="meta-time">
+                                                            <span>{post.publishedAt}</span>
+                                                            <span>.</span>
+                                                            <span>6 min read</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cs-blog-post-block-meta-item">
+                                                        <!--<a class="meta-author" href="/blog/authors/{post.person.username}">{post.person.firstName} {post.person.lastName}</a>-->
+                                                        <a class="btn btn-primary btn-sm" href="/blog/{post.slug}">Read more &rarr;</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="cs-blog-post-block-meta-item">
-                                                <!--                                                <a class="meta-author" href="/blog/authors/{post.person.username}">{post.person.firstName} {post.person.lastName}</a>-->
-                                                <a class="btn btn-primary btn-sm" href="/blog/{post.slug}">Read more &rarr;</a>
-                                            </div>
                                         </div>
+                                        {/for}
                                     </div>
                                 </div>
-                                {/for}
                             </div>
                         </div>
+                        {/if}
                     </div>
-                    <div class="col-sm-3">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="cs-blog-panel">
-                                    <h1>Categories</h1>
-                                    <div class="cs-blog-panel-body">
-                                        {#for category in categories}
-                                        <a class="badge badge-primary cs-blog-badge" href="/blog/category/{category.slug}">{category.title}</a>
-                                        {/for}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="cs-blog-panel">
-                                    <h1>Tags</h1>
-                                    <div class="cs-blog-panel-body">
-                                        {#for tag in tags}
-                                        <a class="badge badge-primary cs-blog-badge" href="/blog/tag/{tag.slug}">{tag.tagName}</a>
-                                        {/for}
-                                    </div>
-                                </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="cs-blog-panel">
+                            <h1>All tags</h1>
+                            <div class="cs-blog-panel-body">
+                                {#for tag in tags}
+                                <a class="badge badge-primary cs-blog-badge" href="/blog/tag/{tag.slug}">{tag.tagName}</a>
+                                {/for}
                             </div>
                         </div>
                     </div>

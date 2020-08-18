@@ -8,6 +8,7 @@ import in.cubestack.apps.blog.util.ContentHelper;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,12 @@ public class CategoryService {
     ContentHelper contentHelper;
 
     public List<CategoryCandidate> findAll() {
-        return categoryRepository.findAll().list().stream().map(CategoryCandidate::from).collect(Collectors.toList());
+        return categoryRepository
+                .findAll()
+                .list()
+                .stream()
+                .sorted(Comparator.comparing(Category::getTitle))
+                .map(CategoryCandidate::from).collect(Collectors.toList());
     }
 
     public Category findOne(Long id) {
@@ -51,4 +57,9 @@ public class CategoryService {
         return new HashMap<>();
     }
 
+    public CategoryCandidate findBySlug(String slug) {
+        Category category = categoryRepository.findBySlug(slug);
+        if(category != null) return CategoryCandidate.from(category);
+        return null;
+    }
 }
