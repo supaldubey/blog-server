@@ -19,25 +19,24 @@ public class PostSummary {
     public static final String META_SPLIT_DELIM = "\\|";
     public static final String SPLIT_DELIM = ",";
 
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String title;
-    private String metaTitle;
-    private String summary;
-    private String slug;
-    private String postType;
-    private String postStatus;
-    private String content;
+    private final Long id;
+    private final String firstName;
+    private final String lastName;
+    private final String username;
+    private final String title;
+    private final String metaTitle;
+    private final String summary;
+    private final String slug;
+    private final String postType;
+    private final String postStatus;
+    private final String content;
+    private final String publishedAt;
+    private final List<PostMeta> tags;
+    private final List<PostMeta> categories;
+    private final BigInteger likes;
+    private final BigInteger views;
+
     private String htmlContent;
-    private String publishedAt;
-    private List<PostMeta> tags;
-    private List<PostMeta> categories;
-
-    private BigInteger likes;
-    private BigInteger views;
-
     private String readTime;
 
     @RegisterForReflection
