@@ -11,10 +11,10 @@ import io.quarkus.qute.api.CheckedTemplate;
 import org.eclipse.microprofile.metrics.MetricUnits;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Map;
 
 @Path("/")
 @Produces(MediaType.TEXT_HTML)
@@ -46,11 +46,34 @@ public class BlogResource {
 
     @GET
     public TemplateInstance home() {
-        return Templates
+        return blogPage(Map.of());
+    }
+
+    @GET
+    @Path("/error")
+    public TemplateInstance errorPage() {
+        return blogPage(Map.of("renderingError", true));
+    }
+
+    @GET
+    @Path("/notFound")
+    public TemplateInstance notFound() {
+        return blogPage(Map.of("notFound", true));
+    }
+
+    private TemplateInstance blogPage(Map<String, Object> additionalMeta) {
+
+        var template = Templates
                 .blog()
                 .data("posts", postService.getAllPostSummaries())
                 .data("categories", categoryService.findAll())
                 .data("tags", tagService.findAll());
+
+        for (Map.Entry<String, Object> item : additionalMeta.entrySet()) {
+            template = template.data(item.getKey(), item.getValue());
+        }
+
+        return template;
     }
 
     @GET
@@ -92,11 +115,7 @@ public class BlogResource {
                     .post()
                     .data("post", summary);
         } else {
-            return Templates.blog()
-                    .data("notFound", true)
-                    .data("posts", postService.getAllPostSummaries())
-                    .data("categories", categoryService.findAll())
-                    .data("tags", tagService.findAll());
+            return blogPage(Map.of("notFound", true));
 
         }
     }

@@ -56,6 +56,16 @@
                         </div>
                         {/if}
 
+                        {#if renderingError}
+                        <div style="height: 40px; margin-bottom: 80px">
+                            <div class="alert alert-warning" role="alert">
+                                Sorry, we are not able to render the page.
+                                <br/><br/>
+                                Our code monkeys have been notified to fix the issue, meanwhile; please checkout other posts.
+                            </div>
+                        </div>
+                        {/if}
+
 
                     </div>
                 </div>
