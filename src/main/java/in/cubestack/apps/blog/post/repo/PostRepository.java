@@ -6,7 +6,6 @@ import in.cubestack.apps.blog.post.service.PostSummary;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
@@ -16,8 +15,11 @@ import java.util.Optional;
 @SuppressWarnings("unchecked")
 public class PostRepository implements PanacheRepository<Post> {
 
-    @Inject
-    EntityManager entityManager;
+    private final EntityManager entityManager;
+
+    public PostRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public Optional<Post> findBySlug(String slug) {
         return find("slug = ?1 and postStatus = ?2", slug, PostStatus.PUBLISHED)
@@ -39,7 +41,7 @@ public class PostRepository implements PanacheRepository<Post> {
                         "inner join postCategory pc on pc.postId = p.id inner join category c on c.id = pc.categoryId " +
                         "inner join postTag pt on pt.postId = p.id inner join tag t on t.id = pt.tagId " +
                         "and p.postStatus = 'PUBLISHED' " +
-                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views order by p.publishedAt desc",
+                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views  limit 20",
                 "PostViewMapping");
         return (List<PostSummary>) nativeQuery.getResultList();
     }
@@ -51,7 +53,7 @@ public class PostRepository implements PanacheRepository<Post> {
                         "inner join postCategory pc on pc.postId = p.id inner join category c on c.id = pc.categoryId " +
                         "inner join postTag pt on pt.postId = p.id inner join tag t on t.id = pt.tagId " +
                         "and p.slug = :slug " +
-                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views",
+                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views ",
                 "PostViewMapping");
         nativeQuery.setParameter("slug", slug);
         return (PostSummary) nativeQuery.getSingleResult();
@@ -64,7 +66,7 @@ public class PostRepository implements PanacheRepository<Post> {
                         "inner join postCategory pc on pc.postId = p.id inner join category c on c.id = pc.categoryId " +
                         "inner join postTag pt on pt.postId = p.id inner join tag t on t.id = pt.tagId " +
                         "and c.slug = :slug " +
-                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views order by p.publishedAt desc",
+                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views  limit 20",
                 "PostViewMapping");
         nativeQuery.setParameter("slug", slug);
         return (List<PostSummary>) nativeQuery.getResultList();
@@ -81,7 +83,7 @@ public class PostRepository implements PanacheRepository<Post> {
                         "inner join postCategory pc on pc.postId = p.id inner join category c on c.id = pc.categoryId " +
                         "inner join postTag pt on pt.postId = p.id inner join tag t on t.id = pt.tagId " +
                         "and t.slug = :slug " +
-                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views order by p.publishedAt desc",
+                        "group by p.id, p.metaTitle, p.title, p.summary, p.slug, p.postType, p.publishedAt, p.postStatus, p.content, a.firstName, a.lastName, a.userName, pa.likes, pa.views  limit 20",
                 "PostViewMapping");
         nativeQuery.setParameter("slug", slug);
         return (List<PostSummary>) nativeQuery.getResultList();

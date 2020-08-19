@@ -5,6 +5,7 @@ import in.cubestack.apps.blog.admin.resource.AdminResource;
 import in.cubestack.apps.blog.core.service.PersonService;
 import org.jboss.resteasy.annotations.Form;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -18,12 +19,12 @@ import java.util.List;
 
 @ApplicationScoped
 @Path("persons")
+@RolesAllowed("Admin")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonResource {
 
-    @Inject
-    PersonService personService;
+    private final PersonService personService;
 
     public PersonResource(PersonService personService) {
         this.personService = personService;

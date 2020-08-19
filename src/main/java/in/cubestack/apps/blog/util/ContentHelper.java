@@ -9,16 +9,22 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class ContentHelper {
 
-    private static final int MAX_LENGTH = 30;
+    private static final int MAX_LENGTH = 120;
 
     private Parser parser;
-    private final Slugify slugify = new Slugify();
+    private final Slugify slugify;
+
+    public ContentHelper(Slugify slugify) {
+        this.slugify = slugify;
+    }
 
     public String slugify(String content) {
         String consideredContent = content;
+
         if (content.length() > MAX_LENGTH) {
             consideredContent = content.substring(0, MAX_LENGTH);
         }
+
         return slugify.slugify(consideredContent);
     }
 
@@ -26,7 +32,6 @@ public class ContentHelper {
         Node document = getParser().parse(markdown);
         HtmlRenderer renderer = HtmlRenderer.builder().build();
         return renderer.render(document);
-
     }
 
     private Parser getParser() {

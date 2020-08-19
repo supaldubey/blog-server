@@ -5,7 +5,6 @@ import in.cubestack.apps.blog.core.repository.RoleRepository;
 import in.cubestack.apps.blog.core.resource.RoleCandidate;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,8 +14,11 @@ import java.util.stream.Collectors;
 @Transactional
 public class RoleService {
 
-    @Inject
-    RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
+
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     public List<RoleCandidate> findAll() {
         return roleRepository.findAll().list().stream().map(RoleCandidate::from).collect(Collectors.toList());

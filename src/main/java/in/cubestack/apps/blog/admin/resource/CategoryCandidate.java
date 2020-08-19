@@ -8,6 +8,7 @@ import org.jboss.resteasy.annotations.jaxrs.FormParam;
 public class CategoryCandidate {
 
     private long id;
+
     @FormParam("title")
     private String title;
     private String metaTitle;

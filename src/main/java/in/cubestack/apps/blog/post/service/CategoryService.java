@@ -18,11 +18,13 @@ import java.util.stream.Collectors;
 @Transactional
 public class CategoryService {
 
-    @Inject
-    CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+    private final ContentHelper contentHelper;
 
-    @Inject
-    ContentHelper contentHelper;
+    public CategoryService(CategoryRepository categoryRepository, ContentHelper contentHelper) {
+        this.categoryRepository = categoryRepository;
+        this.contentHelper = contentHelper;
+    }
 
     public List<CategoryCandidate> findAll() {
         return categoryRepository

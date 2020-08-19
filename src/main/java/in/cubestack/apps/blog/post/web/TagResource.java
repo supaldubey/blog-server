@@ -6,7 +6,7 @@ import in.cubestack.apps.blog.post.domain.Tag;
 import in.cubestack.apps.blog.post.service.TagService;
 import org.jboss.resteasy.annotations.Form;
 
-import javax.inject.Inject;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -18,12 +18,16 @@ import java.util.List;
 import java.util.Map;
 
 @Path("tags")
+@RolesAllowed("Admin")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TagResource {
 
-    @Inject
-    TagService tagService;
+    private final TagService tagService;
+
+    public TagResource(TagService tagService) {
+        this.tagService = tagService;
+    }
 
     @GET
     public List<TagCandidate> findAll() {

@@ -6,6 +6,7 @@ import in.cubestack.apps.blog.event.service.EventService;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.service.PostService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,16 +14,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Path("posts")
+@RolesAllowed("Admin")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PostResource {
 
-    @Inject
-    PostService postService;
+    private final PostService postService;
+    private final EventService eventService;
 
-    @Inject
-    EventService eventService;
-
+    public PostResource(PostService postService, EventService eventService) {
+        this.postService = postService;
+        this.eventService = eventService;
+    }
 
     @GET
     public List<PostCandidate> findAll(

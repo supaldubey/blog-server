@@ -21,17 +21,17 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class BlogResource {
 
-    @Inject
-    PostService postService;
+    private final PostService postService;
+    private final EventService eventService;
+    private final CategoryService categoryService;
+    private final TagService tagService;
 
-    @Inject
-    EventService eventService;
-
-    @Inject
-    CategoryService categoryService;
-
-    @Inject
-    TagService tagService;
+    public BlogResource(PostService postService, EventService eventService, CategoryService categoryService, TagService tagService) {
+        this.postService = postService;
+        this.eventService = eventService;
+        this.categoryService = categoryService;
+        this.tagService = tagService;
+    }
 
     @CheckedTemplate
     public static class Templates {

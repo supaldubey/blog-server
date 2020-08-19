@@ -6,7 +6,7 @@ import in.cubestack.apps.blog.post.domain.Category;
 import in.cubestack.apps.blog.post.service.CategoryService;
 import org.jboss.resteasy.annotations.Form;
 
-import javax.inject.Inject;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -18,12 +18,16 @@ import java.util.List;
 import java.util.Map;
 
 @Path("categories")
+@RolesAllowed("Admin")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CategoryResource {
 
-    @Inject
-    CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryResource(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GET
     public List<CategoryCandidate> findAll() {

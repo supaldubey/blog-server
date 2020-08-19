@@ -1,6 +1,7 @@
 package in.cubestack.apps.blog.util;
 
 
+import javax.enterprise.context.ApplicationScoped;
 import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.regex.Pattern;
 /**
  * https://github.com/slugify/slugify
  */
+@ApplicationScoped
 public class Slugify {
     private static final Properties REPLACEMENTS = new Properties();
 
@@ -29,13 +31,6 @@ public class Slugify {
 
     private boolean underscoreSeparator = false;
     private boolean lowerCase = true;
-
-    @Deprecated
-    public Slugify(boolean lowerCase) {
-        this();
-
-        withLowerCase(lowerCase);
-    }
 
     public Slugify() {
         loadReplacements();
@@ -57,11 +52,6 @@ public class Slugify {
         return this;
     }
 
-
-    public Slugify withLowerCase(final boolean lowerCase) {
-        this.lowerCase = lowerCase;
-        return this;
-    }
 
     public String slugify(final String text) {
         String input = text;
@@ -295,16 +285,12 @@ public class Slugify {
         return stringBuilder.toString();
     }
 
-    private Slugify loadReplacements() {
-
+    private void loadReplacements() {
         if (!REPLACEMENTS.isEmpty()) {
-            return this;
+            return;
         }
 
-
         REPLACEMENTS.putAll(defaultProperties());
-        return this;
-
     }
 
     private void createPatternCache() {
@@ -312,7 +298,7 @@ public class Slugify {
             return;
         }
 
-        REPLACEMENTS.entrySet().forEach(replacement -> addReplacement(replacement));
+        REPLACEMENTS.entrySet().forEach(this::addReplacement);
     }
 
     private void addReplacement(Map.Entry<Object, Object> e) {

@@ -8,8 +8,10 @@ import java.util.List;
 
 @ApplicationScoped
 public class CategoryRepository implements PanacheRepositoryBase<Category, Long> {
+
     public Category findBySlug(String slug) {
         List<Category> categoryList = find("slug", slug).list();
         return categoryList != null && categoryList.size() > 0 ? categoryList.get(0) : null;
     }
+
 }

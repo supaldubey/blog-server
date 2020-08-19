@@ -29,26 +29,23 @@ public class AdminResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminResource.class);
 
-    @Inject
-    AdminService adminService;
+    private final AdminService adminService;
+    private final HttpHelper httpHelper;
+    private final PostService postService;
+    private final PersonService personService;
+    private final CategoryService categoryService;
+    private final RoleService roleService;
+    private final TagService tagService;
 
-    @Inject
-    HttpHelper httpHelper;
-
-    @Inject
-    PostService postService;
-
-    @Inject
-    PersonService personService;
-
-    @Inject
-    CategoryService categoryService;
-
-    @Inject
-    RoleService roleService;
-
-    @Inject
-    TagService tagService;
+    public AdminResource(AdminService adminService, HttpHelper httpHelper, PostService postService, PersonService personService, CategoryService categoryService, RoleService roleService, TagService tagService) {
+        this.adminService = adminService;
+        this.httpHelper = httpHelper;
+        this.postService = postService;
+        this.personService = personService;
+        this.categoryService = categoryService;
+        this.roleService = roleService;
+        this.tagService = tagService;
+    }
 
     @CheckedTemplate
     public static class Templates {

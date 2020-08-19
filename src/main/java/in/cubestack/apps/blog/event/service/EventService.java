@@ -11,11 +11,13 @@ import javax.transaction.Transactional;
 @ApplicationScoped
 public class EventService {
 
-    @Inject
-    EventRepository eventRepository;
+    private final EventRepository eventRepository;
+    private final EventProcessingService eventProcessingService;
 
-    @Inject
-    EventProcessingService eventProcessingService;
+    public EventService(EventRepository eventRepository, EventProcessingService eventProcessingService) {
+        this.eventRepository = eventRepository;
+        this.eventProcessingService = eventProcessingService;
+    }
 
     @Transactional
     public void trigger(Long contentId, EventType eventType) {

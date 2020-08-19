@@ -11,7 +11,7 @@ public class ContentHelperTest {
 
     @BeforeEach
     public void init() {
-        contentHelper = new ContentHelper();
+        contentHelper = new ContentHelper(new Slugify());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ContentHelperTest {
 
     @Test
     public void testSlugLongStringContent() {
-        String output = contentHelper.slugify("This is my infy This is my infy This is my infy This is my infy This is my infy This is my infy This is my infy This is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infy");
-        assertEquals(output, "this-is-my-infy-this-is-my-inf");
+        String output = contentHelper.slugify("This is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is myThis is my infy This is my infy This is my infy This is my infy This is my infy This is my infy This is my infy This is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infyThis is my infy");
+        assertEquals(output, "this-is-my-infy-this-is-mythis-is-my-infy-this-is-mythis-is-my-infy-this-is-mythis-is-my-infy-this-is-mythis-is-my-infy");
     }
 }

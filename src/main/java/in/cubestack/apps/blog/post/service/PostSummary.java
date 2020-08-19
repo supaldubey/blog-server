@@ -16,6 +16,8 @@ public class PostSummary {
 
     public static final int WORDS_PER_MINUTE = 200;
     public static final int AVERAGE_CHARS_PER_WORD = 6;
+    public static final String META_SPLIT_DELIM = "\\|";
+    public static final String SPLIT_DELIM = ",";
 
     private Long id;
     private String firstName;
@@ -38,6 +40,7 @@ public class PostSummary {
 
     private String readTime;
 
+    @RegisterForReflection
     public static class PostMeta {
         private String name;
         private String slug;
@@ -89,9 +92,9 @@ public class PostSummary {
     }
 
     private List<PostMeta> toMeta(String metas) {
-        return Stream.of(metas.split(","))
+        return Stream.of(metas.split(SPLIT_DELIM))
                 .distinct()
-                .map(o1 -> o1.trim().split("\\|"))
+                .map(o1 -> o1.trim().split(META_SPLIT_DELIM))
                 .map(o2 -> new PostMeta(o2[0].trim(), o2[1].trim()))
                 .collect(Collectors.toList());
     }

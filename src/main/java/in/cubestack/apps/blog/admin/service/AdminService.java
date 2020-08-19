@@ -10,11 +10,13 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class AdminService {
 
-    @Inject
-    TokenAuthenticationService tokenAuthenticationService;
+    private final TokenAuthenticationService tokenAuthenticationService;
+    private final PersonService personService;
 
-    @Inject
-    PersonService personService;
+    public AdminService(TokenAuthenticationService tokenAuthenticationService, PersonService personService) {
+        this.tokenAuthenticationService = tokenAuthenticationService;
+        this.personService = personService;
+    }
 
     public String login(String username, String password) {
         Person person = personService.findByUsername(username.toLowerCase()).orElseThrow(() -> new RuntimeException("Invalid username / password"));

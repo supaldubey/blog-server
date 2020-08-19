@@ -25,31 +25,22 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class PostService {
 
-    @Inject
-    PostRepository postRepository;
+    private final  PostRepository postRepository;
+    private final  PersonService personService;
+    private final CategoryService categoryService;
+    private final TagService tagService;
+    private final ContentHelper contentHelper;
 
-    @Inject
-    PersonService personService;
-
-    @Inject
-    CategoryService categoryService;
-
-    @Inject
-    TagService tagService;
-
-    @Inject
-    ContentHelper contentHelper;
+    public PostService(PostRepository postRepository, PersonService personService, CategoryService categoryService, TagService tagService, ContentHelper contentHelper) {
+        this.postRepository = postRepository;
+        this.personService = personService;
+        this.categoryService = categoryService;
+        this.tagService = tagService;
+        this.contentHelper = contentHelper;
+    }
 
     public Optional<Post> findById(Long id) {
         return postRepository.findByIdOptional(id);
-    }
-
-    public PostCandidate findBySlug(String slug) {
-        Optional<Post> postOpt = postRepository.findBySlug(slug);
-        Post post = postOpt.orElseThrow(() -> new RuntimeException("Post not found for the slug " + slug));
-        PostCandidate candidate = PostCandidate.from(post);
-        candidate.setHtmlContent(contentHelper.markdownToHtml(candidate.getContent()));
-        return candidate;
     }
 
     public List<PostCandidate> findAll() {

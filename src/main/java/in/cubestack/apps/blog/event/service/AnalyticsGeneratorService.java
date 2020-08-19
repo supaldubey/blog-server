@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 @ApplicationScoped
@@ -17,8 +16,11 @@ public class AnalyticsGeneratorService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AnalyticsGeneratorService.class);
 
-    @Inject
-    PostService postService;
+    private final PostService postService;
+
+    public AnalyticsGeneratorService(PostService postService) {
+        this.postService = postService;
+    }
 
     public void ingest(Event event) {
         LOGGER.info("Ingesting event {}", event);
