@@ -45,6 +45,7 @@ public class BlogResource {
     }
 
     @GET
+    @Timed(name = "homeFetchTime", description = "A measure of how long it takes to Fetch home.", unit = MetricUnits.MILLISECONDS)
     public TemplateInstance home() {
         return blogPage(Map.of());
     }
@@ -78,6 +79,7 @@ public class BlogResource {
 
     @GET
     @Path("category/{slug}")
+    @Timed(name = "categoryFetchTime", description = "A measure of how long it takes to Fetch category info.", unit = MetricUnits.MILLISECONDS)
     public TemplateInstance category(@PathParam("slug") String slug) {
         List<PostSummary> posts = postService.getPostSummaryByCategorySlug(slug);
 
@@ -91,6 +93,7 @@ public class BlogResource {
 
     @GET
     @Path("tag/{slug}")
+    @Timed(name = "tagFetchTime", description = "A measure of how long it takes to Fetch tag info.", unit = MetricUnits.MILLISECONDS)
     public TemplateInstance tag(@PathParam("slug") String slug) {
         List<PostSummary> posts = postService.getPostSummaryByTagSlug(slug);
 
