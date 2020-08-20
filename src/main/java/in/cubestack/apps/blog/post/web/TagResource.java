@@ -2,6 +2,8 @@ package in.cubestack.apps.blog.post.web;
 
 import in.cubestack.apps.blog.admin.resource.AdminResource;
 import in.cubestack.apps.blog.admin.resource.TagCandidate;
+import in.cubestack.apps.blog.event.domain.EventType;
+import in.cubestack.apps.blog.event.service.EventService;
 import in.cubestack.apps.blog.post.domain.Tag;
 import in.cubestack.apps.blog.post.service.TagService;
 import org.jboss.resteasy.annotations.Form;
@@ -24,9 +26,11 @@ import java.util.Map;
 public class TagResource {
 
     private final TagService tagService;
+    private final EventService eventService;
 
-    public TagResource(TagService tagService) {
+    public TagResource(TagService tagService, EventService eventService) {
         this.tagService = tagService;
+        this.eventService = eventService;
     }
 
     @GET
@@ -49,7 +53,14 @@ public class TagResource {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response save(@Context UriInfo uriInfo, @Form @Valid TagCandidate candidate) {
-        tagService.save(candidate);
+        var savedTag = tagService.save(candidate);
+
+        if (candidate.getTagId() == 0) {
+            eventService.trigger(savedTag.getTagId(), EventType.TAG_CREATED);
+        } else {
+            eventService.trigger(savedTag.getTagId(), EventType.TAG_UPDATED);
+        }
+
 
         URI dashboardUri = uriInfo.getBaseUriBuilder()
                 .path(AdminResource.class)

@@ -11,22 +11,25 @@ import in.cubestack.apps.blog.post.domain.PostType;
 import in.cubestack.apps.blog.post.domain.Tag;
 import in.cubestack.apps.blog.post.repo.PostRepository;
 import in.cubestack.apps.blog.util.ContentHelper;
+import io.quarkus.cache.CacheResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Transactional
 @ApplicationScoped
 public class PostService {
 
-    private final  PostRepository postRepository;
-    private final  PersonService personService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
+
+    private final PostRepository postRepository;
+    private final PersonService personService;
     private final CategoryService categoryService;
     private final TagService tagService;
     private final ContentHelper contentHelper;
@@ -59,7 +62,9 @@ public class PostService {
         return toCandidates(postRepository.findAllByPostStatus(PostStatus.PUBLISHED));
     }
 
+    @CacheResult(cacheName = "posts")
     public List<PostSummary> getAllPostSummaries() {
+        LOGGER.info("Find all posts called");
         return postRepository.getAllPostSummaries();
     }
 
@@ -100,13 +105,17 @@ public class PostService {
         return Optional.empty();
     }
 
+    @CacheResult(cacheName = "category-slug")
     public List<PostSummary> getPostSummaryByCategorySlug(String slug) {
+        LOGGER.info("Find by cat called for slug {}", slug);
         List<PostSummary> postSummaries = postRepository.getPostSummaryByCategorySlug(slug);
         postSummaries.forEach(ps -> ps.setHtmlContent(contentHelper.markdownToHtml(ps.getContent())));
         return postSummaries;
     }
 
+    @CacheResult(cacheName = "tag-slug")
     public List<PostSummary> getPostSummaryByTagSlug(String slug) {
+        LOGGER.info("Find by tag called for slug {}", slug);
         List<PostSummary> postSummaries = postRepository.getPostSummaryByTagSlug(slug);
         postSummaries.forEach(ps -> ps.setHtmlContent(contentHelper.markdownToHtml(ps.getContent())));
         return postSummaries;

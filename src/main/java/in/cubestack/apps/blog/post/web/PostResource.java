@@ -1,13 +1,10 @@
 package in.cubestack.apps.blog.post.web;
 
 import in.cubestack.apps.blog.admin.resource.PostCandidate;
-import in.cubestack.apps.blog.event.domain.EventType;
-import in.cubestack.apps.blog.event.service.EventService;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.service.PostService;
 
 import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -20,11 +17,9 @@ import java.util.stream.Collectors;
 public class PostResource {
 
     private final PostService postService;
-    private final EventService eventService;
 
-    public PostResource(PostService postService, EventService eventService) {
+    public PostResource(PostService postService) {
         this.postService = postService;
-        this.eventService = eventService;
     }
 
     @GET
@@ -49,25 +44,6 @@ public class PostResource {
         }
         return postService.findAllPublished();
     }
-
-    @GET
-    @Path("test-view")
-    public String viewPost(@QueryParam("postId") Long postId) {
-
-        Post post = postService.findById(postId).orElseThrow(RuntimeException::new);
-        eventService.trigger(post.getId(), EventType.POST_VIEWS);
-        return "Liked post with id : " + post.getId();
-    }
-
-    @GET
-    @Path("test-like")
-    public String likePost(@QueryParam("postId") Long postId) {
-
-        Post post = postService.findById(postId).orElseThrow(RuntimeException::new);
-        eventService.trigger(post.getId(), EventType.POST_LIKES);
-        return "Liked post with id : " + post.getId();
-    }
-
 
     @GET
     @Path("{id}")

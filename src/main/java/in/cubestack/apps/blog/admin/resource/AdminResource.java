@@ -6,6 +6,8 @@ import in.cubestack.apps.blog.core.domain.PostStatus;
 import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.core.service.RoleService;
 import in.cubestack.apps.blog.core.service.User;
+import in.cubestack.apps.blog.event.domain.EventType;
+import in.cubestack.apps.blog.event.service.EventService;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.domain.PostType;
 import in.cubestack.apps.blog.post.service.CategoryService;
@@ -18,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -36,8 +37,9 @@ public class AdminResource {
     private final CategoryService categoryService;
     private final RoleService roleService;
     private final TagService tagService;
+    private final EventService eventService;
 
-    public AdminResource(AdminService adminService, HttpHelper httpHelper, PostService postService, PersonService personService, CategoryService categoryService, RoleService roleService, TagService tagService) {
+    public AdminResource(AdminService adminService, HttpHelper httpHelper, PostService postService, PersonService personService, CategoryService categoryService, RoleService roleService, TagService tagService, EventService eventService) {
         this.adminService = adminService;
         this.httpHelper = httpHelper;
         this.postService = postService;
@@ -45,6 +47,7 @@ public class AdminResource {
         this.categoryService = categoryService;
         this.roleService = roleService;
         this.tagService = tagService;
+        this.eventService = eventService;
     }
 
     @CheckedTemplate
@@ -185,7 +188,13 @@ public class AdminResource {
                                 @Context SecurityContext securityContext,
                                 @Form PostCandidate postCandidate) {
         User user = (User) securityContext.getUserPrincipal();
-        postService.persistPost(user, postCandidate);
+        Post post = postService.persistPost(user, postCandidate);
+
+        if (postCandidate.getId() == null) {
+            eventService.trigger(post.getId(), EventType.POST_CREATED);
+        } else {
+            eventService.trigger(post.getId(), EventType.POST_UPDATED);
+        }
 
         URI dashboardUri = uriInfo.getBaseUriBuilder()
                 .path(AdminResource.class)

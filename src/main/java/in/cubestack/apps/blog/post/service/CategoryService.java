@@ -4,9 +4,11 @@ import in.cubestack.apps.blog.admin.resource.CategoryCandidate;
 import in.cubestack.apps.blog.post.domain.Category;
 import in.cubestack.apps.blog.post.repo.CategoryRepository;
 import in.cubestack.apps.blog.util.ContentHelper;
+import io.quarkus.cache.CacheResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class CategoryService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CategoryService.class);
+
     private final CategoryRepository categoryRepository;
     private final ContentHelper contentHelper;
 
@@ -26,7 +30,9 @@ public class CategoryService {
         this.contentHelper = contentHelper;
     }
 
+    @CacheResult(cacheName = "categories")
     public List<CategoryCandidate> findAll() {
+        LOGGER.info("Find all categories called");
         return categoryRepository
                 .findAll()
                 .list()
@@ -59,9 +65,4 @@ public class CategoryService {
         return new HashMap<>();
     }
 
-    public CategoryCandidate findBySlug(String slug) {
-        Category category = categoryRepository.findBySlug(slug);
-        if(category != null) return CategoryCandidate.from(category);
-        return null;
-    }
 }

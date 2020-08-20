@@ -5,7 +5,6 @@ import in.cubestack.apps.blog.core.service.PersonService;
 import in.cubestack.apps.blog.core.service.TokenAuthenticationService;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 @ApplicationScoped
 public class AdminService {

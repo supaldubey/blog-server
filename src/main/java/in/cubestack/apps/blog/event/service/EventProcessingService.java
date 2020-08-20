@@ -11,10 +11,13 @@ import java.util.concurrent.Executors;
 public class EventProcessingService {
 
     private final AnalyticsGeneratorService analyticsGeneratorService;
+    private final CacheManagementService cacheManagementService;
+
     private ExecutorService executorService;
 
-    public EventProcessingService(AnalyticsGeneratorService analyticsGeneratorService) {
+    public EventProcessingService(AnalyticsGeneratorService analyticsGeneratorService, CacheManagementService cacheManagementService) {
         this.analyticsGeneratorService = analyticsGeneratorService;
+        this.cacheManagementService = cacheManagementService;
     }
 
     @PostConstruct
@@ -23,6 +26,11 @@ public class EventProcessingService {
     }
 
     public void process(Event event) {
-        executorService.submit(() -> analyticsGeneratorService.ingest(event));
+        executorService.submit(() -> handleEvent(event));
+    }
+
+    private void handleEvent(Event event) {
+        analyticsGeneratorService.ingest(event);
+        cacheManagementService.manageCache(event);
     }
 }

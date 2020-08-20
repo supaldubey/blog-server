@@ -2,6 +2,12 @@ package in.cubestack.apps.blog.event.domain;
 
 public enum EventType {
 
+    TAG_CREATED,
+    POST_CREATED,
+    CATEGORY_CREATED,
+    POST_UPDATED,
+    TAG_UPDATED,
+    CATEGORY_UPDATED,
     POST_VIEWS,
     POST_LIKES;
 

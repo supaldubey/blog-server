@@ -4,9 +4,11 @@ import in.cubestack.apps.blog.admin.resource.TagCandidate;
 import in.cubestack.apps.blog.post.domain.Tag;
 import in.cubestack.apps.blog.post.repo.TagRepository;
 import in.cubestack.apps.blog.util.ContentHelper;
+import io.quarkus.cache.CacheResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -19,14 +21,22 @@ import java.util.stream.Collectors;
 @Transactional
 public class TagService {
 
-    @Inject
-    TagRepository tagRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(TagService.class);
 
-    @Inject
-    ContentHelper contentHelper;
+    private final TagRepository tagRepository;
+    private final ContentHelper contentHelper;
 
+    public TagService(TagRepository tagRepository, ContentHelper contentHelper) {
+        this.tagRepository = tagRepository;
+        this.contentHelper = contentHelper;
+    }
+
+    @CacheResult(cacheName = "tags")
     public List<TagCandidate> findAll() {
-        return tagRepository.findAll().list().stream().sorted(Comparator.comparing(Tag::getTitle)).map(TagCandidate::from).collect(Collectors.toList());
+        LOGGER.info("Find all tags called");
+        return tagRepository.findAll().list()
+                .stream().sorted(Comparator.comparing(Tag::getTitle))
+                .map(TagCandidate::from).collect(Collectors.toList());
     }
 
     public Tag findOne(Long id) {

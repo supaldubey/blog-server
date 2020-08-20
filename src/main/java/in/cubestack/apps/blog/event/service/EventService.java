@@ -5,7 +5,6 @@ import in.cubestack.apps.blog.event.domain.EventType;
 import in.cubestack.apps.blog.event.repo.EventRepository;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 @ApplicationScoped
