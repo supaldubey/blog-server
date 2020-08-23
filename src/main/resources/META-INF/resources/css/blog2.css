@@ -437,3 +437,27 @@ textarea.form-control {
     margin-top: 10px;
     margin-right: 5px;
 }
+
+
+.cs-blog-post-meta {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.cs-blog-summary {
+    margin-bottom: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 25px;
+}
+
+.cs-blog-summary .fab {
+    font-size: 24px;
+    color: #0056B3;
+}
+
+.cs-blog-summary .clap-link {
+    font-weight: 300;
+    color: #0056B3;
+    cursor: pointer;
+}

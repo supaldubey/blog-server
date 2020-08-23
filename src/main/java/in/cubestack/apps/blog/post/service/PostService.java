@@ -218,4 +218,8 @@ public class PostService {
             }
         }
     }
+
+    public Optional<Post> findPostBySlug(String slug) {
+        return postRepository.findBySlug(slug);
+    }
 }
