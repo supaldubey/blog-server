@@ -37,7 +37,8 @@
         </section>
         <section class="sj-post-cheers-0 clearfix">
             <div class="sj-post-cheers float-left" title="Give a cheers!" onclick="cheers()">
-                <img src="/svgs/blog/cheers.svg" height="20px" width="20px" alt="Cheers">
+                <img id="cheersImage" src="/svgs/blog/cheers.svg" height="20px" width="20px" alt="Cheers">
+                <img id="cheersImageHover" src="/svgs/blog/cheers-w.svg" height="20px" width="20px" alt="Cheers">
                 <span id="likeCount">{post.likes} </span> cheers!
             </div>
             <div class="sj-post-cheers-act float-right">
@@ -48,19 +49,6 @@
                     <img src="/svgs/blog/linkedin.svg" height="20px" width="20px" alt="Share on LinkedIn">
                 </a>
             </div>
-            <!--<div class="float-left">
-                <div id="cheer-container" class="cheer-link" onclick="cheers()">
-
-                </div>
-                <div id="cheer-loader" class="loader"></div>
-            </div>
-            <div class="float-right ">
-                <a href="https://twitter.com/intent/tweet?text={post.title}&url={baseUrl}{post.slug}"><i
-                        class="fab fa-twitter" aria-hidden="true"></i></a>
-                &nbsp;&nbsp;&nbsp;
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url={baseUrl}{post.slug}&title={post.title}"><i
-                        class="fab fa-linkedin" aria-hidden="true"></i></a>
-            </div>-->
         </section>
     </main>
     {#include footer}

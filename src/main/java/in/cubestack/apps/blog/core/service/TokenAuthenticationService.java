@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class TokenAuthenticationService {
 
+    private static final int TOKEN_EXPIRY_MINUTES = 30;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenAuthenticationService.class);
 
     @Inject
@@ -29,13 +31,12 @@ public class TokenAuthenticationService {
     String jwtSecret;
 
     public String generateToken(Person person) {
-        Date expireTime = Date.from(LocalDateTime.now().plusDays(10).atZone(ZoneId.systemDefault()).toInstant());
+        Date expireTime = Date.from(LocalDateTime.now().plusMinutes(TOKEN_EXPIRY_MINUTES).atZone(ZoneId.systemDefault()).toInstant());
 
         return Jwts.builder()
                 .setSubject(person.getUsername())
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .setIssuedAt(new Date())
-                .claim("app", "SchoolPulse")
                 .claim("personId", person.getId())
                 .claim("roles", person.getRoles().stream().map(Role::getRoleName).collect(Collectors.toList()))
                 .setExpiration(expireTime)

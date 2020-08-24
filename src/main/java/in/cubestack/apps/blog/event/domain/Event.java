@@ -17,7 +17,6 @@ public class Event extends BaseModel {
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
-
     public Event() {
     }
 
@@ -41,6 +40,7 @@ public class Event extends BaseModel {
     public void setCounterType(EventType eventType) {
         this.eventType = eventType;
     }
+
 
     @Override
     public String toString() {

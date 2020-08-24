@@ -39,17 +39,15 @@ public class BlogResource {
     @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance blog();
-
         public static native TemplateInstance category();
-
         public static native TemplateInstance tag();
-
         public static native TemplateInstance post();
     }
 
     @GET
     @Timed(name = "homeFetchTime", description = "A measure of how long it takes to Fetch home.", unit = MetricUnits.MILLISECONDS)
     public TemplateInstance home() {
+        eventService.trigger(null, EventType.HOME_VIEWED);
         return blogPage(Map.of());
     }
 
@@ -85,12 +83,17 @@ public class BlogResource {
     public TemplateInstance category(@PathParam("slug") String slug) {
         List<PostSummary> posts = postService.getPostSummaryByCategorySlug(slug);
 
+        var categories = categoryService.findAll();
+        categories.stream().filter(c -> c.getSlug().equals(slug)).findFirst().ifPresent(c ->
+                eventService.trigger(c.getId(), EventType.CATEGORY_VIEWED)
+        );
+
         return Templates
                 .category()
                 .data("notFound", posts.isEmpty())
                 .data("slug", slug)
                 .data("posts", posts)
-                .data("categories", categoryService.findAll())
+                .data("categories", categories)
                 .data("tags", tagService.findAll());
     }
 
@@ -100,12 +103,17 @@ public class BlogResource {
     public TemplateInstance tag(@PathParam("slug") String slug) {
         List<PostSummary> posts = postService.getPostSummaryByTagSlug(slug);
 
+        var tags = tagService.findAll();
+        tags.stream().filter(t -> t.getSlug().equals(slug)).findFirst().ifPresent(t ->
+                eventService.trigger(t.getTagId(), EventType.TAG_VIEWED)
+        );
+
         return Templates
                 .tag()
                 .data("notFound", posts.isEmpty())
                 .data("slug", slug)
                 .data("posts", posts)
-                .data("tags", tagService.findAll())
+                .data("tags", tags)
                 .data("categories", categoryService.findAll());
     }
 
