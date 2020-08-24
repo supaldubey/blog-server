@@ -12,7 +12,10 @@ import org.eclipse.microprofile.metrics.MetricUnits;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.Map;
 
@@ -106,10 +109,21 @@ public class BlogResource {
                 .data("categories", categoryService.findAll());
     }
 
+
+    @PUT
+    @Path("{slug}/like")
+    @Timed(name = "blogLikeTime", description = "A measure of how long it takes to Like blog.", unit = MetricUnits.MILLISECONDS)
+    public Response likePost(@Context UriInfo uriInfo, @PathParam("slug") String slug) {
+        var post = postService.findPostBySlug(slug);
+        post.ifPresent(value -> eventService.trigger(value.getId(), EventType.POST_LIKES));
+
+        return Response.accepted().build();
+    }
+
     @GET
     @Path("{slug}")
     @Timed(name = "blogFetchTime", description = "A measure of how long it takes to Fetch blog.", unit = MetricUnits.MILLISECONDS)
-    public TemplateInstance getPostBySlug(@PathParam("slug") String slug) {
+    public TemplateInstance getPostBySlug(@Context UriInfo uriInfo, @PathParam("slug") String slug) {
         var postSummaryOptional = postService.getSummary(slug);
         if (postSummaryOptional.isPresent()) {
             PostSummary summary = postSummaryOptional.get();
@@ -117,6 +131,7 @@ public class BlogResource {
 
             return Templates
                     .post()
+                    .data("baseUrl", uriInfo.getBaseUriBuilder().build())
                     .data("post", summary);
         } else {
             return blogPage(Map.of("notFound", true));

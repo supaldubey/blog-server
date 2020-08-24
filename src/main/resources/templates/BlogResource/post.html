@@ -13,7 +13,6 @@
     <main class="sj-content">
         {#include errors}
         {/include}
-
         <section class="sj-post-blc-1">
             <h1 class="title" title="{post.title}">{post.title}</h1>
             <div class="clearfix">
@@ -36,9 +35,37 @@
         <section class="sj-post-blc-1 sj-post-1">
             {post.htmlContent.raw}
         </section>
+        <section class="sj-post-cheers-0 clearfix">
+            <div class="sj-post-cheers float-left" title="Give a cheers!" onclick="cheers()">
+                <img src="/svgs/blog/cheers.svg" height="20px" width="20px" alt="Cheers">
+                <span id="likeCount">{post.likes} </span> cheers!
+            </div>
+            <div class="sj-post-cheers-act float-right">
+                <a href="https://twitter.com/intent/tweet?text={post.title}&url={baseUrl}{post.slug}" title="Share on Twitter">
+                    <img src="/svgs/blog/twitter.svg" height="20px" width="20px" alt="Share on Twitter">
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url={baseUrl}{post.slug}&title={post.title}" title="Share on LinkedIn">
+                    <img src="/svgs/blog/linkedin.svg" height="20px" width="20px" alt="Share on LinkedIn">
+                </a>
+            </div>
+            <!--<div class="float-left">
+                <div id="cheer-container" class="cheer-link" onclick="cheers()">
+
+                </div>
+                <div id="cheer-loader" class="loader"></div>
+            </div>
+            <div class="float-right ">
+                <a href="https://twitter.com/intent/tweet?text={post.title}&url={baseUrl}{post.slug}"><i
+                        class="fab fa-twitter" aria-hidden="true"></i></a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url={baseUrl}{post.slug}&title={post.title}"><i
+                        class="fab fa-linkedin" aria-hidden="true"></i></a>
+            </div>-->
+        </section>
     </main>
     {#include footer}
     {/include}
+<script src="/js/jquery-3.5.1.min.js"></script>
 <script src="/js/highlight.min.js"></script>
 <script type="text/javascript">
     hljs.configure();
@@ -47,6 +74,23 @@
             hljs.highlightBlock(block);
         });
     });
+
+    let likes = {post.likes};
+
+    function cheers() {
+        $("#cheer-container").hide();
+        $("#cheer-loader").show();
+        $.ajax({
+          url: '/{post.slug}/like',
+          type: 'PUT',
+          success: function(data) {
+            likes ++;
+            $("#likeCount").html(likes);
+            $("#cheer-loader").hide();
+            $("#cheer-container").fadeIn();
+          }
+        });
+    }
 </script>
 </body>
 </html>

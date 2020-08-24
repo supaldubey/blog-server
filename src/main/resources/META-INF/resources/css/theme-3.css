@@ -257,7 +257,7 @@
 }
 
 .cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge {
-    padding: .50em 0.75em !important;
+    padding: .75em 0.75em !important;
     font-size: 0.70rem !important;
     color: #ffffff;
     font-weight: 400;
@@ -270,7 +270,7 @@
 
 .cs-theme-parent .cs-blog-post-meta .cs-blog-post-meta-badge a {
     margin-right: 4px;
-    padding: 0.25rem 0.55rem;
+    padding: 0.75rem 0.65rem;
     border-radius: var(--cs-theme-meta-badge-border-radius);
     color: white !important;
 }

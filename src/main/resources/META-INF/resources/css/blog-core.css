@@ -385,3 +385,43 @@ a {
 .sj-post-1 p {
     line-height: 1.25 !important;
 }
+
+.sj-post-cheers-0 {
+    margin-top: 16px;
+}
+
+.sj-post-cheers {
+    margin-right: 4px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-primary-color);
+    cursor: pointer;
+    padding: 0.25rem;
+    border: 1px solid transparent;
+}
+
+.sj-post-cheers:hover {
+    border: 1px solid var(--theme-primary-color-2);
+    background-color: var(--theme-primary-color-2);
+    color: white;
+}
+
+.sj-post-cheers:hover img {
+    content: url("/svgs/blog/cheers-w.svg");
+}
+
+.sj-post-cheers span {
+    margin-left: 4px;
+}
+
+.sj-post-cheers-act a {
+    margin-right: 16px;
+}
+
+.sj-post-cheers-act a:hover {
+    text-decoration: none;
+}
+
+.sj-post-cheers-act a:last-child {
+    margin-right: 0;
+}
