@@ -35,7 +35,6 @@ public class TokenAuthenticationService {
                 .setSubject(person.getUsername())
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .setIssuedAt(new Date())
-                .claim("app", "SchoolPulse")
                 .claim("personId", person.getId())
                 .claim("roles", person.getRoles().stream().map(Role::getRoleName).collect(Collectors.toList()))
                 .setExpiration(expireTime)
