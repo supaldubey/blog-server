@@ -115,7 +115,7 @@ public class BlogResource {
     public Response likePost(@Context UriInfo uriInfo, @PathParam("slug") String slug) {
         var post = postService.findPostBySlug(slug);
         post.ifPresent(value -> eventService.trigger(value.getId(), EventType.POST_LIKES));
-        try {Thread.sleep(2222);} catch (Exception e) {}
+
         return Response.accepted().build();
     }
 
