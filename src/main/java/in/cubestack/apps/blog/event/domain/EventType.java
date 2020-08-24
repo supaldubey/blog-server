@@ -9,7 +9,10 @@ public enum EventType {
     TAG_UPDATED,
     CATEGORY_UPDATED,
     POST_VIEWS,
-    POST_LIKES;
+    POST_LIKES,
+    HOME_VIEWED,
+    CATEGORY_VIEWED,
+    TAG_VIEWED;
 
     public static EventType of(String counterType) {
         for (EventType type : values()) {

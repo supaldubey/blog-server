@@ -17,12 +17,7 @@ public abstract class BaseModel {
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
-
     public BaseModel() {
-    }
-
-    public BaseModel(long id) {
-        this.id = id;
     }
 
     public LocalDateTime getCreatedAt() {
