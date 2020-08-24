@@ -63,7 +63,6 @@ public class BlogResource {
     }
 
     private TemplateInstance blogPage(Map<String, Object> additionalMeta) {
-
         var template = Templates
                 .blog()
                 .data("posts", postService.getAllPostSummaries())
@@ -88,7 +87,8 @@ public class BlogResource {
                 .data("notFound", posts.isEmpty())
                 .data("slug", slug)
                 .data("posts", posts)
-                .data("categories", categoryService.findAll());
+                .data("categories", categoryService.findAll())
+                .data("tags", tagService.findAll());
     }
 
     @GET
@@ -102,7 +102,8 @@ public class BlogResource {
                 .data("notFound", posts.isEmpty())
                 .data("slug", slug)
                 .data("posts", posts)
-                .data("tags", tagService.findAll());
+                .data("tags", tagService.findAll())
+                .data("categories", categoryService.findAll());
     }
 
     @GET

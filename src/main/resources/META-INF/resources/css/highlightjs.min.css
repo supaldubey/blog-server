@@ -10,8 +10,10 @@ code {
 .hljs {
     display: block;
     overflow-x: auto;
-    padding: .5em;
+    padding: 1em;
     background: white;
+    color: black;
+    border: 1px solid #E2E0DB;
     font-family: 'Source Code Pro', monospace;
 }
 
@@ -21,14 +23,6 @@ code {
 
 .hljs-ln-code {
     padding-left: 12px !important;
-}
-
-.hljs {
-    display: block;
-    overflow-x: auto;
-    padding: 0.5em;
-    background: white;
-    color: black;
 }
 
 .hljs-comment,
@@ -46,7 +40,7 @@ code {
 .hljs-tag,
 .hljs-attr {
     color: #00f;
-    color: var(--cs-theme-primary-color-dark-2);
+    color: var(--theme-primary-color-2);
 }
 
 .hljs-keyword, .hljs-attr, .hljs-attribute, .hljs-doctag, .hljs-keyword, .hljs-meta-keyword, .hljs-name, .hljs-selector-tag {
@@ -63,7 +57,8 @@ code {
 .hljs-type,
 .hljs-addition {
     color: #a31515;
-    font-weight: 500;
+    color: var(--text-primary-color);
+    font-weight: 600;
 }
 
 .hljs-string,
