@@ -280,6 +280,7 @@ a {
 
 .sj-post-blc-0 {
     padding: 0.35rem 0;
+    margin-bottom: 20px;
 }
 
 .sj-post-blc-0:hover {
@@ -406,8 +407,16 @@ a {
     color: white;
 }
 
-.sj-post-cheers:hover img {
-    content: url("/svgs/blog/cheers-w.svg");
+.sj-post-cheers:hover img#cheersImageHover {
+    display: inline;
+}
+
+.sj-post-cheers:hover img#cheersImage {
+    display: none;
+}
+
+#cheersImageHover {
+    display: none;
 }
 
 .sj-post-cheers span {
