@@ -68,10 +68,11 @@
                 </div>
                 <div class="cs-blog-summary">
                     <div class="float-left">
-                        <div class="clap-link" onclick="cheers()">
+                        <div id="cheer-container" class="cheer-link" onclick="cheers()">
                             <i class="fab fas fa-glass-cheers"></i>&nbsp;&nbsp;<span id="likeCount">{post.likes}</span>
                             cheers!
                         </div>
+                        <div id="cheer-loader" class="loader"></div>
                     </div>
                     <div class="float-right ">
                         <a href="https://twitter.com/intent/tweet?text={post.title}&url={baseUrl}{post.slug}"><i
@@ -106,12 +107,16 @@
     let likes = {post.likes};
 
     function cheers() {
+        $("#cheer-container").hide();
+        $("#cheer-loader").show();
         $.ajax({
           url: '/{post.slug}/like',
           type: 'PUT',
           success: function(data) {
             likes ++;
-            $("#likeCount").html(likes)
+            $("#likeCount").html(likes);
+            $("#cheer-loader").hide();
+            $("#cheer-container").fadeIn();
           }
         });
     }
