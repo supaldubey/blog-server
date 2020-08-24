@@ -1,41 +1,27 @@
-
-<header class="navbar fixed-top navbar-dark cs-blog-navbar">
-    <div class="container-fluid cs-blog-container-fluid">
-        <div class="row cs-blog-container-row">
-            <div class="col-sm-1 cs-blog-container-col">
-                &nbsp;
-            </div>
-            <div class="col-sm-10 cs-blog-container-col">
-                <nav class="navbar navbar-expand-lg navbar-light cs-blog-navbar">
-                    <a class="cs-blog-logo-container" title="Scale Java" href="/">
-                        <img class="cs-blog-navbar-logo" src="/svgs/blog/mug.svg" height="16px" width="16px" alt="Scale Java">
-                        <div class="cs-blog-logo-text">
-                            <span>ScaleJava</span>
-                        </div>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/category/java">Java</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/category/spring">Spring</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-            </div>
-            <div class="col-sm-1 cs-blog-container-col">
-                &nbsp;
-            </div>
-        </div>
-    </div>
+<header class="sj-header">
+    <nav class="sj-top-nav sj-top-nav-hide">
+        <a href="/" class="sj-top-nav-logo">
+            <img src="/icons/logo-full.png" title="Scale Java" height="36px"/>
+        </a>
+        <ul class="sj-top-nav-list">
+            <li class="sj-top-nav-list-item"><a class="sj-top-nav-list-link" href="/">Home</a></li>
+            <li class="sj-top-nav-list-item"><a class="sj-top-nav-list-link" href="/category/java">Java</a></li>
+            <li class="sj-top-nav-list-item"><a class="sj-top-nav-list-link" href="/category/spring">Spring</a></li>
+        </ul>
+    </nav>
+    <label class="sj-top-mobile-nav-button" for="hamburger" aria-label="menu">
+        <svg viewBox="0 0 100 80" width="40" height="40">
+            <rect width="100" height="10" fill="#1D2D35"></rect>
+            <rect y="30" width="100" height="10" fill="#1D2D35"></rect>
+            <rect y="60" width="100" height="10" fill="#1D2D35"></rect>
+        </svg>
+    </label>
+    <input class="sj-top-mobile-nav-checkbox" type="checkbox" id="hamburger">
+    <nav class="sj-top-mobile-nav sj-top-nav-hide">
+        <ul class="sj-top-mobile-nav-list">
+            <li class="sj-top-mobile-nav-list-item"><a class="sj-top-mobile-nav-list-link" href="/">Home</a></li>
+            <li class="sj-top-mobile-nav-list-item"><a class="sj-top-mobile-nav-list-link" href="/category/java">Java</a></li>
+            <li class="sj-top-mobile-nav-list-item"><a class="sj-top-mobile-nav-list-link" href="/category/spring">Spring</a></li>
+        </ul>
+    </nav>
 </header>

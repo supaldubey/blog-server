@@ -1,173 +1,51 @@
 <!doctype html>
 <html lang="en">
 <head>
-    {#include head} {/include}
+    <title>Scale Java - Java, Spring & More</title>
+    {#include head}
+    {/include}
 </head>
-<body class="cs-theme-parent">
-
-{#include header}
-{/include}
-
-<div class="cs-blog-body">
-    <div class="container-fluid cs-blog-container-fluid">
-        <div class="row cs-blog-container-row">
-            <div class="col-sm-1 cs-blog-container-col">
-                &nbsp;
-            </div>
-            <div class="col-sm-10 cs-blog-container-col cs-blog-content-area">
-                <div class="row" style="display: none">
-                    <div class="col-sm-4">
-                        <div class="cs-blog-card cs-blog-card-guides">
-                            <div class="cs-blog-card-title">Comprehensive Guides &rarr;</div>
-                            <div class="cs-blog-card-body">
-                                Explore wide range of comprehensive guides with projects on subjects of your interest.
+<body>
+    {#include header}
+    {/include}
+    <main class="sj-content">
+        {#include errors}
+        {/include}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-9">
+                    {#for post in posts}
+                    <a class="sj-post-blc-0-a" href="/{post.slug}">
+                        <section class="sj-post-blc-0" title="{post.title}">
+                            <h1>{post.title}</h1>
+                            <p>{post.metaTitle}</p>
+                            <div class="clearfix">
+                                <span class="sj-meta-time">{post.publishedAt} . {post.readTime}</span>
+                                <a href="/{post.slug}" class="sj-btn sj-btn--primary float-right">Read more &rarr;</a>
                             </div>
-                        </div>
+                        </section>
+                    </a>
+                    {/for}
+                </div>
+                <div class="col-sm-3">
+                    <div class="sj-panel-0">
+                        <h1>Categories &rarr;</h1>
+                        {#for category in categories}
+                        <a class="sj-tag-0" href="/category/{category.slug}">{category.title}</a>
+                        {/for}
                     </div>
-                    <div class="col-sm-4">
-                        <div class="cs-blog-card cs-blog-card-tutorials">
-                            <div class="cs-blog-card-title">Precise Tutorials &rarr;</div>
-                            <div class="cs-blog-card-body">
-                                Skim through various tutorials to quickly get started on Java, Spring, Persistence, REST
-                                and more.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="cs-blog-card cs-blog-card-articles">
-                            <div class="cs-blog-card-title">Latest Articles &rarr;</div>
-                            <div class="cs-blog-card-body">
-                                Read our latest articles to equip yourself with current technologies.
-                            </div>
-                        </div>
+                    <br/>
+                    <div class="sj-panel-0">
+                        <h1>Tags &rarr;</h1>
+                        {#for tag in tags}
+                        <a class="sj-tag-1" href="/tag/{tag.slug}">{tag.tagName}</a>
+                        {/for}
                     </div>
                 </div>
-                <div class="row" style="">
-                    <div class="col sm-12">
-
-                        {#if notFound}
-                        <div style="height: 40px; margin-bottom: 80px">
-                            <div class="alert alert-warning" role="alert">
-                                Sorry, looks like the link is broken.
-                                <br/><br/>
-                                Maybe look at what other things we have written, while we get to fixing this issue.
-                            </div>
-                        </div>
-                        {/if}
-
-                        {#if renderingError}
-                        <div style="height: 40px; margin-bottom: 80px">
-                            <div class="alert alert-warning" role="alert">
-                                Sorry, we are not able to render the page.
-                                <br/><br/>
-                                Our code monkeys have been notified to fix the issue, meanwhile; please checkout other posts.
-                            </div>
-                        </div>
-                        {/if}
-
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="cs-blog-latest-articles">
-                            <div class="row">
-                                {#for post in posts}
-                                <div class="col-sm-12">
-                                    <div class="cs-blog-post-block">
-                                        <a class="cs-blog-post-block-head" href="/{post.slug}">
-                                            <h1 href="/{post.slug}">{post.title}</h1>
-                                            <div class="cs-blog-post-block-summary">
-                                                <p>{post.metaTitle}</p>
-                                            </div>
-                                        </a>
-                                        <div class="cs-blog-post-block-meta">
-                                            <div class="cs-blog-post-block-meta-item">
-                                                <div class="meta-time">
-                                                    <span>{post.publishedAt}</span>
-                                                    <span>.</span>
-                                                    <span>{post.readTime}</span>
-                                                </div>
-                                            </div>
-                                            <div class="cs-blog-post-block-meta-item">
-                                                <!--                                                <a class="meta-author" href="/blog/authors/{post.person.username}">{post.person.firstName} {post.person.lastName}</a>-->
-                                                <a class="btn btn-primary btn-sm" href="/{post.slug}">Read more
-                                                    &rarr;</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/for}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="cs-blog-panel">
-                                    <h1>Categories</h1>
-                                    <div class="cs-blog-panel-body">
-                                        {#for category in categories}
-                                        <a class="badge badge-primary cs-blog-badge" href="/category/{category.slug}">{category.title}</a>
-                                        {/for}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="cs-blog-panel">
-                                    <h1>Tags</h1>
-                                    <div class="cs-blog-panel-body">
-                                        {#for tag in tags}
-                                        <a class="badge badge-primary cs-blog-badge" href="/tag/{tag.slug}">{tag.tagName}</a>
-                                        {/for}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-1">
-                &nbsp;
             </div>
         </div>
-    </div>
-</div>
-
-{#include footer}
-{/include}
-
-<script src="/js/jquery-3.5.1.min.js"></script>
-<script>
-    $(document).ready(function() {
-        //responsive menu toggle
-        $("#menutoggle").click(function() {
-            $('.xs-menu').toggleClass('displaynone');
-
-        });
-        //add active class on menu
-        $('ul li').click(function(e) {
-            //e.preventDefault();
-            $('li').removeClass('active');
-            $(this).addClass('active');
-        });
-        //drop down menu
-
-        $(".drop-down").hover(function() {
-            $(".mega-menu-ul li").each(() => $(this).removeClass('active'))
-            $(this).addClass('active')
-            $(this).children('.mega-menu').addClass('display-on')
-        });
-
-        $(".drop-down").mouseleave(function() {
-            $('.mega-menu').removeClass('display-on');
-            $(".mega-menu-ul li").each(() => $(this).removeClass('active'))
-        });
-
-    });
-
-</script>
+    </main>
+    {#include footer}
+    {/include}
 </body>
 </html>
