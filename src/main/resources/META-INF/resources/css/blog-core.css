@@ -326,6 +326,7 @@ a {
     line-height: 3;
     transition: all 0.2s ease;
     transition-property: color, background-color, border-color;
+    white-space: nowrap;
 }
 
 .sj-tag-0:hover {
