@@ -72,6 +72,9 @@ public class PostService {
         return posts.stream().map(o -> {
             PostCandidate candidate = PostCandidate.from(o);
             candidate.setHtmlContent(contentHelper.markdownToHtml(candidate.getContent()));
+            if(candidate.getSummary() != null) {
+                candidate.setHtmlSummary(contentHelper.markdownToHtml(candidate.getSummary()));
+            }
             return candidate;
         }).collect(Collectors.toList());
     }
@@ -98,6 +101,9 @@ public class PostService {
         try {
             PostSummary postSummary = postRepository.getPostSummary(slug);
             postSummary.setHtmlContent(contentHelper.markdownToHtml(postSummary.getContent()));
+            if(postSummary.getSummary() != null) {
+                postSummary.setHtmlSummary(contentHelper.markdownToHtml(postSummary.getSummary()));
+            }
             return Optional.of(postSummary);
         } catch (Exception ignore) {
             // These is mostly page not found

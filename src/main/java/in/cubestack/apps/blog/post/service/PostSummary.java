@@ -37,6 +37,7 @@ public class PostSummary {
     private final BigInteger views;
 
     private String htmlContent;
+    private String htmlSummary;
     private String readTime;
 
     @RegisterForReflection
@@ -189,5 +190,13 @@ public class PostSummary {
 
     public void setReadTime(String readTime) {
         this.readTime = readTime;
+    }
+
+    public String getHtmlSummary() {
+        return htmlSummary;
+    }
+
+    public void setHtmlSummary(String htmlSummary) {
+        this.htmlSummary = htmlSummary;
     }
 }
