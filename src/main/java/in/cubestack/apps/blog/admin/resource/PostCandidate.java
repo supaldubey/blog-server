@@ -48,6 +48,8 @@ public class PostCandidate {
 
     private String htmlContent;
 
+    private String htmlSummary;
+
     private String postStatus;
 
     private boolean seriesOrGuide;
@@ -200,6 +202,14 @@ public class PostCandidate {
 
     public void setSeriesOrGuide(boolean seriesOrGuide) {
         this.seriesOrGuide = seriesOrGuide;
+    }
+
+    public String getHtmlSummary() {
+        return htmlSummary;
+    }
+
+    public void setHtmlSummary(String htmlSummary) {
+        this.htmlSummary = htmlSummary;
     }
 
     public static PostCandidate from(Post post) {

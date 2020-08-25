@@ -384,7 +384,7 @@ a {
     font-weight: 300;
 }
 
-.sj-post-1 p {
+.sj-post-1 p, .sj-post-1 li {
     line-height: 1.25 !important;
 }
 
@@ -434,4 +434,38 @@ a {
 
 .sj-post-cheers-act a:last-child {
     margin-right: 0;
+}
+
+code {
+    padding: 0.1rem 0.2rem;
+    background: white;
+    color: black;
+    border: 1px solid #E2E0DB;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.sj-SERIES h2, .sj-SERIES h3, .sj-SERIES h4, .sj-SERIES h5, .sj-SERIES h6 {
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--theme-primary-color-2);
+}
+
+.sj-SERIES h2 a, .sj-SERIES h3 a, .sj-SERIES h4 a, .sj-SERIES h5 a, .sj-SERIES h6 a {
+    color: var(--theme-primary-color-2);
+}
+
+.sj-SERIES h3 {
+    margin-left: 1.8rem;
+}
+
+.sj-SERIES h4 {
+    margin-left: 3.8rem;
+}
+
+.sj-SERIES h5 {
+    margin-left: 5.9rem;
+}
+
+.sj-SERIES h6 {
+    margin-left: 7.6rem;
 }

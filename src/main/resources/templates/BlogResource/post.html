@@ -32,7 +32,12 @@
             </div>
             <h2 class="subtitle">{post.metaTitle}</h2>
         </section>
+        {#if post.htmlSummary != null}
         <section class="sj-post-blc-1 sj-post-1">
+            {post.htmlSummary.raw}
+        </section>
+        {/if}
+        <section class="sj-post-blc-1 sj-post-1 sj-{post.postType}">
             {post.htmlContent.raw}
         </section>
         <section class="sj-post-cheers-0 clearfix">
