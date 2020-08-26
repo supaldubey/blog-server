@@ -49,3 +49,7 @@ jobs:
         run: mvn test
       - name: Build with Maven
         run: mvn -B package --file pom.xml -Dmaven.test.skip=true
+      - name: Publish to GitHub Packages
+        run: mvn -B deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
