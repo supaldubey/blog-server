@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @Path("tags")
 @RolesAllowed("Admin")
@@ -78,12 +77,6 @@ public class TagResource {
     @Path("{id}")
     public void delete(@PathParam("id") Long id) {
         tagService.delete(id);
-    }
-
-    @GET
-    @Path("post-counts")
-    public Map<Tag, Long> findTagPostCounts() {
-        return tagService.findTagPostCounts();
     }
 
 }

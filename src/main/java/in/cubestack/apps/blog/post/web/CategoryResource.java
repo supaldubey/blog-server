@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @Path("categories")
 @RolesAllowed("Admin")
@@ -73,13 +72,5 @@ public class CategoryResource {
     public void delete(@PathParam("id") Long id) {
         categoryService.delete(id);
     }
-
-
-    @GET
-    @Path("post-counts")
-    public Map<Category, Long> findCategoryPostCounts() {
-        return categoryService.findCategoryPostCounts();
-    }
-
 
 }

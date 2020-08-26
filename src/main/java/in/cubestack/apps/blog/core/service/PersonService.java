@@ -39,15 +39,15 @@ public class PersonService {
     }
 
     public void update(PersonCandidate candidate) {
-        Person _person = personRepository.findByIdOptional(candidate.getId()).orElseThrow(() -> new RuntimeException("User not found with id " + candidate.getId()));
-        _person.setFirstName(candidate.getFirstName());
-        _person.setLastName(candidate.getLastName());
-        _person.setEmail(candidate.getEmail());
-        _person.setPhone(candidate.getPhone());
-        _person.getRoles().clear();
-        _person.setPersonRoles(candidate.getRoles().stream().map(o -> new PersonRole(_person, o.toRole())).collect(Collectors.toList()));
-        _person.setUpdatedAt(LocalDateTime.now());
-        personRepository.persist(_person);
+        Person person = personRepository.findByIdOptional(candidate.getId()).orElseThrow(() -> new RuntimeException("User not found with id " + candidate.getId()));
+        person.setFirstName(candidate.getFirstName());
+        person.setLastName(candidate.getLastName());
+        person.setEmail(candidate.getEmail());
+        person.setPhone(candidate.getPhone());
+        person.getRoles().clear();
+        person.setPersonRoles(candidate.getRoles().stream().map(o -> new PersonRole(person, o.toRole())).collect(Collectors.toList()));
+        person.setUpdatedAt(LocalDateTime.now());
+        personRepository.persist(person);
     }
 
     public List<PersonCandidate> findAll() {

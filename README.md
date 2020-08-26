@@ -1,4 +1,7 @@
-# cube-blog project
+# Scale Java Blog Project
+
+The idea is to build a toy blog site running on Java using native images. This started as an experiment
+but seemed good enough to be shared with other good folks of open source world.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

@@ -11,10 +11,7 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -59,11 +56,4 @@ public class TagService {
         return TagCandidate.from(tag);
     }
 
-    private Supplier<UnsupportedOperationException> unsupportedOpsSupplier() {
-        return () -> new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public Map<Tag, Long> findTagPostCounts() {
-        return new HashMap<>();
-    }
 }
