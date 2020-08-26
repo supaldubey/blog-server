@@ -24,7 +24,7 @@ jobs:
       
   test:
     runs-on: ubuntu-latest
-    name: Running tests
+    name: Running tests and build
     needs: compile
     services:
       postgres:
