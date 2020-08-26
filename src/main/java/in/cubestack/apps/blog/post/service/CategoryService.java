@@ -60,9 +60,4 @@ public class CategoryService {
         categoryRepository.persist(category);
         return CategoryCandidate.from(category);
     }
-
-    public Map<Category, Long> findCategoryPostCounts() {
-        return new HashMap<>();
-    }
-
 }
