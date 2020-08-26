@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -50,37 +51,36 @@ public class PostService {
         return toCandidates(postRepository.findAll().list());
     }
 
-    public List<PostCandidate> findAllPublishedPostsByCategories(List<Long> categories) {
-        return toCandidates(postRepository.findAllPublishedPostsByCategories(categories));
-    }
 
     public List<PostCandidate> findAllPublishedPostsByTags(List<Long> tags) {
         return toCandidates(postRepository.findAllPublishedPostsByTags(tags));
     }
 
-    public List<PostCandidate> findAllPublished() {
-        return toCandidates(postRepository.findAllByPostStatus(PostStatus.PUBLISHED));
-    }
-
     @CacheResult(cacheName = "posts")
     public List<PostSummary> getAllPostSummaries() {
         LOGGER.info("Find all posts called");
-        return postRepository.getAllPostSummaries();
+
+        return sortedSummary(postRepository.getAllPostSummaries());
+    }
+
+    private List<PostSummary> sortedSummary(List<PostSummary> postSummaries) {
+        return postSummaries.stream()
+                .sorted(Comparator.comparing(PostSummary::getPublishedAt).reversed())
+                .collect(Collectors.toList());
     }
 
     private List<PostCandidate> toCandidates(List<Post> posts) {
-        return posts.stream().map(o -> {
-            PostCandidate candidate = PostCandidate.from(o);
-            candidate.setHtmlContent(contentHelper.markdownToHtml(candidate.getContent()));
-            if(candidate.getSummary() != null) {
-                candidate.setHtmlSummary(contentHelper.markdownToHtml(candidate.getSummary()));
-            }
-            return candidate;
-        }).collect(Collectors.toList());
+        return posts.stream().map(this::toCandidate).collect(Collectors.toList());
     }
 
-    public List<Post> findAllDrafts() {
-        return postRepository.findAllByPostStatus(PostStatus.DRAFT);
+    private PostCandidate toCandidate(Post post) {
+        PostCandidate candidate = PostCandidate.from(post);
+        candidate.setHtmlContent(contentHelper.markdownToHtml(candidate.getContent()));
+
+        if(candidate.getSummary() != null) {
+            candidate.setHtmlSummary(contentHelper.markdownToHtml(candidate.getSummary()));
+        }
+        return candidate;
     }
 
     public Post save(Post post) {
@@ -114,17 +114,21 @@ public class PostService {
     @CacheResult(cacheName = "category-slug")
     public List<PostSummary> getPostSummaryByCategorySlug(String slug) {
         LOGGER.info("Find by cat called for slug {}", slug);
+
         List<PostSummary> postSummaries = postRepository.getPostSummaryByCategorySlug(slug);
         postSummaries.forEach(ps -> ps.setHtmlContent(contentHelper.markdownToHtml(ps.getContent())));
-        return postSummaries;
+
+        return sortedSummary(postSummaries);
     }
 
     @CacheResult(cacheName = "tag-slug")
     public List<PostSummary> getPostSummaryByTagSlug(String slug) {
         LOGGER.info("Find by tag called for slug {}", slug);
+
         List<PostSummary> postSummaries = postRepository.getPostSummaryByTagSlug(slug);
         postSummaries.forEach(ps -> ps.setHtmlContent(contentHelper.markdownToHtml(ps.getContent())));
-        return postSummaries;
+
+        return sortedSummary(postSummaries);
     }
 
     public void delete(Long id) {
@@ -210,7 +214,7 @@ public class PostService {
     private void syncTags(Post post, PostCandidate postCandidate) {
 
         List<Tag> tagsRemoved = post.getTags().stream()
-                .filter(t -> !postCandidate.getTags().contains(t.getId()))
+                .filter(tag -> !postCandidate.getTags().contains(tag.getId()))
                 .collect(Collectors.toList());
 
         for (Tag tag : tagsRemoved) {

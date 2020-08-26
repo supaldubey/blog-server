@@ -1,14 +1,11 @@
 package in.cubestack.apps.blog.post.web;
 
-import in.cubestack.apps.blog.admin.resource.PostCandidate;
 import in.cubestack.apps.blog.post.domain.Post;
 import in.cubestack.apps.blog.post.service.PostService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Path("posts")
 @RolesAllowed("Admin")
@@ -20,29 +17,6 @@ public class PostResource {
 
     public PostResource(PostService postService) {
         this.postService = postService;
-    }
-
-    @GET
-    public List<PostCandidate> findAll(
-            @QueryParam("categories") List<String> categories,
-            @QueryParam("tags") List<String> tags) {
-
-        if (categories != null && categories.size() > 0) {
-            return postService.findAllPublishedPostsByCategories(
-                    categories
-                            .stream()
-                            .map(Long::valueOf)
-                            .collect(Collectors.toList())
-            );
-        } else if (tags != null && tags.size() > 0) {
-            return postService.findAllPublishedPostsByTags(
-                    tags
-                            .stream()
-                            .map(Long::valueOf)
-                            .collect(Collectors.toList())
-            );
-        }
-        return postService.findAllPublished();
     }
 
     @GET
