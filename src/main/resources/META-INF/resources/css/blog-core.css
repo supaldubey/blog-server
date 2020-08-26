@@ -388,6 +388,27 @@ a {
     line-height: 1.25 !important;
 }
 
+.sj-post-1 a {
+    color: var(--theme-primary-color-2);
+    font-weight: bold;
+}
+
+.sj-post-1 blockquote {
+    display: block;
+    overflow-x: auto;
+    padding: 0.25rem;
+    background: #f3ece0;
+    color: var(--theme-primary-color-2);
+    border: 1px solid #efe7db;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.85rem;
+}
+
+.sj-post-1 blockquote p:before {
+    content: '&rarr; ';
+}
+
 .sj-post-cheers-0 {
     margin-top: 16px;
 }
