@@ -1,0 +1,27 @@
+name: Do Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Bump Version
+        default: v1.0.0
+        required: true
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Performs release
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml -Dmaven.test.skip=true
+      - name: update versions
+        run: mvn versions:set -DnewVersion=${{ github.event.inputs.version }}
+      - name: Publish to GitHub Packages
+        run: mvn -B deploy -Dmaven.test.skip=true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
