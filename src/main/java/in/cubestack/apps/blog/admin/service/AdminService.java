@@ -25,4 +25,10 @@ public class AdminService {
         }
         throw new RuntimeException("Invalid username / password");
     }
+
+    public void resetPassword(String username, String password) {
+        Person person = personService.findByUsername(username.toLowerCase()).orElseThrow(() -> new RuntimeException("Invalid username / password"));
+
+        person.updatePassword(password);
+    }
 }
