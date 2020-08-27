@@ -3,6 +3,7 @@ package in.cubestack.apps.blog.util;
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TableBlock;
 import org.commonmark.ext.gfm.tables.TablesExtension;
+import org.commonmark.node.Link;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.AttributeProvider;
@@ -50,6 +51,10 @@ public class ContentHelper {
         public void setAttributes(Node node, String s, Map<String, String> attributes) {
             if (node instanceof TableBlock) {
                 attributes.put("class", "table table-sm sj-table sj-markdown-table");
+            }
+            if(node instanceof Link) {
+                // Open links on new tab
+                attributes.put("target", "_blank");
             }
         }
     }
