@@ -1,72 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Management</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/all.min.css">
-    <link rel="stylesheet" href="/css/highlightjs.min.css">
-    <link rel="stylesheet" href="/css/blog2.css">
-    <style type="text/css">
-
-    </style>
+    <title>Scale Java - Admin</title>
+    {#include adminHead}
+    {/include}
 </head>
 <body>
-
-<header class="navbar fixed-top navbar-dark bts-navbar">
-    <div class="container-fluid bts-container-fluid">
-        <a class="navbar-brand mb-0 cs-ad-brand" href="/admin/dashboard">Blog Management</a>
-    </div>
-</header>
-<div class="cs-ad-body">
-    {#include adminMenu}{/include}
-    <div class="cs-ad-main">
-        <div class="card cs-ad-card">
-            <div class="card-header cs-ad-card-header">
-                <div class="clearfix">
-                    <span class="cs-ad-card-title float-left">Users</span>
-                    <a type="button" class="btn btn-outline-primary btn-sm float-right" href="/admin/users/create">Add</a>
-                </div>
-            </div>
-            <div class="card-body cs-ad-card-body">
-                <table class="table table-sm table-hover cs-ad-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Roles</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {#for user in users}
-                    <tr>
-                        <td class="cs-ad-item-title">{user.firstName} {user.lastName}</td>
-                        <td>{user.username}</td>
-                        <td>{user.email}</td>
-                        <td>
-                            {#for role in user.roles}
-                            {role.roleName} |
-                            {/for}
-                        </td>
-                        <td>{user.status}</td>
-                    </tr>
-                    {/for}
-                    </tbody>
-                </table>
+{#include adminHeader}
+{/include}
+<main class="sj-content">
+    <div class="card sj-card">
+        <div class="card-header sj-card-header">
+            <div class="clearfix">
+                <span class="sj-card-title">User Management</span>
+                <a type="button" class="sj-tag-3 float-right" href="/admin/users/create">Add</a>
             </div>
         </div>
+        <div class="card-body sj-card-body">
+            <table class="table table-sm table-hover sj-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {#for user in users}
+                <tr>
+                    <td class="sj-item-title">{user.firstName} {user.lastName}</td>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>
+                        {#for role in user.roles}
+                        <span class="sj-tag-1 sj-tag-mini">{role.roleName}</span>
+                        {/for}
+                    </td>
+                    <td>{user.status}</td>
+                </tr>
+                {/for}
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<script src="/js/jquery-3.5.1.min.js"></script>
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-</script>
+</main>
+{#include adminFooter}
+{/include}
 </body>
 </html>

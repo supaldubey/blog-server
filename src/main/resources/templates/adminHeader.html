@@ -1,0 +1,35 @@
+<header class="sj-header sj-admin-header">
+    <nav class="sj-top-nav sj-top-nav-hide">
+        <a href="/" class="sj-top-nav-logo">
+            <img src="/icons/logo-admin-full.png" title="Scale Java" height="36px"/>
+        </a>
+        {#if login == null}
+        <ul class="sj-top-nav-list">
+            <li class="sj-top-nav-list-item {activeTab != null && activeTab == 'users' ? 'active' : ''}"><a class="sj-top-nav-list-link" href="/admin/users">Users</a></li>
+            <li class="sj-top-nav-list-item {activeTab != null && activeTab == 'posts' ? 'active' : ''}"><a class="sj-top-nav-list-link" href="/admin/posts">Posts</a></li>
+            <li class="sj-top-nav-list-item {activeTab != null && activeTab == 'categories' ? 'active' : ''}"><a class="sj-top-nav-list-link" href="/admin/categories">Categories</a></li>
+            <li class="sj-top-nav-list-item {activeTab != null && activeTab == 'tags' ? 'active' : ''}"><a class="sj-top-nav-list-link" href="/admin/tags">Tags</a></li>
+            <li class="sj-top-nav-list-item {activeTab != null && activeTab == 'roles' ? 'active' : ''}"><a class="sj-top-nav-list-link" href="/admin/roles">Roles</a></li>
+        </ul>
+        {/if}
+    </nav>
+    {#if login == null}
+    <label class="sj-top-mobile-nav-button" for="hamburger" aria-label="menu">
+        <svg viewBox="0 0 100 80" width="40" height="40">
+            <rect width="100" height="10" fill="#1D2D35"></rect>
+            <rect y="30" width="100" height="10" fill="#1D2D35"></rect>
+            <rect y="60" width="100" height="10" fill="#1D2D35"></rect>
+        </svg>
+    </label>
+    <input class="sj-top-mobile-nav-checkbox" type="checkbox" id="hamburger">
+    <nav class="sj-top-mobile-nav sj-top-nav-hide">
+        <ul class="sj-top-mobile-nav-list">
+            <li class="sj-top-mobile-nav-list-item"><a class="sj-top-mobile-nav-list-link" href="/admin/users">Users</a></li>
+            <li class="sj-top-mobile-nav-list-item"><a class="sj-top-mobile-nav-list-link" href="/admin/posts">Posts</a></li>
+            <li class="sj-top-mobile-nav-list-item"><a class="sj-top-mobile-nav-list-link" href="/admin/categories">Categories</a></li>
+            <li class="sj-top-mobile-nav-list-item"><a class="sj-top-mobile-nav-list-link" href="/admin/tags">Tags</a></li>
+            <li class="sj-top-mobile-nav-list-item"><a class="sj-top-mobile-nav-list-link" href="/admin/roles">Roles</a></li>
+        </ul>
+    </nav>
+    {/if}
+</header>

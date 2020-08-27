@@ -45,12 +45,6 @@ public class TagResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public TagCandidate save(@Form @Valid TagCandidate tag) {
-        return tagService.save(tag);
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response save(@Context UriInfo uriInfo, @Form @Valid TagCandidate candidate) {
         var savedTag = tagService.save(candidate);
 

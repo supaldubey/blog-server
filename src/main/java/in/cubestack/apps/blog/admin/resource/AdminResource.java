@@ -54,8 +54,6 @@ public class AdminResource {
     public static class Templates {
         public static native TemplateInstance login();
 
-        public static native TemplateInstance dashboard();
-
         public static native TemplateInstance posts();
 
         public static native TemplateInstance users();
@@ -90,7 +88,8 @@ public class AdminResource {
         return Templates.users()
                 .data("user", user)
                 .data("roles", roleService.findAll())
-                .data("users", personService.findAll());
+                .data("users", personService.findAll())
+                .data("activeTab", "users");
     }
 
     @GET
@@ -104,7 +103,7 @@ public class AdminResource {
     }
 
     @GET
-    @Path("role")
+    @Path("roles")
     @RolesAllowed("Admin")
     public TemplateInstance roles(@Context SecurityContext securityContext) {
         User user = (User) securityContext.getUserPrincipal();
@@ -177,7 +176,7 @@ public class AdminResource {
     @GET
     @Path("/login")
     public TemplateInstance login(@QueryParam("invalid") String invalid) {
-        return Templates.login().data("invalid", invalid == null ? "" : invalid);
+        return Templates.login().data("invalid", invalid == null ? "" : invalid).data("login", "login");
     }
 
     @POST

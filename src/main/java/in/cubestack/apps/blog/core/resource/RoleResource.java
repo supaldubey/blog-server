@@ -33,7 +33,7 @@ public class RoleResource {
 
         URI dashboardUri = uriInfo.getBaseUriBuilder()
                 .path(AdminResource.class)
-                .path("/role")
+                .path("/roles")
                 .build();
         return Response.seeOther(dashboardUri).build();
     }
