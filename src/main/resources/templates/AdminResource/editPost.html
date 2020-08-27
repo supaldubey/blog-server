@@ -92,14 +92,14 @@
                         <div class="col-sm-12 form-group">
                             <h6 class="sj-form-label">Quick summary:</h6>
                             <div id="summary-editor">{post.summary}</div>
-                            <input name="summary" id="summary" type="hidden">
+                            <input name="summary" id="summary" type="hidden" value="{post.summary}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 form-group">
                             <h6 class="sj-form-label">Post contents:</h6>
                             <div id="content-editor">{post.content}</div>
-                            <input name="content" id="content" type="hidden">
+                            <input name="content" id="content" type="hidden" value="{post.content}">
                         </div>
                     </div>
                 </div>
@@ -135,27 +135,25 @@
             nonSelectedText: 'Select Status'
         });
 
-        {#if post.status}
-        $('#postStatus').val("{post.status.name()}");
-        {/if}
-
         var contentEditor = ace.edit("content-editor");
         contentEditor.setTheme("ace/theme/chrome");
         contentEditor.session.setMode("ace/mode/markdown");
 
-        var input = $('input[name="content"]');
         contentEditor.getSession().on("change", function () {
-            input.val(contentEditor.getSession().getValue());
+            $("#content").val(contentEditor.getSession().getValue());
         });
 
         var summaryEditor = ace.edit("summary-editor");
         summaryEditor.setTheme("ace/theme/chrome");
         summaryEditor.session.setMode("ace/mode/markdown");
 
-        var input = $('input[name="summary"]');
         summaryEditor.getSession().on("change", function () {
-            input.val(summaryEditor.getSession().getValue());
+            $("#summary").val(summaryEditor.getSession().getValue());
         });
+
+        {#if post.status}
+        $('#postStatus').val("{post.status.name()}");
+        {/if}
     });
 
 </script>

@@ -434,7 +434,7 @@ a {
 }
 
 .sj-post-1 blockquote p:before {
-    content: '&rarr; ';
+    content: '\2192   ';
 }
 
 .sj-post-cheers-0 {
