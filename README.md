@@ -39,13 +39,14 @@ You can run your application in dev mode that enables live coding using:
 
 The application can be packaged using `./mvnw package`.
 It produces the `cube-blog-1.0.0-SNAPSHOT-runner.jar` file in the `/target` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
+
+The jar produced is an ```uber-jar```, and this can be changed by updating property in ```application.properties``` file.
 
 The application is now runnable using `java -jar target/cube-blog-1.0.0-SNAPSHOT-runner.jar`.
 
 ## Creating a native executable
 
-You can create a native executable using: `./mvnw package -Pnative`.
+You can create a native executable using: `./mvnw package -Pnative`. This step requires GraalVM, the project uses Java 11 specific JDK.
 
 Or, if you don't have GraalVM installed, you can run the native executable build in a container using: `./mvnw package -Pnative -Dquarkus.native.container-build=true`.
 
