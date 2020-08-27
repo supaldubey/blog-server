@@ -123,8 +123,16 @@
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub supaldubey/blog-server Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/supaldubey/blog-server</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
