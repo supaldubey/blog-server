@@ -3,7 +3,7 @@ package in.cubestack.apps.blog.util;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ContentHelperTest {
 
@@ -12,6 +12,7 @@ public class ContentHelperTest {
     @BeforeEach
     public void init() {
         contentHelper = new ContentHelper(new Slugify());
+        contentHelper.initialize();
     }
 
     @Test
@@ -23,7 +24,7 @@ public class ContentHelperTest {
     @Test
     public void testMdConvertorWithLinks() {
         String html = contentHelper.markdownToHtml("# Hi \n This is test\nclick [here](http://cubestack.in)");
-        assertEquals(html, "<h1>Hi</h1>\n<p>This is test\nclick <a href=\"http://cubestack.in\">here</a></p>\n");
+        assertEquals(html, "<h1>Hi</h1>\n<p>This is test\nclick <a href=\"http://cubestack.in\" target=\"_blank\">here</a></p>\n");
     }
 
     @Test

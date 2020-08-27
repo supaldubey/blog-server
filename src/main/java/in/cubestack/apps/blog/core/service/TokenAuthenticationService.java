@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class TokenAuthenticationService {
 
-    private static final int TOKEN_EXPIRY_MINUTES = 30;
+    private static final int TOKEN_EXPIRY_MINUTES = 60;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenAuthenticationService.class);
 

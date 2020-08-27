@@ -13,7 +13,7 @@ public class HttpHelper {
     private static final String AUTHENTICATION_HEADER = "Authentication";
     private static final String BASIC_AUTH_HEADER = "BASIC ";
 
-    public static final int MAX_COOKIE_AGE = 60 * 60 * 60;
+    public static final int MAX_COOKIE_AGE = 60 * 60;
 
     public String getTokenFromCookie(ContainerRequestContext requestContext) {
         return requestContext.getCookies().entrySet().stream().filter(e -> e.getKey().equals(COOKIE_TOKEN_NAME))

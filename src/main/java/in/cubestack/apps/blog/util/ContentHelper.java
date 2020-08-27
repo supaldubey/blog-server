@@ -9,8 +9,9 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.AttributeProvider;
 import org.commonmark.renderer.html.HtmlRenderer;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +19,25 @@ import java.util.Map;
 public class ContentHelper {
 
     private static final int MAX_LENGTH = 120;
-    private List<Extension> extensions;
+    private HtmlRenderer renderer;
     private Parser parser;
+
     private final Slugify slugify;
 
     public ContentHelper(Slugify slugify) {
         this.slugify = slugify;
+    }
+
+    @PostConstruct
+    public void initialize() {
+        List<Extension> extensions = Collections.singletonList(TablesExtension.create());
+        renderer = HtmlRenderer
+                .builder()
+                .attributeProviderFactory(ctx -> new TableAttributeProvider())
+                .extensions(extensions)
+                .build();
+
+        parser = Parser.builder().extensions(extensions).build();
     }
 
     public String slugify(String content) {
@@ -37,37 +51,20 @@ public class ContentHelper {
     }
 
     public String markdownToHtml(String markdown) {
-        Node document = getParser().parse(markdown);
-        HtmlRenderer renderer = HtmlRenderer
-                .builder()
-                .attributeProviderFactory(ctx -> new TableAttributeProvider())
-                .extensions(extensions)
-                .build();
+        Node document = parser.parse(markdown);
         return renderer.render(document);
     }
 
-    private class TableAttributeProvider implements AttributeProvider {
+    private static class TableAttributeProvider implements AttributeProvider {
         @Override
         public void setAttributes(Node node, String s, Map<String, String> attributes) {
             if (node instanceof TableBlock) {
                 attributes.put("class", "table table-sm sj-table sj-markdown-table");
             }
-            if(node instanceof Link) {
+            if (node instanceof Link) {
                 // Open links on new tab
                 attributes.put("target", "_blank");
             }
         }
-    }
-
-    private Parser getParser() {
-        if (parser == null) {
-            synchronized (ContentHelper.class) {
-                if (parser == null) {
-                    extensions = Arrays.asList(TablesExtension.create());
-                    parser = Parser.builder().extensions(extensions).build();
-                }
-            }
-        }
-        return parser;
     }
 }
