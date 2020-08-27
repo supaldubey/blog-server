@@ -490,6 +490,7 @@ code {
     background: white;
     color: black;
     border: 1px solid #E2E0DB;
+    white-space: nowrap;
     font-family: 'Source Code Pro', monospace;
 }
 
@@ -605,6 +606,20 @@ code {
 
 .sj-table td, .sj-table th {
     padding: 0.4rem .3rem;
+}
+
+.sj-markdown-table {
+    background-color: white;
+    border: 1px solid #E2E0DB;
+    font-size: 0.8rem;
+}
+
+.sj-markdown-table tbody tr:hover {
+    cursor: default;
+}
+
+.sj-markdown-table td, .sj-markdown-table th {
+    padding: 0.6rem .4rem;
 }
 
 .form-control {
