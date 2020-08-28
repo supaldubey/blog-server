@@ -10,7 +10,7 @@ code {
 .hljs {
     display: block;
     overflow-x: auto;
-    padding: 1em;
+    padding: 0.95rem;
     background: white;
     color: black;
     border: 1px solid #E2E0DB;

@@ -109,6 +109,14 @@ a {
     padding: 0.2rem 0rem;
 }
 
+.sj-nav-logo-img, .sj-hamburger-menu {
+    height: 36px;
+}
+
+.sj-bottom-nav-logo-img {
+    height: 48px;
+}
+
 .sj-top-nav-list, .sj-bottom-nav-list {
     display: block;
     margin: 0;
@@ -385,12 +393,12 @@ a {
 }
 
 .sj-post-blc-1 .title {
-    font-size: 2.95rem;
+    font-size: 2.45rem;
     font-weight: 800;
 }
 
 .sj-post-blc-1 .subtitle {
-    font-size: 1.65rem;
+    font-size: 1.55rem;
     font-weight: 300;
 }
 
@@ -412,13 +420,17 @@ a {
     font-weight: 300;
 }
 
+.sj-post-1 strong {
+    font-weight: 500;
+}
+
 .sj-post-1 p, .sj-post-1 li {
     line-height: 1.25 !important;
 }
 
 .sj-post-1 a {
     color: var(--theme-primary-color-2);
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .sj-post-1 blockquote {
@@ -658,3 +670,132 @@ code {
     font-weight: 500;
     margin-bottom: 1rem;
 }
+
+#cheersImage, #cheersImageHover, .sj-post-cheers-act img {
+    height: 20px;
+    width: 20px;
+}
+
+.sj-post-1 .h1, .sj-post-1 h1 {
+    font-size: 2rem;
+}
+
+.sj-post-1 .h2, .sj-post-1 h2 {
+    font-size: 1.75rem;
+}
+
+.sj-post-1 .h3, .sj-post-1 h3 {
+    font-size: 1.55rem;
+}
+
+.sj-post-1 .h4, .sj-post-1 h4 {
+    font-size: 1.35rem;
+}
+
+.sj-post-1 .h5, .sj-post-1 h5 {
+    font-size: 1.2rem;
+}
+
+.sj-post-1 .h6, .sj-post-1 h6 {
+    font-size: 1rem;
+}
+
+/** START - Blog css - mobile friendly cut outs **/
+@media (max-width: 600px) {
+    .sj-content {
+        padding: 4rem 0.5rem;
+    }
+
+    .sj-post-blc-0 {
+        margin-bottom: 20px;
+    }
+
+    .sj-post-blc-0 h1, .sj-panel-0 h1 {
+        font-size: 1.15rem;
+    }
+
+    .sj-post-blc-0 p {
+        font-size: 0.85rem;
+    }
+
+    .sj-post-blc-1 .title {
+        font-size: 1.5rem;
+    }
+
+    .sj-post-blc-1 .subtitle {
+        font-size: 1.11rem;
+    }
+
+    .sj-post-blc-1 .meta-time {
+        font-size: 0.55rem;
+    }
+
+    .sj-post-1 .h1, .sj-post-1 h1 {
+        font-size: 1.35rem;
+    }
+
+    .sj-post-1 .h2, .sj-post-1 h2 {
+        font-size: 1.25rem;
+    }
+
+    .sj-post-1 .h3, .sj-post-1 h3 {
+        font-size: 1.15rem;
+    }
+
+    .sj-post-1 .h4, .sj-post-1 h4 {
+        font-size: 1.05rem;
+    }
+
+    .sj-post-1 .h5, .sj-post-1 h5 {
+        font-size: 0.95rem;
+    }
+
+    .sj-post-1 .h6, .sj-post-1 h6 {
+        font-size: 0.85rem;
+    }
+
+    .sj-post-1 p, .sj-post-1 ul, .sj-post-1 ol, .sj-group-0 span {
+        font-size: 0.85rem;
+    }
+
+    .sj-tag-0, .sj-tag-1, .sj-tag-2, .sj-tag-3 {
+        padding: 0.25rem 0.35rem;
+        font-size: 0.55rem;
+    }
+
+    .sj-nav-logo-img, .sj-hamburger-menu {
+        height: 28px;
+    }
+
+    .sj-bottom-nav-logo-img {
+        height: 32px;
+    }
+
+    .sj-post-blc-0-a .sj-meta-time {
+        font-size: 0.55rem;
+    }
+
+    .sj-btn {
+        padding: 0.15em 0.25em;
+        font-size: 0.85rem;
+    }
+
+    .sj-top-mobile-nav-list, .sj-bottom-nav-list {
+        font-size: 0.85rem;
+    }
+
+    .hljs {
+        padding: 0.75rem !important;
+        font-size: 0.75rem;
+    }
+
+    .sj-post-cheers {
+        font-size: 0.85rem;
+    }
+
+    #cheersImage, #cheersImageHover, .sj-post-cheers-act img  {
+        height: 16px;
+        width: 16px;
+    }
+}
+/** END   - Blog css - mobile friendly cut outs **/
