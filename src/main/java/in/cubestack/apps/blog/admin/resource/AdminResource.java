@@ -13,6 +13,7 @@ import in.cubestack.apps.blog.post.domain.PostType;
 import in.cubestack.apps.blog.post.service.CategoryService;
 import in.cubestack.apps.blog.post.service.PostService;
 import in.cubestack.apps.blog.post.service.TagService;
+import in.cubestack.apps.blog.post.web.BlogResource;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.api.CheckedTemplate;
 import org.jboss.resteasy.annotations.Form;
@@ -167,6 +168,19 @@ public class AdminResource {
     @Path("/login")
     public TemplateInstance login(@QueryParam("invalid") String invalid) {
         return Templates.login().data("invalid", invalid == null ? "" : invalid).data("login", "login");
+    }
+
+    @GET
+    @RolesAllowed("Admin")
+    @Path("/preview/{slug}")
+    public TemplateInstance preview(@Context UriInfo uriInfo, @PathParam("slug") String slug) {
+        var summary = postService.getSummary(slug).orElseThrow();
+        eventService.trigger(summary.getId(), EventType.POST_VIEWS);
+
+        return BlogResource.Templates
+                .post()
+                .data("baseUrl", uriInfo.getBaseUriBuilder().build())
+                .data("post", summary);
     }
 
     @POST

@@ -34,7 +34,7 @@
                 <tbody>
                 {#for post in posts}
                 <tr>
-                    <td class="sj-item-title">{post.title}</td>
+                    <td class="sj-item-title"><a class="sj-link" target="_blank" href="/admin/preview/{post.slug}"> {post.title}</a></td>
                     <td>{post.metaTitle}</td>
                     <td> <a class="sj-link" href="/{post.slug}">{post.slug}</a> </td>
                     <td>{post.person.firstName}</td>
